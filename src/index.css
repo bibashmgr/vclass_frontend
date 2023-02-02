@@ -7,3 +7,8 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+@font-face {
+  font-family: "Open Sans";
+  src: url("/fonts/open_sans.ttf");
+}
