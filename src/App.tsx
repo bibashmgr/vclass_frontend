@@ -1,12 +1,18 @@
 import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+// pages
+import Login from "./pages/auth/Login";
+import Dashboard from "./pages/admin/Dashboard";
 
 const App = () => {
   return (
-    <div className="w-screen h-screen flex justify-center items-center bg-slate-100 dark:bg-slate-900">
-      <div className="text-black font-bold text-2xl dark:text-white">
-        VCLASS
-      </div>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/auth/login" element={<Login />} />
+      </Routes>
+    </Router>
   )
 }
 
