@@ -1,7 +1,10 @@
 import axios from 'axios';
 
+// helpers
+import { getUser } from './storageHandler';
+
 const BASE_URL = 'http://localhost:9999';
-const HEADER = {'Content-Type': 'application/json', "Access-Control-Allow-Origin": BASE_URL};
+const HEADER = {"Content-Type": "application/json", "Access-Control-Allow-Origin": BASE_URL, "Authorization": `Bearer ${getUser().token}`};
 
 export const apiHandler = async (methodType: string, endpoint: string, payload?: null | object | FormData, ) => {
     return await axios({
