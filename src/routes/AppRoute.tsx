@@ -29,10 +29,10 @@ const AppRoute = () => {
                 <Route path="/auth/*" element={<AuthRoute />} />
             </Route>
             <Route element={<AuthenticatedRoute />}>
-                <Route element={<ProtectedRoute role={['student', 'teacher']} />}>
+                <Route element={<ProtectedRoute role={['student', 'teacher']} isAdminRoute={false} />}>
                     <Route path="/*" element={<SystemRoute />} />
                 </Route>
-                <Route element={<ProtectedRoute role={['admin']} />}>
+                <Route element={<ProtectedRoute role={['admin']} isAdminRoute={true} />}>
                     <Route path="/admin/*" element={<AdminRoute />} />
                 </Route>
             </Route>
@@ -64,14 +64,34 @@ const AuthenticatedRoute = () => {
     )
 }
 
-const ProtectedRoute = ({ role }: { role: string[] }) => {
+const ProtectedRoute = ({ role, isAdminRoute }: { role: string[], isAdminRoute: boolean }) => {
     const { user, loading } = useAuth()
 
     if (loading) {
         return <Loader />
     }
+
+    const getRoute = () => {
+        if (role.includes(user.role)) {
+            return <Outlet />
+        }
+        else {
+            if (user.role === 'admin') {
+                return <Navigate to='/admin' />
+            } else if (user.role === 'student' || user.role === 'teacher') {
+                return <Navigate to='/' />
+            } else {
+                if (user.token) {
+                    return <Navigate to="/unauthorized" />
+                } else {
+                    <Navigate to="/auth/login" />
+                }
+            }
+        }
+    }
+
     return (
-        <>{role.includes(user.role) ? <Outlet /> : (user.token ? <Navigate to="/unauthorized" /> : <Navigate to="/auth/login" />)}</>
+        <>{getRoute()}</>
     )
 }
 
@@ -89,7 +109,9 @@ const AdminRoute = () => {
     return (
         <Routes>
             <Route path='*' element={<PageNotFound />} />
-            <Route path='/' element={<Dashboard />} />
+            <Route element={<AppLayout isAdmin={true} />}>
+                <Route path='/' element={<Dashboard />} />
+            </Route>
         </Routes>
     )
 }
@@ -98,7 +120,9 @@ const SystemRoute = () => {
     return (
         <Routes>
             <Route path='*' element={<PageNotFound />} />
-            <Route index element={<Home />} />
+            <Route element={<AppLayout isAdmin={false} />}>
+                <Route index element={<Home />} />
+            </Route>
         </Routes>
     )
 }
