@@ -29,10 +29,10 @@ const AppRoute = () => {
                 <Route path="/auth/*" element={<AuthRoute />} />
             </Route>
             <Route element={<AuthenticatedRoute />}>
-                <Route element={<ProtectedRoute role={['student', 'teacher']} isAdminRoute={false} />}>
+                <Route element={<ProtectedRoute role={['student', 'teacher']} />}>
                     <Route path="/*" element={<SystemRoute />} />
                 </Route>
-                <Route element={<ProtectedRoute role={['admin']} isAdminRoute={true} />}>
+                <Route element={<ProtectedRoute role={['admin']} />}>
                     <Route path="/admin/*" element={<AdminRoute />} />
                 </Route>
             </Route>
@@ -64,7 +64,7 @@ const AuthenticatedRoute = () => {
     )
 }
 
-const ProtectedRoute = ({ role, isAdminRoute }: { role: string[], isAdminRoute: boolean }) => {
+const ProtectedRoute = ({ role }: { role: string[] }) => {
     const { user, loading } = useAuth()
 
     if (loading) {
