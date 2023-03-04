@@ -9,6 +9,32 @@ module.exports = {
         lg: '976px',
         xl: '1440px',
       },
+      colors: {
+        lightColor: '#FFFFFF',
+        darkColor: '#0F172A',
+        failureColor: {
+          light: '#F87171',
+          dark: '#EF4444',
+        },
+        successColor: {
+          light: '#6EE7B7',
+          dark: '#10B981',
+        },
+        infoColor: {
+          light: '#93C5FD',
+          dark: '#3B82F6',
+        },
+        warnColor: {
+          light: '#FEF08A',
+          dark: '#FDE047',
+        },
+        neutralColor: {
+          lightest: '#F1F5F9',
+          lighter: '#E2E8F0',
+          light: '#CBD5E1',
+          dark: '#94A3B8',
+        },
+      },
     },
     fontFamily: {
       sans: ['Open Sans', 'sans-serif'],
