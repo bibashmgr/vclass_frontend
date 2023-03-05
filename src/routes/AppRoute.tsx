@@ -6,6 +6,13 @@ import LoginSuccess from "../pages/auth/LoginSuccess";
 
 // pages: admin
 import Dashboard from "../pages/admin/Dashboard";
+import Subject from "../pages/admin/subject/Subject";
+import SubjectCreate from "../pages/admin/subject/SubjectCreate";
+import SubjectEdit from "../pages/admin/subject/SubjectEdit";
+import SubjectView from "../pages/admin/subject/SubjectView";
+import Faculty from "../pages/admin/faculty/Faculty";
+import Batch from "../pages/admin/batch/Batch";
+import User from "../pages/admin/user/User";
 
 // pages: system
 import Home from "../pages/system/Home";
@@ -111,9 +118,35 @@ const AdminRoute = () => {
             <Route path='*' element={<PageNotFound />} />
             <Route element={<AppLayout isAdmin={true} />}>
                 <Route path='/' element={<Dashboard />} />
+                {/* subjectRoutes */}
+                <Route path="/subject" element={<Subject />} />
+                <Route path="/subject/create" element={<SubjectCreate />} />
+                <Route path="/subject/edit" element={<SubjectEdit />} />
+                <Route path="/subject/view" element={<SubjectView />} />
+                {/* facultyRoutes */}
+                <Route path="/faculty" element={<Faculty />} />
+                {/* <Route path="/faculty/create" element={<FacultyCreate />} /> */}
+                {/* <Route path="/faculty/edit" element={<FacultyEdit />} /> */}
+                {/* <Route path="/faculty/view" element={<FacultyView />} /> */}
+                {/* batchRoutes */}
+                <Route path="/batch" element={<Batch />} />
+                {/* <Route path="/batch/create" element={<BatchCreate />} /> */}
+                {/* <Route path="/batch/edit" element={<BatchEdit />} /> */}
+                {/* <Route path="/batch/view" element={<BatchView />} /> */}
+                {/* userRoutes */}
+                <Route path="/user" element={<User />} />
+                {/* <Route path="/user/edit" element={<UserEdit />} /> */}
+                {/* <Route path="/user/view" element={<UserView />} /> */}
             </Route>
         </Routes>
     )
+}
+
+const SubjectRoute = () => {
+    return (
+        <Routes>
+
+        </Routes>)
 }
 
 const SystemRoute = () => {
