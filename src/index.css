@@ -9,6 +9,14 @@
 }
 
 @font-face {
-  font-family: "Open Sans";
-  src: url("/fonts/open_sans.ttf");
+  font-family: 'Open Sans';
+  src: url('/fonts/open_sans.ttf');
+}
+
+body {
+  background-color: #f1f5f9;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
