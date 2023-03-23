@@ -14,6 +14,10 @@ const AppLayout = ({ isAdmin }: { isAdmin: boolean }) => {
         setIsSidebarOpen(!isSidebarOpen);
     }
 
+    const closeSidebar = () => {
+        setIsSidebarOpen(false);
+    }
+
     const getPathName = (): string => {
         let locations = [];
         locations = location.pathname.split('/');
@@ -27,9 +31,12 @@ const AppLayout = ({ isAdmin }: { isAdmin: boolean }) => {
 
     return (
         <div>
-            <Sidebar isAdmin={isAdmin} isSidebarOpen={isSidebarOpen} handleSidebar={handleSidebar} pathName={getPathName()} />
+            <Sidebar isAdmin={isAdmin} isSidebarOpen={isSidebarOpen} handleSidebar={handleSidebar} closeSidebar={closeSidebar} pathName={getPathName()} />
             <div className='w-screen'>
-                <Appbar handleSidebar={handleSidebar} />
+                {
+                    isSidebarOpen && <div className='w-screen h-screen fixed top-0 left-0 z-[998] bg-black/25' onClick={closeSidebar} />
+                }
+                <Appbar pathName={getPathName()} handleSidebar={handleSidebar} />
                 <div className='w-full md:w-[calc(100vw-240px)] lg:w-[calc(100vw-288px)] fixed top-16 md:top-20 left-0 md:left-60 lg:left-72 overflow-scroll h-[calc(100vh-60px)] md:h-[calc(100vh-80px)] px-4 md:px-6 py-4 md:py-4'>
                     <Outlet />
                 </div>
