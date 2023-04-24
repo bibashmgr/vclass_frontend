@@ -13,11 +13,11 @@ type propsType = {
 
 const CustomButton = ({ children, handleClick, colorScheme = 'neutral', isLoading = false, isDisabled = false }: propsType) => {
     const getColorScheme = (color: string) => {
-        if (color === 'neutral') return 'text-darkColor bg-neutralColor-lightest';
+        if (color === 'neutral') return 'text-darkColor bg-gray-100 dark:text-gray-200 dark:bg-gray-700';
         if (color === 'success') return 'text-lightColor bg-successColor-dark';
         if (color === 'info') return 'text-lightColor bg-infoColor-dark';
         if (color === 'failure') return 'text-lightColor bg-failureColor-dark';
-        return 'text-darkColor bg-neutralColor-lightest'
+        return 'text-darkColor bg-gray-100'
     }
 
     return (

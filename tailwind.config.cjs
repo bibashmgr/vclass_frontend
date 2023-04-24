@@ -28,12 +28,6 @@ module.exports = {
           light: '#FEF08A',
           dark: '#FDE047',
         },
-        neutralColor: {
-          lightest: '#F1F5F9',
-          lighter: '#E2E8F0',
-          light: '#CBD5E1',
-          dark: '#94A3B8',
-        },
       },
       boxShadow: {
         custom: '0px 0px 35px rgba(181, 181, 195, 0.15)',

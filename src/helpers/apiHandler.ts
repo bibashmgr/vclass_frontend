@@ -14,7 +14,7 @@ export const apiHandler = async (methodType: string, endpoint: string, payload?:
         data: payload,
         headers: HEADER,
     }).then((res) => {
-        return res;
+        return res.data;
     }).catch((error) => {
         return error.response;
     });

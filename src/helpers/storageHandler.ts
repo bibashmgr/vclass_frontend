@@ -23,6 +23,33 @@ export const setUser = async (token: string) => {
         })
 }
 
-export const removeUser = () =>{
+export const removeUser = () => {
     localStorage.removeItem('VCLASS_USER');
+}
+
+export const getColorMode = () => {
+    let colorMode = localStorage.getItem('VCLASS_COLOR_MODE');
+    if(colorMode){
+        return colorMode
+    } else {
+        if(window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            return 'dark'
+        } else {
+            return 'light'
+        }
+    }
+}
+
+export const setColorMode = () => {
+    let colorMode = getColorMode();
+
+    if(colorMode === 'dark'){
+        localStorage.setItem('VCLASS_COLOR_MODE', 'light');
+    } else {
+        localStorage.setItem('VCLASS_COLOR_MODE', 'dark');
+    }
+}
+
+export const removeColorMode = () => {
+    localStorage.removeItem('VCLASS_COLOR_MODE');
 }

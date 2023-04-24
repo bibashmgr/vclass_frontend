@@ -14,7 +14,7 @@ type propsType = {
 
 const ActionTd = ({ hasView = true, hasEdit = false, hasDelete = false, handleView = () => { }, handleEdit = () => { }, handleDelete = () => { } }: propsType) => {
     return (
-        <td className='pr-6 flex gap-2'>
+        <td className='px-6 py-4 flex gap-2 justify-start items-center'>
             {
                 hasView && <CustomButton handleClick={handleView} colorScheme='success'>
                     View
