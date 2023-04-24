@@ -2,21 +2,43 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Open Sans';
+  src: url('/fonts/open_sans.ttf');
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-@font-face {
-  font-family: 'Open Sans';
-  src: url('/fonts/open_sans.ttf');
+::-webkit-scrollbar {
+  display: none;
 }
 
 body {
   background-color: #f1f5f9;
 }
 
-::-webkit-scrollbar {
-  display: none;
+table, thead, tbody {
+  width: 100%;
 }
+
+th{
+  text-align: start;
+  background-color: #F1F5F9;
+  color: #94A3B8;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 0.75rem 0rem;
+}
+
+td{
+  color: #0F172A;
+  font-weight: 400;
+  font-size: 14px;
+  padding: 0.75rem 0rem;
+  min-width: 200px;
+}
+
