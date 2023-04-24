@@ -121,8 +121,8 @@ const AdminRoute = () => {
                 {/* subjectRoutes */}
                 <Route path="/subject" element={<Subject />} />
                 <Route path="/subject/create" element={<SubjectCreate />} />
-                <Route path="/subject/edit" element={<SubjectEdit />} />
-                <Route path="/subject/view" element={<SubjectView />} />
+                <Route path="/subject/edit/:id" element={<SubjectEdit />} />
+                <Route path="/subject/view/:id" element={<SubjectView />} />
                 {/* facultyRoutes */}
                 <Route path="/faculty" element={<Faculty />} />
                 {/* <Route path="/faculty/create" element={<FacultyCreate />} /> */}
