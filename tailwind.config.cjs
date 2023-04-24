@@ -30,7 +30,7 @@ module.exports = {
         },
       },
       boxShadow: {
-        custom: '0px 0px 35px rgba(181, 181, 195, 0.15)',
+        light: '0px 0px 35px rgba(181, 181, 195, 0.15)',
       },
     },
     fontFamily: {
