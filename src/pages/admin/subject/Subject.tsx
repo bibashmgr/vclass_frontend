@@ -19,12 +19,13 @@ const Subject = () => {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        apiHandler('get', 'subject').then((res) => {
-            if (res.success) {
-                // setSubjects(res.data);
-                setIsLoading(false);
-            }
-        });
+        // apiHandler('get', 'subject').then((res) => {
+        //     if (res.success) {
+        //         // setSubjects(res.data);
+        //         setIsLoading(false);
+        //     }
+        // });
+        setIsLoading(false);
     }, [])
 
     return (
