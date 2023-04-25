@@ -1,8 +1,12 @@
 import React, { useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
+import axios from 'axios';
+
+// components
+import Spinner from '../../components/global/Spinner';
 
 // helpers
-import { setUser, getUser } from '../../helpers/storageHandler';
+import { removeToken, setToken } from '../../helpers/storageHandler';
 
 const LoginSuccess = () => {
     const location = useLocation();
@@ -13,21 +17,20 @@ const LoginSuccess = () => {
         const token = new URLSearchParams(query).get('token');
 
         if (token) {
-            let user = setUser(token);
-            user.then((data) => {
-                if (data.role === 'admin') {
-                    navigate('/admin/')
-                } else {
-                    navigate('/')
-                }
-            })
+            setToken(token);
+            navigate('/admin');
         } else {
             navigate('/auth/login');
         }
-    }, [])
+    }, []);
 
     return (
-        <div>LoginSuccess</div>
+        <div className='w-screen h-screen bg-gray-100 dark:bg-gray-700 flex justify-center items-center'>
+            <div className='flex flex-col gap-2 items-center'>
+                <Spinner boxSize={6} />
+                <p className='text-darkColor dark:text-gray-300 text-xs font-bold'>Redirecting...</p>
+            </div>
+        </div>
     )
 }
 

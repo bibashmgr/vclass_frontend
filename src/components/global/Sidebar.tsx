@@ -23,7 +23,7 @@ const Sidebar = ({ isAdmin, isSidebarOpen, closeSidebar, handleSidebar, pathName
             <div className='flex flex-col gap-4 py-4'>
                 {
                     navLinks.map((navLink, index) => {
-                        return isAdmin && <NavLink key={index} title={navLink.title} url={navLink.url} Icon={navLink.Icon} isActive={pathName === navLink.url} closeSidebar={closeSidebar} isSidebarOpen={isSidebarOpen} />
+                        return isAdmin && <NavLink key={index} title={navLink.title} url={navLink.url} Icon={navLink.Icon} isActive={pathName === navLink.url || pathName === `${navLink.url}/`} closeSidebar={closeSidebar} isSidebarOpen={isSidebarOpen} />
                     }
                     )
                 }

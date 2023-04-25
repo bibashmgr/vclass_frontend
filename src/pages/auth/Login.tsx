@@ -7,7 +7,7 @@ const Login = () => {
 
     return (
         <div className="w-screen h-screen flex justify-center items-center bg-gray-100 dark:bg-gray-700">
-            <CustomButton handleClick={handleLogin}>Login with Goggle</CustomButton>
+            <CustomButton handleClick={handleLogin} colorScheme='info'>Login with Goggle</CustomButton>
         </div>
     )
 }

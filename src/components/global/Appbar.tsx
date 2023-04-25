@@ -8,18 +8,14 @@ import { HiMenu } from 'react-icons/hi';
 // components
 import IconButton from './IconButton';
 
-// hooks
-import { useAuth } from '../../hooks/useAuth';
-
 // utils
 import { navLinks } from '../../utils/navlinks';
 
 // helpers
-import { getColorMode, removeUser, setColorMode } from '../../helpers/storageHandler';
+import { getColorMode, removeToken, setColorMode } from '../../helpers/storageHandler';
 import Popover from './Popover';
 
 const Appbar = ({ handleSidebar, pathName }: { handleSidebar: React.MouseEventHandler, pathName: string }) => {
-    const { user } = useAuth();
     const navigate = useNavigate();
 
     const getAppbarTitle = (): string | undefined => {
@@ -35,7 +31,7 @@ const Appbar = ({ handleSidebar, pathName }: { handleSidebar: React.MouseEventHa
     }
 
     const handleLogout = () => {
-        removeUser();
+        removeToken();
         navigate('/auth/login');
     }
 
@@ -51,7 +47,7 @@ const Appbar = ({ handleSidebar, pathName }: { handleSidebar: React.MouseEventHa
                 <IconButton Icon={MdNotifications} title='Notification' handleClick={handleNotificationClick} />
                 <IconButton Icon={getColorMode() === 'dark' ? MdDarkMode : MdWbSunny} title='Notification' handleClick={handleModeClick} />
                 <Popover parentElement={
-                    <img src={user?.avatar} className='w-8 h-8 rounded-md cursor-pointer' />
+                    <img src='https://via.placeholder.com/150' className='w-8 h-8 rounded-md cursor-pointer object-cover' />
                 }>
                     <div className='px-4 py-2.5 hover:opacity-60 cursor-pointer' onClick={handleLogout}>Logout</div>
                 </Popover>

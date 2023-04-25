@@ -10,7 +10,6 @@ import ActionTd from '../../../components/admin/ActionTd';
 // utils
 import { subjectSchema } from '../../../utils/schemas';
 import { subjectHeader } from '../../../utils/tableHeaders';
-import { apiHandler } from '../../../helpers/apiHandler';
 
 const Subject = () => {
     const navigate = useNavigate();
@@ -19,12 +18,6 @@ const Subject = () => {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        // apiHandler('get', 'subject').then((res) => {
-        //     if (res.success) {
-        //         // setSubjects(res.data);
-        //         setIsLoading(false);
-        //     }
-        // });
         setIsLoading(false);
     }, [])
 

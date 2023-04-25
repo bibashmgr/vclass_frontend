@@ -1,33 +1,16 @@
-import axios from "axios";
-
-export const getUser = () => {
-    const user = localStorage.getItem('VCLASS_USER');
-    if(user){
-        return JSON.parse(user);
-    }
+export const getToken = ():string | null => {
+    return localStorage.getItem('VCLASS_TOKEN');
 }
 
-export const setUser = async (token: string) => {
-        return axios({
-            method: 'get',
-            baseURL: 'http://localhost:9999',
-            url: 'auth/login/success',
-            data: null,
-            headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": 'http://localhost:9999', "Authorization": `Bearer ${token}` },
-        }).then((res) => {
-            let user = { token: token, ...res.data.data };
-            localStorage.setItem('VCLASS_USER', JSON.stringify(user));
-            return user;
-        }).catch((error) => {
-            return null;
-        })
+export const setToken = async (token: string) => {   
+    localStorage.setItem('VCLASS_TOKEN', token);
 }
 
-export const removeUser = () => {
-    localStorage.removeItem('VCLASS_USER');
+export const removeToken = () => {
+    localStorage.removeItem('VCLASS_TOKEN');
 }
 
-export const getColorMode = () => {
+export const getColorMode = ():string => {
     let colorMode = localStorage.getItem('VCLASS_COLOR_MODE');
     if(colorMode){
         return colorMode

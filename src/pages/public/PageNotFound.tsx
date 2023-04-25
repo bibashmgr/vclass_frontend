@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 // components
 import CustomButton from '../../components/global/CustomButton';
+import { getColorMode } from '../../helpers/storageHandler';
 
 const PageNotFound = () => {
     const navigate = useNavigate();
@@ -14,7 +15,7 @@ const PageNotFound = () => {
                     <p className='text-darkColor dark:text-lightColor font-bold text-2xl'>Oops!</p>
                     <p className='text-gray-400 dark:text-gray-300 font-normal text-xs'>You are lost.</p>
                 </div>
-                <img src="/images/404.svg" alt="404" className='w-[300px] h-[300px]' />
+                <img src={getColorMode() === 'dark' ? '/images/404-dark.svg' : '/images/404-light.svg'} alt="404" className='w-[300px] h-[300px]' />
                 <CustomButton handleClick={() => navigate('/admin')} colorScheme='info'>
                     Return Home
                 </CustomButton>
