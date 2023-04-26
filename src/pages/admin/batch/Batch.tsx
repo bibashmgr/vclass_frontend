@@ -11,14 +11,26 @@ import ActionTd from '../../../components/admin/ActionTd';
 import { batchSchema } from '../../../utils/schemas';
 import { batchHeader } from '../../../utils/tableHeaders';
 
+// handlers
+import { apiHandler } from '../../../handlers/apiHandler';
+
 const Batch = () => {
     const navigate = useNavigate();
 
     const [batches, setBatches] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
+    const getBatches = async () => {
+        await apiHandler('get', 'batches', null).then((res) => {
+            if (res.success) {
+                setBatches(res.data);
+            }
+            setIsLoading(false);
+        })
+    }
+
     useEffect(() => {
-        setIsLoading(false);
+        getBatches();
     }, [])
 
     return (
