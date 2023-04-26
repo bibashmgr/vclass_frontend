@@ -17,6 +17,7 @@ const CustomButton = ({ children, handleClick, colorScheme = 'neutral', isLoadin
         if (color === 'success') return 'text-lightColor bg-successColor-dark';
         if (color === 'info') return 'text-lightColor bg-infoColor-dark';
         if (color === 'failure') return 'text-lightColor bg-failureColor-dark';
+        if (color === 'warn') return 'text-lightColor bg-warnColor-dark'
         return 'text-darkColor bg-gray-100'
     }
 
