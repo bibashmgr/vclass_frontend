@@ -42,7 +42,7 @@ const Subject = () => {
                             <td className='px-6 py-4'>{subjectIndex + 1 < 10 ? `0${subjectIndex + 1}` : subjectIndex + 1}</td>
                             <td className='px-6 py-4 capitalize'>{subject.name}</td>
                             <td className='px-6 py-4 uppercase'>{subject.codeName}</td>
-                            <ActionTd hasView hasEdit hasDelete handleView={() => navigate(`/admin/subject/view/${subject._id}`)} handleEdit={() => navigate(`/admin/subject/edit/${subject._id}`)} handleDelete={() => console.log('delete subject')} />
+                            <ActionTd hasView hasEdit hasArchive isHidden={subject.isHidden} handleView={() => navigate(`/admin/subject/view/${subject._id}`)} handleEdit={() => navigate(`/admin/subject/edit/${subject._id}`)} handleArchive={() => console.log('delete subject')} />
                         </tr>
                     )
                 })

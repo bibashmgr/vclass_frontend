@@ -11,7 +11,7 @@ export const facultyHeader = [
 export const batchHeader = [
     'Year',
     'Faculty',
-    'Semester',
+    'Current Semester',
 ]
 
 export const userHeader = [

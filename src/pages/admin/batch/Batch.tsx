@@ -42,8 +42,8 @@ const Batch = () => {
                             <td className='px-6 py-4'>{batchIndex + 1 < 10 ? `0${batchIndex + 1}` : batchIndex + 1}</td>
                             <td className='px-6 py-4'>{batch.year}</td>
                             <td className='px-6 py-4'>{batch.facultyId}</td>
-                            <td className='px-6 py-4'>{batch.semester}</td>
-                            <ActionTd hasView hasEdit hasDelete handleView={() => navigate(`/admin/batch/view/${batch._id}`)} handleEdit={() => navigate(`/admin/batch/edit/${batch._id}`)} handleDelete={() => console.log('delete batch')} />
+                            <td className='px-6 py-4'>{batch.currentSemester}</td>
+                            <ActionTd hasView hasEdit hasArchive isHidden={batch.isHidden} handleView={() => navigate(`/admin/batch/view/${batch._id}`)} handleEdit={() => navigate(`/admin/batch/edit/${batch._id}`)} handleArchive={() => console.log('archive batch')} />
                         </tr>
                     )
                 })

@@ -43,7 +43,7 @@ const User = () => {
                             <td className='px-6 py-4 capitalize'>{user.name}</td>
                             <td className='px-6 py-4'>{user.email}</td>
                             <td className='px-6 py-4 capitalize'>{user.role}</td>
-                            <ActionTd hasView hasEdit hasDelete handleView={() => navigate(`/admin/user/view/${user._id}`)} handleEdit={() => navigate(`/admin/user/edit/${user._id}`)} handleDelete={() => console.log('delete user')} />
+                            <ActionTd hasView hasEdit hasArchive isHidden={user.isHidden} handleView={() => navigate(`/admin/user/view/${user._id}`)} handleEdit={() => navigate(`/admin/user/edit/${user._id}`)} handleArchive={() => console.log('delete user')} />
                         </tr>
                     )
                 })

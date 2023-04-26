@@ -2,19 +2,22 @@ export type subjectSchema = {
     _id: string,
     name: string,
     codeName: string,
+    isHidden: boolean,
 }
 
 export type facultySchema = {
     _id: string,
     name: string,
     semesters: [],
+    isHidden: boolean,
 }
 
 export type batchSchema = {
     _id: string,
     year: string,
     facultyId: string,
-    semester: number,
+    currentSemester: number,
+    isHidden: boolean,
 }
 
 export type userSchema = {
@@ -27,4 +30,5 @@ export type userSchema = {
     college: string,
     batch: number,
     faculty: string,
+    isHidden: boolean,
 }
