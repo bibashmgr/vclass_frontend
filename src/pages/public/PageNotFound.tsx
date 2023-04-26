@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 // components
 import CustomButton from '../../components/global/CustomButton';
-import { getColorMode } from '../../helpers/storageHandler';
+import { getColorMode } from '../../handlers/storageHandler';
 
 const PageNotFound = () => {
     const navigate = useNavigate();

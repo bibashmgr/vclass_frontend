@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Outlet, Route, Routes } from "react-router-dom";
 
 // pages: auth
 import Login from "../pages/auth/Login";
@@ -24,20 +24,20 @@ import Unauthorized from "../pages/public/Unauthorized";
 // layouts
 import AppLayout from "../layouts/AppLayout";
 
-const AppRoute = () => {
+const AppRoutes = () => {
     return (
         <Routes>
             <Route path="/unauthorized" element={<Unauthorized />} />
-            <Route path="/auth/*" element={<AuthRoute />} />
-            <Route path="/*" element={<SystemRoute />} />
-            <Route path="/admin/*" element={<AdminRoute />} />
+            <Route path="/auth/*" element={<AuthRoutes />} />
+            <Route path="/*" element={<SystemRoutes />} />
+            <Route path="/admin/*" element={<AdminRoutes />} />
         </Routes>
     )
 }
 
-export default AppRoute;
+export default AppRoutes;
 
-const AuthRoute = () => {
+const AuthRoutes = () => {
     return (
         <Routes>
             <Route path='*' element={<PageNotFound />} />
@@ -47,7 +47,7 @@ const AuthRoute = () => {
     )
 }
 
-const AdminRoute = () => {
+const AdminRoutes = () => {
     return (
         <Routes>
             <Route path='*' element={<PageNotFound />} />
@@ -77,7 +77,7 @@ const AdminRoute = () => {
     )
 }
 
-const SystemRoute = () => {
+const SystemRoutes = () => {
     return (
         <Routes>
             <Route path='*' element={<PageNotFound />} />

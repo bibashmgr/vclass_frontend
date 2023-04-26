@@ -1,7 +1,7 @@
 import { BrowserRouter as Router } from "react-router-dom";
 
 // routes
-import AppRoute from "./routes/AppRoute";
+import AppRoutes from "./routes/AppRoutes";
 import { useEffect } from "react";
 
 const App = () => {
@@ -15,7 +15,7 @@ const App = () => {
 
   return (
     <Router>
-      <AppRoute />
+      <AppRoutes />
     </Router>
   )
 }

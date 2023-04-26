@@ -12,7 +12,7 @@ import IconButton from './IconButton';
 import { navLinks } from '../../utils/navlinks';
 
 // helpers
-import { getColorMode, removeToken, setColorMode } from '../../helpers/storageHandler';
+import { getColorMode, removeToken, setColorMode } from '../../handlers/storageHandler';
 import Popover from './Popover';
 
 const Appbar = ({ handleSidebar, pathName }: { handleSidebar: React.MouseEventHandler, pathName: string }) => {

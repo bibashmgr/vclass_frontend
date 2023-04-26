@@ -6,7 +6,7 @@ import axios from 'axios';
 import Spinner from '../../components/global/Spinner';
 
 // helpers
-import { removeToken, setToken } from '../../helpers/storageHandler';
+import { removeToken, setToken } from '../../handlers/storageHandler';
 
 const LoginSuccess = () => {
     const location = useLocation();
