@@ -2,7 +2,7 @@ import React from 'react'
 
 const SubjectCreate = () => {
     return (
-        <div>SubjectCreate</div>
+        <div className='text-darkColor dark:text-lightColor'>SubjectCreate</div>
     )
 }
 

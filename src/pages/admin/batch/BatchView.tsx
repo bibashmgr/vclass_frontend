@@ -2,7 +2,7 @@ import React from 'react'
 
 const BatchView = () => {
     return (
-        <div>BatchView</div>
+        <div className='text-darkColor dark:text-lightColor'>BatchView</div>
     )
 }
 

@@ -69,17 +69,17 @@ const AdminRoutes = () => {
                 {/* facultyRoutes */}
                 <Route path="/faculty" element={<Faculty />} />
                 <Route path="/faculty/create" element={<FacultyCreate />} />
-                <Route path="/faculty/edit" element={<FacultyEdit />} />
-                <Route path="/faculty/view" element={<FacultyView />} />
+                <Route path="/faculty/edit/:id" element={<FacultyEdit />} />
+                <Route path="/faculty/view/:id" element={<FacultyView />} />
                 {/* batchRoutes */}
                 <Route path="/batch" element={<Batch />} />
                 <Route path="/batch/create" element={<BatchCreate />} />
-                <Route path="/batch/edit" element={<BatchEdit />} />
-                <Route path="/batch/view" element={<BatchView />} />
+                <Route path="/batch/edit/:id" element={<BatchEdit />} />
+                <Route path="/batch/view/:id" element={<BatchView />} />
                 {/* userRoutes */}
                 <Route path="/user" element={<User />} />
-                <Route path="/user/edit" element={<UserEdit />} />
-                <Route path="/user/view" element={<UserView />} />
+                <Route path="/user/edit/:id" element={<UserEdit />} />
+                <Route path="/user/view/:id" element={<UserView />} />
             </Route>
         </Routes>
     )

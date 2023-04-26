@@ -40,7 +40,7 @@ const Faculty = () => {
                             <td className='px-6 py-4'>{facultyIndex + 1 < 10 ? `0${facultyIndex + 1}` : facultyIndex + 1}</td>
                             <td className='px-6 py-4 uppercase'>{faculty.name}</td>
                             <td className='px-6 py-4'>{faculty.semesters.length}</td>
-                            <ActionTd hasView hasEdit hasArchive isHidden={faculty.isHidden} handleView={() => navigate(`/admin/faculty/view/${faculty._id}`)} handleEdit={() => navigate(`/admin/subject/edit/${faculty._id}`)} handleArchive={() => console.log('delete faculty')} />
+                            <ActionTd hasView hasEdit hasArchive isHidden={faculty.isHidden} handleView={() => navigate(`/admin/faculty/view/${faculty._id}`)} handleEdit={() => navigate(`/admin/faculty/edit/${faculty._id}`)} handleArchive={() => console.log('delete faculty')} />
                         </tr>
                     )
                 })

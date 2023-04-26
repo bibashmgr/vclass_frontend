@@ -2,7 +2,7 @@ import React from 'react'
 
 const BatchCreate = () => {
     return (
-        <div>BatchCreate</div>
+        <div className='text-darkColor dark:text-lightColor'>BatchCreate</div>
     )
 }
 

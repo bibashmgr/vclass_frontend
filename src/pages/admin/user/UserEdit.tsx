@@ -2,7 +2,7 @@ import React from 'react'
 
 const UserEdit = () => {
     return (
-        <div>UserEdit</div>
+        <div className='text-darkColor dark:text-lightColor'>UserEdit</div>
     )
 }
 

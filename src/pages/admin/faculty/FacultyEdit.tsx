@@ -2,7 +2,7 @@ import React from 'react'
 
 const FacultyEdit = () => {
     return (
-        <div>FacultyEdit</div>
+        <div className='text-darkColor dark:text-lightColor'>FacultyEdit</div>
     )
 }
 
