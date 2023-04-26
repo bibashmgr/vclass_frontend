@@ -3,17 +3,21 @@ import axios from 'axios';
 // helpers
 import { getToken } from './storageHandler';
 
-const BASE_URL = 'http://localhost:9999';
-const HEADER = {"Content-Type": "application/json", "Access-Control-Allow-Origin": BASE_URL, "Authorization": `Bearer ${getToken()}`};
+// config
+import { config } from '../config/config';
 
 // endpoint mustnot start with '/'
-export const apiHandler = async (methodType: string, endpoint: string, payload?: null | object | FormData, ) => {
+export const apiHandler = async (methodType: string, endPoint: string, payload?: null | object | FormData, ) => {
     return await axios({
         method: methodType,
-        baseURL: BASE_URL,
-        url: endpoint,
+        baseURL: config.BASE_URL,
+        url: endPoint,
         data: payload,
-        headers: HEADER,
+        headers: {
+            "Content-Type": "application/json", 
+            "Access-Control-Allow-Origin": config.BASE_URL, 
+            "Authorization": `Bearer ${getToken()}`
+        },
     }).then((res) => {
         return res.data;
     }).catch((error) => {

@@ -10,11 +10,12 @@ type propsType = {
     tableHeader: string[],
     layoutTitle: string,
     layoutSubtitle: string,
+    hasCreateBtn?: boolean,
     isEmpty: boolean,
     isLoading: boolean,
 }
 
-const ListLayout = ({ children, tableHeader, layoutTitle, layoutSubtitle, isEmpty, isLoading }: propsType) => {
+const ListLayout = ({ children, tableHeader, layoutTitle, layoutSubtitle, isEmpty, isLoading, hasCreateBtn = true }: propsType) => {
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -29,7 +30,9 @@ const ListLayout = ({ children, tableHeader, layoutTitle, layoutSubtitle, isEmpt
                     <p className='text-darkColor dark:text-lightColor text-lg font-semibold'>{layoutTitle}</p>
                     <p className='text-gray-400 dark:text-gray-400 text-xs font-normal'>{layoutSubtitle}</p>
                 </div>
-                <CustomButton handleClick={handleAddSubject}>Create</CustomButton>
+                {
+                    hasCreateBtn && <CustomButton handleClick={handleAddSubject}>Create</CustomButton>
+                }
             </div>
             <div className='mt-4 relative block overflow-x-auto whitespace-nowrap'>
                 <table className='w-full text-sm text-left text-gray-500 dark:text-gray-400'>

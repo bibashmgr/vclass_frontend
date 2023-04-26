@@ -11,8 +11,16 @@ import SubjectCreate from "../pages/admin/subject/SubjectCreate";
 import SubjectEdit from "../pages/admin/subject/SubjectEdit";
 import SubjectView from "../pages/admin/subject/SubjectView";
 import Faculty from "../pages/admin/faculty/Faculty";
+import FacultyCreate from "../pages/admin/faculty/FacultyCreate";
+import FacultyEdit from "../pages/admin/faculty/FacultyEdit";
+import FacultyView from "../pages/admin/faculty/FacultyView";
 import Batch from "../pages/admin/batch/Batch";
+import BatchCreate from "../pages/admin/batch/BatchCreate";
+import BatchEdit from "../pages/admin/batch/BatchEdit";
+import BatchView from "../pages/admin/batch/BatchView";
 import User from "../pages/admin/user/User";
+import UserEdit from "../pages/admin/user/UserEdit";
+import UserView from "../pages/admin/user/UserView";
 
 // pages: system
 import Home from "../pages/system/Home";
@@ -60,18 +68,18 @@ const AdminRoutes = () => {
                 <Route path="/subject/view/:id" element={<SubjectView />} />
                 {/* facultyRoutes */}
                 <Route path="/faculty" element={<Faculty />} />
-                {/* <Route path="/faculty/create" element={<FacultyCreate />} /> */}
-                {/* <Route path="/faculty/edit" element={<FacultyEdit />} /> */}
-                {/* <Route path="/faculty/view" element={<FacultyView />} /> */}
+                <Route path="/faculty/create" element={<FacultyCreate />} />
+                <Route path="/faculty/edit" element={<FacultyEdit />} />
+                <Route path="/faculty/view" element={<FacultyView />} />
                 {/* batchRoutes */}
                 <Route path="/batch" element={<Batch />} />
-                {/* <Route path="/batch/create" element={<BatchCreate />} /> */}
-                {/* <Route path="/batch/edit" element={<BatchEdit />} /> */}
-                {/* <Route path="/batch/view" element={<BatchView />} /> */}
+                <Route path="/batch/create" element={<BatchCreate />} />
+                <Route path="/batch/edit" element={<BatchEdit />} />
+                <Route path="/batch/view" element={<BatchView />} />
                 {/* userRoutes */}
                 <Route path="/user" element={<User />} />
-                {/* <Route path="/user/edit" element={<UserEdit />} /> */}
-                {/* <Route path="/user/view" element={<UserView />} /> */}
+                <Route path="/user/edit" element={<UserEdit />} />
+                <Route path="/user/view" element={<UserView />} />
             </Route>
         </Routes>
     )

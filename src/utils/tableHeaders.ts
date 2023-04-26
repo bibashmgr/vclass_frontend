@@ -11,13 +11,11 @@ export const facultyHeader = [
 export const batchHeader = [
     'Year',
     'Faculty',
-    'Total Semesters',
+    'Semester',
 ]
 
 export const userHeader = [
     'Name',
     'Email',
     'Role',
-    'Batch',
-    'Faculty',
 ]
