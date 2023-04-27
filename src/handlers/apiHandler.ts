@@ -15,7 +15,8 @@ export const apiHandler = async (methodType: string, endPoint: string, payload?:
         data: payload,
         headers: {
             "Content-Type": "application/json", 
-            "Access-Control-Allow-Origin": config.BASE_URL, 
+            "Access-Control-Allow-Origin": config.BASE_URL,
+            'Access-Control-Allow-Methods': ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
             "Authorization": `Bearer ${getToken()}`
         },
     }).then((res) => {
