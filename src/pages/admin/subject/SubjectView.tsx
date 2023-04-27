@@ -11,7 +11,7 @@ import ViewLayout from '../../../layouts/crud_layouts/ViewLayout';
 import Card from '../../../components/global/Card';
 
 // icons
-import { MdOutlineCode } from 'react-icons/md';
+import { MdDescription, MdOutlineCode } from 'react-icons/md';
 import { AiFillIdcard } from 'react-icons/ai';
 
 const SubjectView = () => {
@@ -19,6 +19,7 @@ const SubjectView = () => {
   const [subject, setSubject] = useState({
     name: '',
     codeName: '',
+    desc: '',
   });
 
   useEffect(() => {
@@ -27,6 +28,7 @@ const SubjectView = () => {
         setSubject({
           name: res.data.name,
           codeName: res.data.codeName,
+          desc: res.data.desc,
         });
       }
     });
@@ -40,6 +42,13 @@ const SubjectView = () => {
         subtitle={subject.codeName}
         Icon={MdOutlineCode}
       />
+      <div className='lg:col-span-2'>
+        <Card
+          title='Description'
+          subtitle={subject.desc}
+          Icon={MdDescription}
+        />
+      </div>
     </ViewLayout>
   );
 };

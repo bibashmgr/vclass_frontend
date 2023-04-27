@@ -15,6 +15,7 @@ const SubjectEdit = () => {
   const [subject, setSubject] = useState({
     name: '',
     codeName: '',
+    desc: '',
   });
 
   const handleInputField = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,6 +29,7 @@ const SubjectEdit = () => {
         setSubject({
           name: '',
           codeName: '',
+          desc: '',
         });
       }
     });
@@ -39,6 +41,7 @@ const SubjectEdit = () => {
         setSubject({
           name: res.data.name,
           codeName: res.data.codeName,
+          desc: res.data.desc,
         });
       }
     });
@@ -64,6 +67,15 @@ const SubjectEdit = () => {
         name='codeName'
         value={subject.codeName}
         handleChange={handleInputField}
+      />
+      <CustomInputField
+        hasLabel
+        label='Description'
+        type='textarea'
+        name='desc'
+        value={subject.desc}
+        handleChange={handleInputField}
+        extraStyling='lg:col-span-2'
       />
     </FormLayout>
   );

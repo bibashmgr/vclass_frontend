@@ -47,7 +47,7 @@ const Appbar = ({
 
   return (
     <nav
-      className={`bg-gray-100 dark:bg-gray-700 w-full md:w-[calc(100vw-240px)] lg:w-[calc(100vw-288px)] h-16 md:h-20 flex justify-between items-center px-4 md:px-6 sticky md:fixed top-0 left-0 md:left-60 lg:left-72 z-10`}
+      className={`bg-gray-100 dark:bg-gray-700 w-full md:w-[calc(100vw-240px)] lg:w-[calc(100vw-288px)] h-16 md:h-20 flex justify-between items-center px-4 md:px-6 sticky md:fixed top-0 left-0 md:left-60 lg:left-72 z-20`}
     >
       <div className='flex gap-3 h-full items-center'>
         <HiMenu
@@ -80,7 +80,7 @@ const Appbar = ({
           }
         >
           <div
-            className='px-4 py-2.5 hover:opacity-60 cursor-pointer'
+            className='px-4 py-2.5 hover:opacity-75 cursor-pointer'
             onClick={handleLogout}
           >
             Logout

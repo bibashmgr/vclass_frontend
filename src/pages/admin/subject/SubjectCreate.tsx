@@ -61,7 +61,7 @@ const SubjectCreate = () => {
         name='desc'
         value={subject.desc}
         handleChange={handleInputField}
-        extraStyling='col-span-2'
+        extraStyling='lg:col-span-2'
       />
     </FormLayout>
   );

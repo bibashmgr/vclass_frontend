@@ -41,7 +41,7 @@ const AppLayout = ({ isAdmin }: { isAdmin: boolean }) => {
       <div className='w-screen'>
         {isSidebarOpen && (
           <div
-            className='w-screen h-screen fixed top-0 left-0 z-20 bg-black/25'
+            className='w-screen h-screen fixed top-0 left-0 z-30 bg-black/25'
             onClick={closeSidebar}
           />
         )}

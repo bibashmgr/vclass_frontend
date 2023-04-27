@@ -25,7 +25,7 @@ const Sidebar = ({
     <aside
       className={`bg-lightColor dark:bg-gray-800 w-60 lg:w-72 h-screen px-4 md:px-6 fixed top-0 ${
         isSidebarOpen ? 'left-0 md:left-0' : '-left-60 md:left-0'
-      } z-30 ease-linear duration-150`}
+      } z-40 ease-linear duration-150`}
     >
       <div className='w-full h-16 md:h-20 flex justify-between items-center'>
         <div className='flex gap-2 items-center'>
