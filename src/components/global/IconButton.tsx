@@ -17,7 +17,8 @@ const IconButton = ({
   indicatorTitle = '0',
 }: propsType) => {
   return (
-    <div
+    <button
+      type='button'
       title={title}
       onClick={handleClick}
       className='border border-gray-300 dark:border-gray-500 inline-flex rounded-md p-[6px] cursor-pointer relative hover:opacity-80'
@@ -30,7 +31,7 @@ const IconButton = ({
           </div>
         </div>
       )}
-    </div>
+    </button>
   );
 };
 
