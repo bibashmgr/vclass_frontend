@@ -4,7 +4,8 @@ import React, { useState } from 'react';
 import FormLayout from '../../../layouts/crud_layouts/FormLayout';
 
 // components
-import CustomInputField from '../../../components/global/InputField';
+import InputField from '../../../components/global/InputField';
+import SelectField from '../../../components/global/SelectField';
 
 // helpers
 import { apiHandler } from '../../../handlers/apiHandler';
@@ -40,21 +41,21 @@ const SubjectCreate = () => {
       handleSubmit={handleCreateSubject}
       isEdit={false}
     >
-      <CustomInputField
+      <InputField
         hasLabel
         label='Name'
         name='name'
         value={subject.name}
         handleChange={handleInputField}
       />
-      <CustomInputField
+      <InputField
         hasLabel
         label='Code Name'
         name='codeName'
         value={subject.codeName}
         handleChange={handleInputField}
       />
-      <CustomInputField
+      <InputField
         hasLabel
         label='Description'
         type='textarea'

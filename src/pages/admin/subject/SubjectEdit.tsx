@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import FormLayout from '../../../layouts/crud_layouts/FormLayout';
 
 // components
-import CustomInputField from '../../../components/global/InputField';
+import InputField from '../../../components/global/InputField';
 
 // helpers
 import { apiHandler } from '../../../handlers/apiHandler';
@@ -27,9 +27,9 @@ const SubjectEdit = () => {
     apiHandler('patch', `subjects/${params.id}`, subject).then((res) => {
       if (res.success) {
         setSubject({
-          name: '',
-          codeName: '',
-          desc: '',
+          name: res.data.name,
+          codeName: res.data.codeName,
+          desc: res.data.desc,
         });
       }
     });
@@ -54,21 +54,21 @@ const SubjectEdit = () => {
       handleSubmit={handleEditSubject}
       isEdit={true}
     >
-      <CustomInputField
+      <InputField
         hasLabel
         label='Name'
         name='name'
         value={subject.name}
         handleChange={handleInputField}
       />
-      <CustomInputField
+      <InputField
         hasLabel
         label='Code Name'
         name='codeName'
         value={subject.codeName}
         handleChange={handleInputField}
       />
-      <CustomInputField
+      <InputField
         hasLabel
         label='Description'
         type='textarea'
