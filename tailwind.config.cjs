@@ -32,6 +32,16 @@ module.exports = {
       boxShadow: {
         light: '0px 0px 35px rgba(181, 181, 195, 0.15)',
       },
+      keyframes: {
+        toaster: {
+          '0%, 100%': { transform: 'translateX(320px)' },
+          '25%': { transform: 'translateX(0px)' },
+          '75%': { transform: 'translateX(0px)' },
+        },
+      },
+      animation: {
+        toaster: 'toaster 3s ease-in-out',
+      },
     },
     fontFamily: {
       sans: ['Open Sans', 'sans-serif'],

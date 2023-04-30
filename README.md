@@ -16,7 +16,7 @@
 ### TODO
 - [ ] Create Reusable Components
   - [ ] Toast
-  - [ ] Modal 
+  - [x] Modal
 - [ ] Protected Routes
 
 ### ISSUES
