@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 
+// styles
+import 'react-toastify/dist/ReactToastify.css';
+
 //layouts
 import FormLayout from '../../../layouts/crud_layouts/FormLayout';
 
 // components
 import InputField from '../../../components/global/InputField';
-import SelectField from '../../../components/global/SelectField';
 
 // helpers
 import { apiHandler } from '../../../handlers/apiHandler';

@@ -48,38 +48,36 @@ const SubjectEdit = () => {
   }, []);
 
   return (
-    <>
-      <FormLayout
-        layoutTitle='Edit Subject'
-        layoutSubtitle='Fill out the forms'
-        handleSubmit={handleEditSubject}
-        isEdit={true}
-      >
-        <InputField
-          hasLabel
-          label='Name'
-          name='name'
-          value={subject.name}
-          handleChange={handleInputField}
-        />
-        <InputField
-          hasLabel
-          label='Code Name'
-          name='codeName'
-          value={subject.codeName}
-          handleChange={handleInputField}
-        />
-        <InputField
-          hasLabel
-          label='Description'
-          type='textarea'
-          name='desc'
-          value={subject.desc}
-          handleChange={handleInputField}
-          extraStyling='lg:col-span-2'
-        />
-      </FormLayout>
-    </>
+    <FormLayout
+      layoutTitle='Edit Subject'
+      layoutSubtitle='Fill out the forms'
+      handleSubmit={handleEditSubject}
+      isEdit={true}
+    >
+      <InputField
+        hasLabel
+        label='Name'
+        name='name'
+        value={subject.name}
+        handleChange={handleInputField}
+      />
+      <InputField
+        hasLabel
+        label='Code Name'
+        name='codeName'
+        value={subject.codeName}
+        handleChange={handleInputField}
+      />
+      <InputField
+        hasLabel
+        label='Description'
+        type='textarea'
+        name='desc'
+        value={subject.desc}
+        handleChange={handleInputField}
+        extraStyling='lg:col-span-2'
+      />
+    </FormLayout>
   );
 };
 

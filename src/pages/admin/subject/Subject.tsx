@@ -23,6 +23,7 @@ const Subject = () => {
   const [subjects, setSubjects] = useState<subjectSchema[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
   const [selectedSubject, setSelectedSubject] = useState<subjectSchema | null>(
     null
   );
