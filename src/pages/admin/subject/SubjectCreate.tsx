@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 
-// styles
-import 'react-toastify/dist/ReactToastify.css';
-
 //layouts
 import FormLayout from '../../../layouts/crud_layouts/FormLayout';
 
@@ -11,6 +8,7 @@ import InputField from '../../../components/global/InputField';
 
 // helpers
 import { apiHandler } from '../../../handlers/apiHandler';
+import { showMessage } from '../../../handlers/messageHandler';
 
 const SubjectCreate = () => {
   const [subject, setSubject] = useState({
@@ -27,6 +25,7 @@ const SubjectCreate = () => {
     e.preventDefault();
     apiHandler('post', 'subjects/create', subject).then((res) => {
       if (res.success) {
+        showMessage(res.message, 'failure');
         setSubject({
           name: '',
           codeName: '',
