@@ -9,6 +9,7 @@ import InputField from '../../../components/global/InputField';
 
 // helpers
 import { apiHandler } from '../../../handlers/apiHandler';
+import { showMessage } from '../../../handlers/messageHandler';
 
 const SubjectEdit = () => {
   const params = useParams();
@@ -38,11 +39,14 @@ const SubjectEdit = () => {
   useEffect(() => {
     apiHandler('get', `subjects/${params.id}`, null).then((res) => {
       if (res.success) {
+        showMessage(res.message, 'success');
         setSubject({
           name: res.data.name,
           codeName: res.data.codeName,
           desc: res.data.desc,
         });
+      } else {
+        showMessage(res.message, 'failure');
       }
     });
   }, []);

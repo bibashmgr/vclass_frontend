@@ -25,12 +25,14 @@ const SubjectCreate = () => {
     e.preventDefault();
     apiHandler('post', 'subjects/create', subject).then((res) => {
       if (res.success) {
-        showMessage(res.message, 'failure');
+        showMessage(res.message, 'success');
         setSubject({
           name: '',
           codeName: '',
           desc: '',
         });
+      } else {
+        showMessage(res.message, 'failure');
       }
     });
   };

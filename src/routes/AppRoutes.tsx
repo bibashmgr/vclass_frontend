@@ -46,7 +46,7 @@ const AppRoutes = ({ colorMode }: { colorMode: string | undefined }) => {
           <>
             <ToastContainer
               position='top-right'
-              autoClose={300000}
+              autoClose={2000}
               hideProgressBar
               newestOnTop
               closeOnClick

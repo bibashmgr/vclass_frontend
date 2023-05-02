@@ -13,6 +13,7 @@ import { subjectHeader } from '../../../utils/tableHeaders';
 
 // handlers
 import { apiHandler } from '../../../handlers/apiHandler';
+import { showMessage } from '../../../handlers/messageHandler';
 
 // components
 import Modal from '../../../components/global/Modal';
@@ -23,6 +24,7 @@ const Subject = () => {
   const [subjects, setSubjects] = useState<subjectSchema[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [updateCounter, setUpdateCounter] = useState<boolean>(false);
 
   const [selectedSubject, setSelectedSubject] = useState<subjectSchema | null>(
     null
@@ -43,7 +45,11 @@ const Subject = () => {
         (res) => {
           if (res.success) {
             setIsModalOpen(false);
-            window.location.reload();
+            showMessage(res.message, 'success');
+            setUpdateCounter(!updateCounter);
+            // window.location.reload();
+          } else {
+            showMessage(res.message, 'failure');
           }
         }
       );
@@ -52,7 +58,7 @@ const Subject = () => {
 
   useEffect(() => {
     getSubjects();
-  }, []);
+  }, [updateCounter]);
 
   return (
     <>
