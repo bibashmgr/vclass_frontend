@@ -5,7 +5,7 @@ import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 
 type optionType = {
   name: string;
-  value: string;
+  _id: string;
 };
 
 type propsType = {
@@ -50,7 +50,7 @@ const SelectField = ({
             {placeHolder}
           </option>
           {options.map((option: optionType) => {
-            return <option value={option.value}>{option.name}</option>;
+            return <option value={option._id}>{option.name}</option>;
           })}
         </select>
         <MdOutlineKeyboardArrowDown className='w-6 h-6 absolute top-2 right-2 text-gray-900 dark:text-lightColor' />
