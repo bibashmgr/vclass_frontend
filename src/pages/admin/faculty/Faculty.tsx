@@ -6,6 +6,7 @@ import ListLayout from '../../../layouts/crud_layouts/ListLayout';
 
 // components
 import ActionTd from '../../../components/admin/ActionTd';
+import Modal from '../../../components/global/Modal';
 
 // utils
 import { facultySchema } from '../../../utils/schemas';
@@ -14,7 +15,6 @@ import { facultyHeader } from '../../../utils/tableHeaders';
 // handlers
 import { apiHandler } from '../../../handlers/apiHandler';
 import { showMessage } from '../../../handlers/messageHandler';
-import Modal from '../../../components/global/Modal';
 
 const Faculty = () => {
     const navigate = useNavigate();
@@ -23,7 +23,6 @@ const Faculty = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const [updateCounter, setUpdateCounter] = useState<boolean>(false);
-
     const [selectedFaculty, setSelectedFaculty] = useState<facultySchema | null>(
         null
     );
@@ -55,7 +54,7 @@ const Faculty = () => {
 
     useEffect(() => {
         getFaculties();
-    }, [])
+    }, [updateCounter])
 
     return (
         <>
