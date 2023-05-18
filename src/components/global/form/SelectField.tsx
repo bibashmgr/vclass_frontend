@@ -4,8 +4,8 @@ import React from 'react';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 
 type optionType = {
-  name: string;
-  _id: string;
+  title: string | number;
+  value: string | number;
 };
 
 type propsType = {
@@ -39,7 +39,7 @@ const SelectField = ({
       )}
       <div className='relative'>
         <select
-          className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 cursor-pointer appearance-none invalid:text-gray-700 invalid:dark:text-gray-400'
+          className='bg-gray-50 border border-gray-300 text-gray-400 text-sm rounded-md placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 cursor-pointer appearance-none invalid:text-gray-700 invalid:dark:text-gray-400'
           id={name}
           name={name}
           value={value}
@@ -51,18 +51,13 @@ const SelectField = ({
           </option>
           {options.map((option: optionType, index) => {
             return (
-              <option value={option._id} key={index}>
-                {option.name}
+              <option value={option.value} key={index}>
+                {option.title}
               </option>
             );
           })}
         </select>
-        <MdOutlineKeyboardArrowDown
-          className='w-6 h-6 absolute top-2 right-2 text-gray-900 dark:text-lightColor cursor-pointer'
-          onClick={() => {
-            let sel = document.getElementById(name);
-          }}
-        />
+        <MdOutlineKeyboardArrowDown className='w-6 h-6 absolute top-1/2 -translate-y-1/2 right-2 text-gray-400 cursor-pointer' />
       </div>
     </div>
   );
