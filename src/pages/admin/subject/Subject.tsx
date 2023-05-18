@@ -22,20 +22,21 @@ const Subject = () => {
   const navigate = useNavigate();
 
   const [subjects, setSubjects] = useState<subjectSchema[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [updateCounter, setUpdateCounter] = useState<boolean>(false);
-
   const [selectedSubject, setSelectedSubject] = useState<subjectSchema | null>(
     null
   );
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [updateCounter, setUpdateCounter] = useState<boolean>(false);
 
   const getSubjects = async () => {
     await apiHandler('get', 'subjects', null).then((res) => {
       if (res.success) {
         setSubjects(res.data);
+        setIsLoading(false);
+      } else {
+        showMessage(res.message, 'failure');
       }
-      setIsLoading(false);
     });
   };
 
@@ -46,8 +47,8 @@ const Subject = () => {
           if (res.success) {
             setIsModalOpen(false);
             showMessage(res.message, 'success');
+            setIsLoading(true);
             setUpdateCounter(!updateCounter);
-            // window.location.reload();
           } else {
             showMessage(res.message, 'failure');
           }

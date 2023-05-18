@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import FormLayout from '../../../layouts/crud_layouts/FormLayout';
 
 // components
-import InputField from '../../../components/global/InputField';
+import InputField from '../../../components/global/form/InputField';
 
 // helpers
 import { apiHandler } from '../../../handlers/apiHandler';
@@ -21,7 +21,7 @@ const SubjectCreate = () => {
     setSubject((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleCreateSubject = (e: React.MouseEvent) => {
+  const handleCreateSubject = (e: React.FormEvent) => {
     e.preventDefault();
     apiHandler('post', 'subjects/create', subject).then((res) => {
       if (res.success) {
@@ -42,7 +42,6 @@ const SubjectCreate = () => {
       layoutTitle='Create Subject'
       layoutSubtitle='Fill out the forms'
       handleSubmit={handleCreateSubject}
-      isEdit={false}
     >
       <InputField
         hasLabel

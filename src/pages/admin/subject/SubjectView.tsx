@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 
 // helpers
 import { apiHandler } from '../../../handlers/apiHandler';
+import { showMessage } from '../../../handlers/messageHandler';
 
 // layouts
 import ViewLayout from '../../../layouts/crud_layouts/ViewLayout';
@@ -16,26 +17,35 @@ import { AiFillIdcard } from 'react-icons/ai';
 
 const SubjectView = () => {
   const params = useParams();
+
   const [subject, setSubject] = useState({
     name: '',
     codeName: '',
     desc: '',
   });
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    apiHandler('get', `subjects/${params.id}`, null).then((res) => {
+    apiHandler('get', `subjects/${params.subjectId}`, null).then((res) => {
       if (res.success) {
         setSubject({
           name: res.data.name,
           codeName: res.data.codeName,
           desc: res.data.desc,
         });
+        setIsLoading(false);
+      } else {
+        showMessage(res.message, 'failure');
       }
     });
   }, []);
 
   return (
-    <ViewLayout layoutTitle='View Subject' layoutSubtitle='Subject details'>
+    <ViewLayout
+      layoutTitle='View Subject'
+      layoutSubtitle='Subject details'
+      isLoading={isLoading}
+    >
       <Card title='Name' subtitle={subject.name} Icon={AiFillIdcard} />
       <Card
         title='Code Name'

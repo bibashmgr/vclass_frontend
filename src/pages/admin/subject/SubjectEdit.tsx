@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import FormLayout from '../../../layouts/crud_layouts/FormLayout';
 
 // components
-import InputField from '../../../components/global/InputField';
+import InputField from '../../../components/global/form/InputField';
 
 // helpers
 import { apiHandler } from '../../../handlers/apiHandler';
@@ -13,17 +13,19 @@ import { showMessage } from '../../../handlers/messageHandler';
 
 const SubjectEdit = () => {
   const params = useParams();
+
   const [subject, setSubject] = useState({
     name: '',
     codeName: '',
     desc: '',
   });
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleInputField = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSubject((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleEditSubject = (e: React.MouseEvent) => {
+  const handleEditSubject = (e: React.FormEvent) => {
     e.preventDefault();
     apiHandler('patch', `subjects/${params.id}`, subject).then((res) => {
       if (res.success) {
@@ -32,19 +34,21 @@ const SubjectEdit = () => {
           codeName: res.data.codeName,
           desc: res.data.desc,
         });
+      } else {
+        showMessage(res.message, 'failure');
       }
     });
   };
 
   useEffect(() => {
-    apiHandler('get', `subjects/${params.id}`, null).then((res) => {
+    apiHandler('get', `subjects/${params.subjectId}`, null).then((res) => {
       if (res.success) {
-        showMessage(res.message, 'success');
         setSubject({
           name: res.data.name,
           codeName: res.data.codeName,
           desc: res.data.desc,
         });
+        setIsLoading(false);
       } else {
         showMessage(res.message, 'failure');
       }
@@ -57,6 +61,7 @@ const SubjectEdit = () => {
       layoutSubtitle='Fill out the forms'
       handleSubmit={handleEditSubject}
       isEdit={true}
+      isLoading={isLoading}
     >
       <InputField
         hasLabel
