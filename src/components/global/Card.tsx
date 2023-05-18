@@ -1,9 +1,8 @@
-import React from 'react';
 import { IconType } from 'react-icons';
 
 type propsType = {
   title: string;
-  subtitle: string;
+  subtitle: string | undefined | null;
   hasIcon?: boolean;
   Icon: IconType;
 };
@@ -17,7 +16,7 @@ const Card = ({ title, subtitle, hasIcon = true, Icon }: propsType) => {
           {title}:
         </p>
         <p className='font-normal text-gray-700 dark:text-gray-400 text-xs'>
-          {subtitle}
+          {subtitle || 'none'}
         </p>
       </div>
     </div>

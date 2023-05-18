@@ -1,7 +1,7 @@
 import React from 'react';
 
 // components
-import Button from '../global/Button';
+import Button from '../global/button/Button';
 
 type propsType = {
   hasView?: boolean;

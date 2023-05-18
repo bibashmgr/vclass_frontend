@@ -1,7 +1,7 @@
 import React from 'react';
 
 // components
-import Spinner from './Spinner';
+import Spinner from '../Spinner';
 
 type propsType = {
   children: React.ReactNode;
@@ -9,7 +9,8 @@ type propsType = {
   colorScheme?: string;
   isLoading?: boolean;
   isDisabled?: boolean;
-  handleClick: React.MouseEventHandler;
+  handleClick?: React.MouseEventHandler;
+  isSmall?: boolean;
 };
 
 const Button = ({
@@ -18,7 +19,8 @@ const Button = ({
   colorScheme = 'neutral',
   isLoading = false,
   isDisabled = false,
-  handleClick,
+  handleClick = () => {},
+  isSmall = false,
 }: propsType) => {
   const getColorScheme = (color: string) => {
     if (color === 'success')
@@ -36,7 +38,9 @@ const Button = ({
   return (
     <button
       type={type}
-      className={`px-5 py-2.5 rounded-md text-sm font-medium ${getColorScheme(
+      className={`${
+        isSmall ? 'px-3 py-2 text-xs' : 'px-5 py-2.5 text-sm'
+      } rounded-md  font-medium disabled:opacity-75 disabled:cursor-not-allowed ${getColorScheme(
         colorScheme
       )}`}
       onClick={handleClick}

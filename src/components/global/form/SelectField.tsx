@@ -46,14 +46,23 @@ const SelectField = ({
           onChange={handleSelect}
           required
         >
-          <option value='' disabled selected>
+          <option value='' disabled>
             {placeHolder}
           </option>
-          {options.map((option: optionType) => {
-            return <option value={option._id}>{option.name}</option>;
+          {options.map((option: optionType, index) => {
+            return (
+              <option value={option._id} key={index}>
+                {option.name}
+              </option>
+            );
           })}
         </select>
-        <MdOutlineKeyboardArrowDown className='w-6 h-6 absolute top-2 right-2 text-gray-900 dark:text-lightColor' />
+        <MdOutlineKeyboardArrowDown
+          className='w-6 h-6 absolute top-2 right-2 text-gray-900 dark:text-lightColor cursor-pointer'
+          onClick={() => {
+            let sel = document.getElementById(name);
+          }}
+        />
       </div>
     </div>
   );

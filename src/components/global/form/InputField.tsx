@@ -7,8 +7,9 @@ type propsType = {
   name: string;
   value: any;
   placeHolder?: string | undefined;
-  handleChange: React.ChangeEventHandler;
+  handleChange?: React.ChangeEventHandler;
   extraStyling?: string;
+  isDisabled?: boolean;
 };
 
 const InputField = ({
@@ -18,8 +19,9 @@ const InputField = ({
   name,
   value,
   placeHolder = 'Enter value',
-  handleChange,
+  handleChange = () => {},
   extraStyling = '',
+  isDisabled = false,
 }: propsType) => {
   return (
     <div className={`flex flex-col gap-2 ${extraStyling}`}>
@@ -39,6 +41,20 @@ const InputField = ({
           type={type}
           placeholder={placeHolder}
           onChange={handleChange}
+          required
+          disabled={isDisabled}
+          className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md  focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 disabled:opacity-75 disabled:cursor-not-allowed'
+        />
+      )}
+      {type === 'number' && (
+        <input
+          id={name}
+          name={name}
+          value={value}
+          type={type}
+          placeholder={placeHolder}
+          onChange={handleChange}
+          min='1'
           required
           className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md  focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
         />

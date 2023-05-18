@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import { MdClose, MdInfoOutline } from 'react-icons/md';
 
 // components
-import Button from './Button';
+import Button from './button/Button';
 
 type propsType = {
   isOpen: boolean;

@@ -6,7 +6,7 @@ import { MdNotifications, MdWbSunny, MdDarkMode } from 'react-icons/md';
 import { HiMenu } from 'react-icons/hi';
 
 // components
-import IconButton from './IconButton';
+import IconButton from '../global/button/IconButton';
 
 // utils
 import { navLinks } from '../../utils/navlinks';
@@ -17,7 +17,7 @@ import {
   removeToken,
   setColorMode,
 } from '../../handlers/storageHandler';
-import Popover from './Popover';
+import Popover from '../global/Popover';
 
 const Appbar = ({
   handleSidebar,
