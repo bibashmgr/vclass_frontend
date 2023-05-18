@@ -1,7 +1,7 @@
 import { toast } from 'react-toastify';
 
 // icons
-import { SuccessIcon, FailureIcon, InfoIcon, WarnIcon } from '../utils/Icons';
+import { SuccessIcon, FailureIcon, InfoIcon, WarnIcon } from '../components/global/Icons';
 
 export const showMessage = (title: string, type: string) => {
     switch (type) {

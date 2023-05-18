@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // components
-import Button from '../../components/global/Button';
+import Button from '../../components/global/button/Button';
 import { getColorMode } from '../../handlers/storageHandler';
 
 const PageNotFound = () => {

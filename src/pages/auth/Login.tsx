@@ -1,4 +1,4 @@
-import Button from '../../components/global/Button';
+import Button from '../../components/global/button/Button';
 
 const Login = () => {
   const handleLogin = async () => {

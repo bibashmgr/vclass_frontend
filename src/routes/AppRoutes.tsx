@@ -90,22 +90,22 @@ const AdminRoutes = () => {
         {/* subjectRoutes */}
         <Route path='/subject' element={<Subject />} />
         <Route path='/subject/create' element={<SubjectCreate />} />
-        <Route path='/subject/edit/:id' element={<SubjectEdit />} />
-        <Route path='/subject/view/:id' element={<SubjectView />} />
+        <Route path='/subject/edit/:subjectId' element={<SubjectEdit />} />
+        <Route path='/subject/view/:subjectId' element={<SubjectView />} />
         {/* facultyRoutes */}
         <Route path='/faculty' element={<Faculty />} />
         <Route path='/faculty/create' element={<FacultyCreate />} />
-        <Route path='/faculty/edit/:id' element={<FacultyEdit />} />
-        <Route path='/faculty/view/:id' element={<FacultyView />} />
+        <Route path='/faculty/edit/:facultyId' element={<FacultyEdit />} />
+        <Route path='/faculty/view/:facultyId' element={<FacultyView />} />
         {/* batchRoutes */}
         <Route path='/batch' element={<Batch />} />
         <Route path='/batch/create' element={<BatchCreate />} />
-        <Route path='/batch/edit/:id' element={<BatchEdit />} />
-        <Route path='/batch/view/:id' element={<BatchView />} />
+        <Route path='/batch/edit/:batchId' element={<BatchEdit />} />
+        <Route path='/batch/view/:batchId' element={<BatchView />} />
         {/* userRoutes */}
         <Route path='/user' element={<User />} />
-        <Route path='/user/edit/:id' element={<UserEdit />} />
-        <Route path='/user/view/:id' element={<UserView />} />
+        <Route path='/user/edit/:userId' element={<UserEdit />} />
+        <Route path='/user/view/:userId' element={<UserView />} />
       </Route>
     </Routes>
   );
