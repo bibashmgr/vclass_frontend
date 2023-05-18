@@ -29,8 +29,10 @@ const User = () => {
     await apiHandler('get', 'users', null).then((res) => {
       if (res.success) {
         setUsers(res.data);
+        setIsLoading(false);
+      } else {
+        showMessage(res.message, 'failure');
       }
-      setIsLoading(false);
     });
   };
 
@@ -40,6 +42,7 @@ const User = () => {
         if (res.success) {
           setIsModalOpen(false);
           showMessage(res.message, 'success');
+          setIsLoading(true);
           setUpdateCounter(!updateCounter);
         } else {
           setIsModalOpen(false);
