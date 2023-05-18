@@ -25,19 +25,25 @@ const SubjectView = () => {
   });
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    apiHandler('get', `subjects/${params.subjectId}`, null).then((res) => {
-      if (res.success) {
-        setSubject({
-          name: res.data.name,
-          codeName: res.data.codeName,
-          desc: res.data.desc,
-        });
-        setIsLoading(false);
-      } else {
-        showMessage(res.message, 'failure');
+  const getSubjects = async () => {
+    await apiHandler('get', `subjects/${params.subjectId}`, null).then(
+      (res) => {
+        if (res.success) {
+          setSubject({
+            name: res.data.name,
+            codeName: res.data.codeName,
+            desc: res.data.desc,
+          });
+          setIsLoading(false);
+        } else {
+          showMessage(res.message, 'failure');
+        }
       }
-    });
+    );
+  };
+
+  useEffect(() => {
+    getSubjects();
   }, []);
 
   return (
