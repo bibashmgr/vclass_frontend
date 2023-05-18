@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // components
-import IconButton from '../../components/global/IconButton';
+import IconButton from '../../components/global/button/IconButton';
 
 // icons
 import { IoChevronBack } from 'react-icons/io5';
@@ -11,9 +11,15 @@ type propsType = {
   children: React.ReactNode;
   layoutTitle: string;
   layoutSubtitle: string;
+  isLoading: boolean;
 };
 
-const ViewLayout = ({ children, layoutTitle, layoutSubtitle }: propsType) => {
+const ViewLayout = ({
+  children,
+  layoutTitle,
+  layoutSubtitle,
+  isLoading,
+}: propsType) => {
   const navigate = useNavigate();
 
   return (
@@ -33,7 +39,16 @@ const ViewLayout = ({ children, layoutTitle, layoutSubtitle }: propsType) => {
           </p>
         </div>
       </div>
-      <div className='grid gap-4 lg:grid-cols-2'>{children}</div>
+      {isLoading ? (
+        <div className='animate-pulse grid gap-4 lg:grid-cols-2 w-full'>
+          <div className='h-[72px] bg-gray-200 rounded-lg dark:bg-gray-700 w-full'></div>
+          <div className='h-[72px] bg-gray-200 rounded-lg dark:bg-gray-700 w-full'></div>
+          <div className='h-[72px] bg-gray-200 rounded-lg dark:bg-gray-700 w-full'></div>
+          <div className='h-[72px] bg-gray-200 rounded-lg dark:bg-gray-700 w-full'></div>
+        </div>
+      ) : (
+        <div className='grid gap-4 lg:grid-cols-2'>{children}</div>
+      )}
     </div>
   );
 };

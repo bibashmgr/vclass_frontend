@@ -2,7 +2,7 @@ import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 // components
-import Button from '../../components/global/Button';
+import Button from '../../components/global/button/Button';
 import { getColorMode } from '../../handlers/storageHandler';
 
 type propsType = {
@@ -67,14 +67,10 @@ const ListLayout = ({
             {isLoading ? (
               <tr className='bg-white dark:bg-gray-800'>
                 <td colSpan={tableHeader.length + 2} className='py-4'>
-                  <div
-                    role='status'
-                    className='animate-pulse flex flex-col gap-4 w-full'
-                  >
+                  <div className='animate-pulse flex flex-col gap-4 w-full'>
                     <div className='h-6 bg-gray-200 rounded-lg dark:bg-gray-700 w-full'></div>
                     <div className='h-6 bg-gray-200 rounded-lg dark:bg-gray-700 w-full'></div>
                     <div className='h-6 bg-gray-200 rounded-lg dark:bg-gray-700 w-full'></div>
-                    <span className='sr-only'>Loading...</span>
                   </div>
                 </td>
               </tr>
