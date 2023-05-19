@@ -25,7 +25,7 @@ const SubjectView = () => {
   });
   const [isLoading, setIsLoading] = useState(true);
 
-  const getSubjects = async () => {
+  const getSubject = async () => {
     await apiHandler('get', `subjects/${params.subjectId}`, null).then(
       (res) => {
         if (res.success) {
@@ -43,7 +43,7 @@ const SubjectView = () => {
   };
 
   useEffect(() => {
-    getSubjects();
+    getSubject();
   }, []);
 
   return (

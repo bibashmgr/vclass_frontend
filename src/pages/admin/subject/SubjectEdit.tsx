@@ -27,20 +27,21 @@ const SubjectEdit = () => {
 
   const handleEditSubject = (e: React.FormEvent) => {
     e.preventDefault();
-    apiHandler('patch', `subjects/${params.id}`, subject).then((res) => {
+    apiHandler('patch', `subjects/${params.subjectId}`, subject).then((res) => {
       if (res.success) {
         setSubject({
           name: res.data.name,
           codeName: res.data.codeName,
           desc: res.data.desc,
         });
+        showMessage(res.message, 'success');
       } else {
         showMessage(res.message, 'failure');
       }
     });
   };
 
-  const getSubjects = async () => {
+  const getSubject = async () => {
     await apiHandler('get', `subjects/${params.subjectId}`, null).then(
       (res) => {
         if (res.success) {
@@ -58,7 +59,7 @@ const SubjectEdit = () => {
   };
 
   useEffect(() => {
-    getSubjects();
+    getSubject();
   }, []);
 
   return (
