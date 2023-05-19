@@ -11,6 +11,8 @@ import MultiSelectField from '../../../components/global/form/MultiSelectField';
 // helpers
 import { apiHandler } from '../../../handlers/apiHandler';
 import { showMessage } from '../../../handlers/messageHandler';
+
+// utils
 import { subjectSchema } from '../../../utils/schemas';
 
 const FacultyCreate = () => {
@@ -51,7 +53,6 @@ const FacultyCreate = () => {
 
   const handleCreateFaculty = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(faculty);
 
     let mappingSemesters = [];
 

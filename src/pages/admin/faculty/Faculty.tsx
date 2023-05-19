@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // layouts
@@ -31,8 +31,10 @@ const Faculty = () => {
     await apiHandler('get', 'faculties', null).then((res) => {
       if (res.success) {
         setFaculties(res.data);
+        setIsLoading(false);
+      } else {
+        showMessage(res.message, 'failure');
       }
-      setIsLoading(false);
     });
   };
 
@@ -86,9 +88,9 @@ const Faculty = () => {
               </td>
               <td className='px-6 py-4 uppercase'>{faculty.name}</td>
               <td className='px-6 py-4'>
-                {faculty.semesters.length + 1 < 10
-                  ? `0${faculty.semesters.length + 1}`
-                  : faculty.semesters.length + 1}
+                {faculty.semesters.length < 10
+                  ? `0${faculty.semesters.length}`
+                  : faculty.semesters.length}
               </td>
               <ActionTd
                 hasView
