@@ -1,8 +1,8 @@
 import { IconType } from 'react-icons';
 
 type propsType = {
-  title: string;
-  subtitle: string | undefined | null;
+  title: string | number;
+  subtitle: string | number | undefined;
   hasIcon?: boolean;
   Icon: IconType;
 };
