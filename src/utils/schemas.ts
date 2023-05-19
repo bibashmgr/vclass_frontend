@@ -9,7 +9,7 @@ export type subjectSchema = {
 export type facultySchema = {
   _id: string;
   name: string;
-  semesters: string[][];
+  semesters: any[][];
   desc: string;
   isHidden: boolean;
 };

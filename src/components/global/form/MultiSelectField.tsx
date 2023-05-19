@@ -136,7 +136,7 @@ const MultiSelectField = ({
       </div>
       <div className='relative'>
         <div
-          className={`absolute z-10 left-0 right-0 top-0 py-1 text-sm text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-md shadow-light dark:shadow-none cursor-pointer max-h-36 overflow-y-auto ${
+          className={`absolute z-10 left-0 right-0 top-0 py-2 text-sm text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-md shadow-light dark:shadow-none cursor-pointer max-h-36 overflow-y-auto ${
             isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
           }`}
         >

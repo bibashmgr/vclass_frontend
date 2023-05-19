@@ -2,7 +2,7 @@ import { IconType } from 'react-icons';
 
 type propsType = {
   title: string | number;
-  subtitle: string | number | undefined;
+  subtitle: string | number | undefined | null;
   hasIcon?: boolean;
   Icon: IconType;
 };

@@ -12,9 +12,10 @@ import ViewLayout from '../../../layouts/crud_layouts/ViewLayout';
 import Card from '../../../components/global/Card';
 
 // icons
+import { FaUniversity } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
 import { AiFillIdcard } from 'react-icons/ai';
-import { BsStack, BsPersonFill, BsBuilding } from 'react-icons/bs';
+import { BsStack, BsPersonFill } from 'react-icons/bs';
 
 // type
 import { userSchema } from '../../../utils/schemas';
@@ -49,7 +50,7 @@ const UserView = () => {
       <Card title='Name' subtitle={user?.name} Icon={AiFillIdcard} />
       <Card title='Email' subtitle={user?.email} Icon={MdEmail} />
       <Card title='Role' subtitle={user?.role} Icon={BsPersonFill} />
-      <Card title='College' subtitle={user?.college} Icon={BsBuilding} />
+      <Card title='College' subtitle={user?.college} Icon={FaUniversity} />
       <Card title='Batch' subtitle={user?.batch?.toString()} Icon={BsStack} />
     </ViewLayout>
   );
