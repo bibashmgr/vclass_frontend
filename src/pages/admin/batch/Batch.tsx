@@ -40,6 +40,7 @@ const Batch = () => {
         if (res.success) {
           setIsModalOpen(false);
           showMessage(res.message, 'success');
+          setIsLoading(true);
           setUpdateCounter(!updateCounter);
         } else {
           showMessage(res.message, 'failure');
@@ -81,9 +82,9 @@ const Batch = () => {
               <td className='px-6 py-4'>{batch.year}</td>
               <td className='px-6 py-4'>{batch.faculty.name}</td>
               <td className='px-6 py-4'>
-                {batch.currentSemester + 1 < 10
-                  ? `0${batch.currentSemester + 1}`
-                  : batch.currentSemester + 1}
+                {batch.currentSemester < 10
+                  ? `0${batch.currentSemester}`
+                  : batch.currentSemester}
               </td>
               <ActionTd
                 hasView

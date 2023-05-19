@@ -10,12 +10,15 @@ import SelectField from '../../../components/global/form/SelectField';
 // helpers
 import { apiHandler } from '../../../handlers/apiHandler';
 import { showMessage } from '../../../handlers/messageHandler';
+
+// utils
 import { facultySchema } from '../../../utils/schemas';
 
 const BatchCreate = () => {
   const [batch, setBatch] = useState({
-    name: '',
+    year: '',
     faculty: '',
+    currentSemester: '',
     desc: '',
   });
   const [faculties, setFaculties] = useState([]);
@@ -27,12 +30,17 @@ const BatchCreate = () => {
 
   const handleCreateBatch = (e: React.FormEvent) => {
     e.preventDefault();
-    apiHandler('post', 'batches/create', batch).then((res) => {
+    apiHandler('post', 'batches/create', {
+      ...batch,
+      year: Number(batch.year),
+      currentSemester: Number(batch.currentSemester),
+    }).then((res) => {
       if (res.success) {
         showMessage(res.message, 'success');
         setBatch({
-          name: '',
+          year: '',
           faculty: '',
+          currentSemester: '',
           desc: '',
         });
       } else {
@@ -44,7 +52,13 @@ const BatchCreate = () => {
   const getFaculties = async () => {
     await apiHandler('get', 'faculties', null).then((res) => {
       if (res.success) {
-        setFaculties(res.data);
+        let mappingFaculties = res.data.map((data: facultySchema) => {
+          return {
+            title: data.name,
+            value: data._id,
+          };
+        });
+        setFaculties(mappingFaculties);
         setIsLoading(false);
       } else {
         showMessage(res.message, 'failure');
@@ -66,9 +80,10 @@ const BatchCreate = () => {
     >
       <InputField
         hasLabel
-        label='Name'
-        name='name'
-        value={batch.name}
+        type='number'
+        label='Year'
+        name='year'
+        value={batch.year}
         handleChange={handleInputField}
       />
       <SelectField
@@ -77,12 +92,16 @@ const BatchCreate = () => {
         name='faculty'
         value={batch.faculty}
         handleSelect={handleInputField}
-        options={faculties.map((faculty: facultySchema) => {
-          return {
-            title: faculty.name,
-            value: faculty._id,
-          };
-        })}
+        options={faculties}
+      />
+      <InputField
+        type='number'
+        hasLabel
+        label='Current Semester'
+        name='currentSemester'
+        value={batch.currentSemester}
+        handleChange={handleInputField}
+        extraStyling='lg:col-span-2'
       />
       <InputField
         hasLabel
