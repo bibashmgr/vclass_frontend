@@ -95,7 +95,6 @@ const FacultyEdit = () => {
 
   const handleEditFaculty = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(faculty);
 
     let mappingSemesters = [];
 

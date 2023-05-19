@@ -86,7 +86,7 @@ const Faculty = () => {
                   ? `0${facultyIndex + 1}`
                   : facultyIndex + 1}
               </td>
-              <td className='px-6 py-4 uppercase'>{faculty.name}</td>
+              <td className='px-6 py-4'>{faculty.name}</td>
               <td className='px-6 py-4'>
                 {faculty.semesters.length < 10
                   ? `0${faculty.semesters.length}`
