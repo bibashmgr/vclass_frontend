@@ -1,6 +1,6 @@
 import { Outlet, Route, Routes } from 'react-router-dom';
 
-import { ToastContainer, Theme, Flip } from 'react-toastify';
+import { ToastContainer, Theme, Flip, Bounce } from 'react-toastify';
 
 // styles
 import 'react-toastify/dist/ReactToastify.css';
@@ -54,7 +54,7 @@ const AppRoutes = ({ colorMode }: { colorMode: string | undefined }) => {
               pauseOnFocusLoss
               draggable
               pauseOnHover
-              transition={Flip}
+              transition={Bounce}
               theme={colorMode as Theme}
             />
             <Outlet />

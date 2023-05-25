@@ -18,15 +18,50 @@ import { batchSchema, facultySchema, userSchema } from '../../../utils/schemas';
 const UserEdit = () => {
   const params = useParams();
 
-  const [user, setUser] = useState<userSchema>();
-  const [faculties, setFaculties] = useState<facultySchema[]>([]);
-  const [batches, setBatches] = useState<batchSchema[]>([]);
+  const [user, setUser] = useState({
+    name: '',
+    email: '',
+    role: '',
+    college: '',
+    batch: '',
+  });
+  const [batches, setBatches] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const handleInputField = (e: React.ChangeEvent<HTMLInputElement>) => {};
+  const [roleOptions] = useState([
+    {
+      title: 'Student',
+      value: 'student',
+    },
+    {
+      title: 'Teacher',
+      value: 'teacher',
+    },
+    {
+      title: 'Admin',
+      value: 'admin',
+    },
+    {
+      title: 'User',
+      value: 'user',
+    },
+  ]);
 
-  const handleEditUser = (e: React.FormEvent) => {
+  const handleInputField = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
+
+  const handleEditUser = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    apiHandler('patch', `users/${params.userId}`, user).then((res) => {
+      if (res.success) {
+        setUser(res.data);
+        showMessage(res.message, 'success');
+      } else {
+        showMessage(res.message, 'failure');
+      }
+    });
   };
 
   const getUsers = async () => {
@@ -40,33 +75,30 @@ const UserEdit = () => {
     });
   };
 
-  const getFaculties = async () => {
-    await apiHandler('get', 'faculties', null).then((res) => {
-      if (res.success) {
-        setFaculties(res.data);
-      }
-      setIsLoading(false);
-    });
-  };
-
   const getBatches = async () => {
     await apiHandler('get', 'batches', null).then((res) => {
       if (res.success) {
-        setBatches(res.data);
+        let mappingBatches = res.data.map((data: batchSchema) => {
+          return {
+            title: data.year,
+            value: data._id,
+          };
+        });
+
+        setBatches(mappingBatches);
       }
       setIsLoading(false);
     });
   };
 
   useEffect(() => {
-    getUsers();
-    getFaculties();
     getBatches();
+    getUsers();
   }, []);
 
   return (
     <FormLayout
-      layoutTitle='Edit Subject'
+      layoutTitle='Edit User'
       layoutSubtitle='Fill out the forms'
       handleSubmit={handleEditUser}
       isEdit={true}
@@ -92,30 +124,14 @@ const UserEdit = () => {
         name='role'
         value={user?.role}
         handleSelect={handleInputField}
-        options={[
-          {
-            title: 'Student',
-            value: 'student',
-          },
-          {
-            title: 'Teacher',
-            value: 'teacher',
-          },
-          {
-            title: 'Admin',
-            value: 'admin',
-          },
-          {
-            title: 'User',
-            value: 'user',
-          },
-        ]}
+        options={roleOptions}
       />
       <InputField
         hasLabel
         label='College'
         name='college'
         value={user?.college}
+        isRequired={false}
         handleChange={handleInputField}
       />
       <SelectField
@@ -124,12 +140,8 @@ const UserEdit = () => {
         name='batch'
         value={user?.batch}
         handleSelect={handleInputField}
-        options={batches.map((batch: batchSchema) => {
-          return {
-            title: `${batch.faculty} ${batch.year}`,
-            value: batch._id,
-          };
-        })}
+        options={batches}
+        isRequired={false}
       />
     </FormLayout>
   );

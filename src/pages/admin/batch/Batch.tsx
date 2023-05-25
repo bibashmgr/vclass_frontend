@@ -29,8 +29,10 @@ const Batch = () => {
     await apiHandler('get', 'batches', null).then((res) => {
       if (res.success) {
         setBatches(res.data);
+        setIsLoading(false);
+      } else {
+        showMessage(res.message, 'failure');
       }
-      setIsLoading(false);
     });
   };
 

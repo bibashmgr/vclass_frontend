@@ -16,6 +16,7 @@ type propsType = {
   handleSelect: React.ChangeEventHandler;
   options: optionType[];
   placeHolder?: string;
+  isRequired?: boolean;
 };
 
 const SelectField = ({
@@ -26,6 +27,7 @@ const SelectField = ({
   handleSelect,
   options,
   placeHolder = 'Select an option',
+  isRequired = false,
 }: propsType) => {
   return (
     <div className='flex flex-col gap-2'>
@@ -44,7 +46,7 @@ const SelectField = ({
           name={name}
           value={value}
           onChange={handleSelect}
-          required
+          required={isRequired}
         >
           <option value='' disabled>
             {placeHolder}
