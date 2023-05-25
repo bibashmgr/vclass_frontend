@@ -2,13 +2,63 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Open Sans';
+  src: url('/fonts/open_sans.ttf');
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-@font-face {
-  font-family: "Open Sans";
-  src: url("/fonts/open_sans.ttf");
+::-webkit-scrollbar {
+  display: none;
+}
+
+.Toastify__toast {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.Toastify__toast-body {
+  gap: 8px;
+}
+
+.Toastify__toast-theme--dark {
+  background-color: #1f2937;
+  color: #9ca3af;
+}
+
+.Toastify__toast-theme--light {
+  background-color: #ffffff;
+  color: #6b7280;
+}
+
+.Toastify__toast-theme--colored.Toastify__toast--default {
+  color: #3B82F6;
+}
+
+.Toastify__toast-theme--colored.Toastify__toast--info {
+  color: #3B82F6;
+}
+
+.Toastify__toast-theme--colored.Toastify__toast--success {
+  color: #10B981;
+}
+
+.Toastify__toast-theme--colored.Toastify__toast--warning {
+  color: #FDE047;
+}
+
+.Toastify__toast-theme--colored.Toastify__toast--error {
+  color: #EF4444;
+}
+
+.Toastify__close-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-60%);
+  right: 12px;
 }

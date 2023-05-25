@@ -6,8 +6,8 @@ module.exports = {
       screens: {
         sm: '480px',
         md: '768px',
-        lg: '976px',
-        xl: '1440px',
+        lg: '1024px',
+        xl: '1280px',
       },
       colors: {
         lightColor: '#FFFFFF',
@@ -28,12 +28,9 @@ module.exports = {
           light: '#FEF08A',
           dark: '#FDE047',
         },
-        neutralColor: {
-          lightest: '#F1F5F9',
-          lighter: '#E2E8F0',
-          light: '#CBD5E1',
-          dark: '#94A3B8',
-        },
+      },
+      boxShadow: {
+        light: '0px 0px 35px rgba(181, 181, 195, 0.15)',
       },
     },
     fontFamily: {
