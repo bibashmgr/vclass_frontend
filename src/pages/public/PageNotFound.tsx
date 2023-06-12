@@ -1,12 +1,40 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // components
 import Button from '../../components/global/button/Button';
-import { getColorMode } from '../../handlers/storageHandler';
+
+// handlers
+import { getColorMode, getToken } from '../../handlers/storageHandler';
+import { apiHandler } from '../../handlers/apiHandler';
 
 const PageNotFound = () => {
   const navigate = useNavigate();
+
+  const redirectUser = () => {
+    if (getToken()) {
+      fetchUserInfo();
+    } else {
+      navigate('/auth/login');
+    }
+  };
+
+  const fetchUserInfo = async () => {
+    const res = await apiHandler('get', '/auth/login/success');
+
+    if (res.success) {
+      if (res.data.role === 'admin') {
+        navigate('/admin');
+      } else if (res.data.role === 'student') {
+        navigate('/');
+      } else if (res.data.role === 'teacher') {
+        navigate('/');
+      } else {
+        navigate('/unauthorized');
+      }
+    } else {
+      navigate('/auth/login');
+    }
+  };
 
   return (
     <div className='flex justify-center items-center w-screen h-screen bg-gray-100 dark:bg-gray-700 px-6'>
@@ -28,7 +56,7 @@ const PageNotFound = () => {
           alt='404'
           className='w-[300px] h-[300px]'
         />
-        <Button handleClick={() => navigate('/admin')} colorScheme='info'>
+        <Button handleClick={redirectUser} colorScheme='info'>
           Return Home
         </Button>
       </div>
