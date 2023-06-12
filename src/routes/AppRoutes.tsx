@@ -1,6 +1,6 @@
-import { Outlet, Route, Routes } from 'react-router-dom';
+import { Outlet, Route, Routes, Navigate } from 'react-router-dom';
 
-import { ToastContainer, Theme, Flip, Bounce } from 'react-toastify';
+import { ToastContainer, Theme, Bounce } from 'react-toastify';
 
 // styles
 import 'react-toastify/dist/ReactToastify.css';
@@ -33,43 +33,73 @@ import Home from '../pages/system/Home';
 // pages: public
 import PageNotFound from '../pages/public/PageNotFound';
 import Unauthorized from '../pages/public/Unauthorized';
+import Loader from '../pages/public/Loader';
 
 // layouts
 import AppLayout from '../layouts/AppLayout';
 
+// hooks
+import { useAuth } from '../hooks/useAuth';
+
 const AppRoutes = ({ colorMode }: { colorMode: string | undefined }) => {
   return (
     <Routes>
-      <Route path='/unauthorized' element={<Unauthorized />} />
-      <Route
-        element={
-          <>
-            <ToastContainer
-              position='top-right'
-              autoClose={2000}
-              hideProgressBar
-              newestOnTop
-              closeOnClick
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              pauseOnHover
-              transition={Bounce}
-              theme={colorMode as Theme}
-            />
-            <Outlet />
-          </>
-        }
-      >
+      <Route element={<PortalRoutes colorMode={colorMode} />}>
+        <Route path='/unauthorized' element={<Unauthorized />} />
         <Route path='/auth/*' element={<AuthRoutes />} />
-        <Route path='/*' element={<SystemRoutes />} />
-        <Route path='/admin/*' element={<AdminRoutes />} />
+        <Route element={<ProtectedRoutes roles={['admin']} />}>
+          <Route path='/admin/*' element={<AdminRoutes />} />
+        </Route>
+        <Route element={<ProtectedRoutes roles={['student', 'teacher']} />}>
+          <Route path='/*' element={<SystemRoutes />} />
+        </Route>
       </Route>
     </Routes>
   );
 };
 
 export default AppRoutes;
+
+const PortalRoutes = ({ colorMode }: { colorMode: string | undefined }) => {
+  return (
+    <>
+      <ToastContainer
+        position='top-right'
+        autoClose={2000}
+        hideProgressBar
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        transition={Bounce}
+        theme={colorMode as Theme}
+      />
+      <Outlet />
+    </>
+  );
+};
+
+const ProtectedRoutes = ({ roles }: { roles: string[] }) => {
+  const { token, user, isLoading } = useAuth();
+
+  return (
+    <>
+      {isLoading ? (
+        <Loader />
+      ) : token && user ? (
+        roles.includes(user.role) ? (
+          <Outlet />
+        ) : (
+          <Navigate to='/unauthorized' />
+        )
+      ) : (
+        <Navigate to='/auth/login' />
+      )}
+    </>
+  );
+};
 
 const AuthRoutes = () => {
   return (

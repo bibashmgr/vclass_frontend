@@ -1,9 +1,6 @@
 import { useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 
-// styles
-import 'react-toastify/dist/ReactToastify.css';
-
 // components
 import Sidebar from '../components/admin/Sidebar';
 import Appbar from '../components/admin/Appbar';
