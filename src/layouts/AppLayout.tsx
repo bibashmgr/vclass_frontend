@@ -45,7 +45,11 @@ const AppLayout = ({ isAdmin }: { isAdmin: boolean }) => {
             onClick={closeSidebar}
           />
         )}
-        <Appbar pathName={getPathName()} handleSidebar={handleSidebar} />
+        <Appbar
+          pathName={getPathName()}
+          handleSidebar={handleSidebar}
+          isAdmin={isAdmin}
+        />
         <div className='w-full md:w-[calc(100vw-240px)] lg:w-[calc(100vw-288px)] fixed top-16 md:top-20 left-0 md:left-60 lg:left-72 overflow-scroll h-[calc(100vh-60px)] md:h-[calc(100vh-80px)] px-4 md:px-6 py-4 md:py-4 bg-gray-100 dark:bg-gray-700 z-10'>
           <Outlet />
         </div>

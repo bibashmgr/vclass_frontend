@@ -19,13 +19,14 @@ import {
 } from '../../handlers/storageHandler';
 import Popover from '../global/Popover';
 
-const Appbar = ({
-  handleSidebar,
-  pathName,
-}: {
+// types
+type propsType = {
   handleSidebar: React.MouseEventHandler;
   pathName: string;
-}) => {
+  isAdmin: boolean;
+};
+
+const Appbar = ({ handleSidebar, pathName, isAdmin }: propsType) => {
   const navigate = useNavigate();
 
   const getAppbarTitle = (): string | undefined => {
@@ -55,17 +56,19 @@ const Appbar = ({
           onClick={handleSidebar}
         />
         <p className='text-lg font-bold text-darkColor dark:text-lightColor capitalize'>
-          {getAppbarTitle()}
+          {getAppbarTitle() || 'Home'}
         </p>
       </div>
       <div className='flex gap-2 items-center'>
-        <IconButton
-          Icon={MdNotifications}
-          title='Notification'
-          handleClick={handleNotificationClick}
-          hasIncidator
-          indicatorTitle='0'
-        />
+        {!isAdmin && (
+          <IconButton
+            Icon={MdNotifications}
+            title='Notification'
+            handleClick={handleNotificationClick}
+            hasIncidator
+            indicatorTitle='0'
+          />
+        )}
         <IconButton
           Icon={getColorMode() === 'dark' ? MdDarkMode : MdWbSunny}
           title='Notification'

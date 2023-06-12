@@ -15,8 +15,8 @@ export const useAuth = () => {
 
     if (res.success) {
       setUser(res.data);
-      setIsLoading(false);
     }
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -25,6 +25,8 @@ export const useAuth = () => {
     if (userToken) {
       setToken(userToken);
       getUser();
+    } else {
+      setIsLoading(false);
     }
   }, []);
 

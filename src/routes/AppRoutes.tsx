@@ -84,6 +84,8 @@ const PortalRoutes = ({ colorMode }: { colorMode: string | undefined }) => {
 const ProtectedRoutes = ({ roles }: { roles: string[] }) => {
   const { token, user, isLoading } = useAuth();
 
+  console.log(token, user, isLoading);
+
   return (
     <>
       {isLoading ? (

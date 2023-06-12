@@ -40,23 +40,23 @@ const Sidebar = ({
         />
       </div>
       <div className='flex flex-col gap-4 py-4'>
-        {navLinks.map((navLink, index) => {
-          return (
-            isAdmin && (
-              <NavLink
-                key={index}
-                title={navLink.title}
-                url={navLink.url}
-                Icon={navLink.Icon}
-                isActive={
-                  pathName === navLink.url || pathName === `${navLink.url}/`
-                }
-                closeSidebar={closeSidebar}
-                isSidebarOpen={isSidebarOpen}
-              />
-            )
-          );
-        })}
+        {isAdmin
+          ? navLinks.map((navLink, index) => {
+              return (
+                <NavLink
+                  key={index}
+                  title={navLink.title}
+                  url={navLink.url}
+                  Icon={navLink.Icon}
+                  isActive={
+                    pathName === navLink.url || pathName === `${navLink.url}/`
+                  }
+                  closeSidebar={closeSidebar}
+                  isSidebarOpen={isSidebarOpen}
+                />
+              );
+            })
+          : null}
       </div>
     </aside>
   );
