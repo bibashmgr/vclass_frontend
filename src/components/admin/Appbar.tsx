@@ -8,9 +8,6 @@ import { HiMenu } from 'react-icons/hi';
 // components
 import IconButton from '../global/button/IconButton';
 
-// utils
-import { navLinks } from '../../utils/navlinks';
-
 // helpers
 import {
   getColorMode,
@@ -24,9 +21,10 @@ type propsType = {
   handleSidebar: React.MouseEventHandler;
   pathName: string;
   isAdmin: boolean;
+  navLinks: any[];
 };
 
-const Appbar = ({ handleSidebar, pathName, isAdmin }: propsType) => {
+const Appbar = ({ handleSidebar, pathName, isAdmin, navLinks }: propsType) => {
   const navigate = useNavigate();
 
   const getAppbarTitle = (): string | undefined => {

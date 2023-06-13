@@ -2,11 +2,17 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IconType } from 'react-icons';
 
-// utils
-import { navLinks } from '../../utils/navlinks';
-
 // icons
 import { MdClose } from 'react-icons/md';
+
+type propsType = {
+  isAdmin: boolean;
+  isSidebarOpen: boolean;
+  closeSidebar: Function;
+  handleSidebar: React.MouseEventHandler;
+  pathName: string;
+  navLinks: any[];
+};
 
 const Sidebar = ({
   isAdmin,
@@ -14,13 +20,8 @@ const Sidebar = ({
   closeSidebar,
   handleSidebar,
   pathName,
-}: {
-  isAdmin: boolean;
-  isSidebarOpen: boolean;
-  closeSidebar: Function;
-  handleSidebar: React.MouseEventHandler;
-  pathName: string;
-}) => {
+  navLinks,
+}: propsType) => {
   return (
     <aside
       className={`bg-lightColor dark:bg-gray-800 w-60 lg:w-72 h-screen px-4 md:px-6 fixed top-0 ${
@@ -40,23 +41,21 @@ const Sidebar = ({
         />
       </div>
       <div className='flex flex-col gap-4 py-4'>
-        {isAdmin
-          ? navLinks.map((navLink, index) => {
-              return (
-                <NavLink
-                  key={index}
-                  title={navLink.title}
-                  url={navLink.url}
-                  Icon={navLink.Icon}
-                  isActive={
-                    pathName === navLink.url || pathName === `${navLink.url}/`
-                  }
-                  closeSidebar={closeSidebar}
-                  isSidebarOpen={isSidebarOpen}
-                />
-              );
-            })
-          : null}
+        {navLinks.map((navLink, index) => {
+          return (
+            <NavLink
+              key={index}
+              title={navLink.title}
+              url={navLink.url}
+              Icon={navLink.Icon}
+              isActive={
+                pathName === navLink.url || pathName === `${navLink.url}/`
+              }
+              closeSidebar={closeSidebar}
+              isSidebarOpen={isSidebarOpen}
+            />
+          );
+        })}
       </div>
     </aside>
   );
