@@ -19,7 +19,6 @@ const Semester = () => {
 
   useEffect(() => {
     let subs = outletContext.faculty?.semesters[Number(params.semesterId) - 1];
-    console.log(subs);
     setSubjects(subs);
   }, [outletContext]);
 
