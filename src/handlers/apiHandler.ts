@@ -11,7 +11,7 @@ export const apiHandler = async (
   methodType: string,
   endPoint: string,
   payload?: null | object | FormData,
-  token?: string
+  token?: null | string
 ) => {
   return await axios({
     method: methodType,
@@ -22,7 +22,7 @@ export const apiHandler = async (
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': config.BASE_URL,
       'Access-Control-Allow-Methods': ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
-      'Authorization': `Bearer ${token || getToken()}`,
+      Authorization: `Bearer ${token || getToken()}`,
     },
   })
     .then((res) => {
