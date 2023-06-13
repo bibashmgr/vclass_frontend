@@ -36,6 +36,6 @@ export type userSchema = {
   email: string;
   role: string;
   college: string | null;
-  batch: string | number | null;
+  batch: batchSchema;
   isHidden: boolean;
 };

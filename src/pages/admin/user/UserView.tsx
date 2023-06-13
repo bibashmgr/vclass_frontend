@@ -51,7 +51,11 @@ const UserView = () => {
       <Card title='Email' subtitle={user?.email} Icon={MdEmail} />
       <Card title='Role' subtitle={user?.role} Icon={BsPersonFill} />
       <Card title='College' subtitle={user?.college} Icon={FaUniversity} />
-      <Card title='Batch' subtitle={user?.batch?.toString()} Icon={BsStack} />
+      <Card
+        title='Batch'
+        subtitle={user?.batch?.year.toString()}
+        Icon={BsStack}
+      />
     </ViewLayout>
   );
 };
