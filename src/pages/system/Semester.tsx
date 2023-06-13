@@ -44,7 +44,7 @@ const Semester = () => {
                 Icon={BsArrowRightShort}
                 title='View'
                 iconSize={'6'}
-                handleClick={() => navigate(`subject/${subject._id}`)}
+                handleClick={() => navigate(`subject/${subject._id}/chat`)}
               />
             </div>
           </div>

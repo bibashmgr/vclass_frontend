@@ -3,13 +3,16 @@ import { Route, Routes } from 'react-router-dom';
 // pages: system
 import Home from '../../pages/system/Home';
 import Semester from '../../pages/system/Semester';
-import SubjectPortal from '../../pages/system/subjectPortal/SubjectPortal';
+import Chat from '../../pages/system/portal/Chat';
+import Post from '../../pages/system/portal/Post';
+import Attendance from '../../pages/system/portal/Attendance';
 
 // pages: public
 import PageNotFound from '../../pages/public/PageNotFound';
 
 // layouts
 import AppLayout from '../../layouts/AppLayout';
+import PortalLayout from '../../layouts/PortalLayout';
 
 const SystemRoutes = () => {
   return (
@@ -20,8 +23,12 @@ const SystemRoutes = () => {
         <Route path='/semester/:semesterId' element={<Semester />} />
         <Route
           path='/semester/:semesterId/subject/:subjectId'
-          element={<SubjectPortal />}
-        />
+          element={<PortalLayout />}
+        >
+          <Route path='chat' element={<Chat />} />
+          <Route path='post' element={<Post />} />
+          <Route path='attendance' element={<Attendance />} />
+        </Route>
       </Route>
     </Routes>
   );

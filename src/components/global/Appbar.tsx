@@ -6,15 +6,14 @@ import { MdNotifications, MdWbSunny, MdDarkMode } from 'react-icons/md';
 import { HiMenu } from 'react-icons/hi';
 
 // components
-import IconButton from '../global/button/IconButton';
+import IconButton from './button/IconButton';
+import Popover from './Popover';
 
 // helpers
-import {
-  getColorMode,
-  removeToken,
-  setColorMode,
-} from '../../handlers/storageHandler';
-import Popover from '../global/Popover';
+import { removeToken, setColorMode } from '../../handlers/storageHandler';
+
+// context
+import { useTheme } from '../../context/ThemeContext';
 
 // types
 type propsType = {
@@ -26,6 +25,7 @@ type propsType = {
 
 const Appbar = ({ handleSidebar, pathName, isAdmin, navLinks }: propsType) => {
   const navigate = useNavigate();
+  const theme = useTheme();
 
   const getAppbarTitle = (): string | undefined => {
     let navLink = navLinks.find((link) => link.url === pathName);
@@ -68,7 +68,7 @@ const Appbar = ({ handleSidebar, pathName, isAdmin, navLinks }: propsType) => {
           />
         )}
         <IconButton
-          Icon={getColorMode() === 'dark' ? MdDarkMode : MdWbSunny}
+          Icon={theme === 'dark' ? MdDarkMode : MdWbSunny}
           title='Notification'
           handleClick={handleModeClick}
         />

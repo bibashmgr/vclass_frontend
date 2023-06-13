@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 
 // components
-import Sidebar from '../components/admin/Sidebar';
-import Appbar from '../components/admin/Appbar';
+import Sidebar from '../components/global/Sidebar';
+import Appbar from '../components/global/Appbar';
 
 // utils
 import { navLinks } from '../utils/navLinks';

@@ -11,10 +11,10 @@ import SystemRoutes from './subRoutes/SystemRoutes';
 // helpers
 import { PortalRoutes, ProtectedRoutes } from './RouteHelpers';
 
-const AppRoutes = ({ colorMode }: { colorMode: string | undefined }) => {
+const AppRoutes = () => {
   return (
     <Routes>
-      <Route element={<PortalRoutes colorMode={colorMode} />}>
+      <Route element={<PortalRoutes />}>
         <Route path='/unauthorized' element={<Unauthorized />} />
         <Route path='/auth/*' element={<AuthRoutes />} />
         <Route element={<ProtectedRoutes roles={['admin']} />}>

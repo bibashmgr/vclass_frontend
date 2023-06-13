@@ -1,5 +1,4 @@
 import { Outlet, Navigate } from 'react-router-dom';
-
 import { ToastContainer, Theme, Bounce } from 'react-toastify';
 
 // styles
@@ -11,11 +10,11 @@ import Loader from '../pages/public/Loader';
 // hooks
 import { useAuth } from '../hooks/useAuth';
 
-export const PortalRoutes = ({
-  colorMode,
-}: {
-  colorMode: string | undefined;
-}) => {
+// context
+import { useTheme } from '../context/ThemeContext';
+
+export const PortalRoutes = () => {
+  const theme = useTheme();
   return (
     <>
       <ToastContainer
@@ -29,7 +28,7 @@ export const PortalRoutes = ({
         draggable
         pauseOnHover
         transition={Bounce}
-        theme={colorMode as Theme}
+        theme={theme as Theme}
       />
       <Outlet />
     </>
