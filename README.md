@@ -1,23 +1,16 @@
-## VCLASS FRONTEND
+## VCLASS FRONTEND:
 
-### OVERVIEW
+### OVERVIEW:
+This repository contains the code for the frontend of VCLASS. It is responsible for presenting the user interface, interacting with the backend server, and providing an engaging user experience.
 
-### DEPENDENCIES
+### DEPENDENCIES:
+This repository relies on the following dependencies:
+
+- Vite
 - React
 - React Router
-- React Redux
 - Typescript
 - Tailwind CSS
-- Vite
 - Axios
 - React Icons
 - Socket.io
-
-### TODO
-- [ ] Create Reusable Components
-  - [ ] Toast
-  - [x] Modal
-- [ ] Protected Routes
-
-### ISSUES
-- [ ] Fix Avatar Dropdown
