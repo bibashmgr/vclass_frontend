@@ -39,3 +39,11 @@ export type userSchema = {
   batch: batchSchema;
   isHidden: boolean;
 };
+
+export type messageSchema = {
+  _id: string;
+  desc: string;
+  portal: string;
+  user: userSchema;
+  createdAt: Date;
+};
