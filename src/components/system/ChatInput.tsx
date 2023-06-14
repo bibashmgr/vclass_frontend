@@ -17,16 +17,16 @@ const ChatInput = ({ text, handleText, handleSend }: propsType) => {
       <button
         type='button'
         className='inline-flex justify-center p-2 text-gray-500 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600'
-        title='Photo'
+        title='Image'
       >
-        <HiPhotograph className='w-6 h-6' />
+        <HiPhotograph className='w-5 h-5' />
       </button>
       <button
         type='button'
         className='p-2 text-gray-500 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600'
         title='Emoji'
       >
-        <HiFaceSmile className='w-6 h-6' />
+        <HiFaceSmile className='w-5 h-5' />
       </button>
       <textarea
         rows={1}
