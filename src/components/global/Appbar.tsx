@@ -14,6 +14,7 @@ import { removeToken, setColorMode } from '../../handlers/storageHandler';
 
 // context
 import { useTheme } from '../../context/ThemeContext';
+import { useUserInfo } from '../../context/UserInfoContext';
 
 // types
 type propsType = {
@@ -26,6 +27,7 @@ type propsType = {
 const Appbar = ({ handleSidebar, pathName, isAdmin, navLinks }: propsType) => {
   const navigate = useNavigate();
   const theme = useTheme();
+  const userInfo = useUserInfo();
 
   const getAppbarTitle = (): string | undefined => {
     let navLink = navLinks.find((link) => link.url === pathName);
@@ -75,7 +77,7 @@ const Appbar = ({ handleSidebar, pathName, isAdmin, navLinks }: propsType) => {
         <Popover
           parentElement={
             <img
-              src='https://via.placeholder.com/150'
+              src={userInfo?.userInfo?.avatar}
               className='w-8 h-8 rounded-md cursor-pointer object-cover'
             />
           }
