@@ -11,7 +11,7 @@ type propsType = {
 const ChatInput = ({ text, handleText, handleSend }: propsType) => {
   return (
     <form
-      className='fixed bottom-4 left-6 md:left-[17rem] lg:left-[20rem] right-6 flex items-center px-3 py-2 rounded-lg bg-gray-50 dark:bg-gray-800'
+      className='fixed bottom-4 left-6 md:left-[17rem] lg:left-[20rem] right-6 flex items-center px-3 py-2 rounded-lg bg-white dark:bg-gray-800'
       onSubmit={handleSend}
     >
       <button
