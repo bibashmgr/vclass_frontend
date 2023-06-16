@@ -50,18 +50,20 @@ const AppLayout = ({ isAdmin }: { isAdmin: boolean }) => {
   }, []);
 
   const fetchSemesters = async () => {
-    const res = await apiHandler('get', 'faculties/batch');
+    const res = await apiHandler('get', 'batches/userId');
 
     if (res.success) {
-      setFaculty(res.data);
+      setFaculty(res.data.faculty);
       let sems: any[] = [];
-      res.data.semesters.map((semester: any, index: number) => {
-        sems.push({
-          title: `Semester ${index + 1}`,
-          url: `/semester/${index + 1}`,
-          roles: ['student', 'teacher'],
-          Icon: BsFillBookmarksFill,
-        });
+      res.data.faculty.semesters.map((semester: any, index: number) => {
+        if (index < res.data.currentSemester) {
+          sems.push({
+            title: `Semester ${index + 1}`,
+            url: `/semester/${index + 1}`,
+            roles: ['student', 'teacher'],
+            Icon: BsFillBookmarksFill,
+          });
+        }
       });
 
       setSemesters(sems);
