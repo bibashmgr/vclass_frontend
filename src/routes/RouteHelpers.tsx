@@ -12,6 +12,7 @@ import { useAuth } from '../hooks/useAuth';
 
 // context
 import { useTheme } from '../context/ThemeContext';
+import { SocketProvider } from '../context/SocketContext';
 
 export const PortalRoutes = () => {
   const theme = useTheme();
@@ -35,6 +36,14 @@ export const PortalRoutes = () => {
   );
 };
 
+export const SocketRoutes = () => {
+  return (
+    <SocketProvider>
+      <Outlet />
+    </SocketProvider>
+  );
+};
+
 export const ProtectedRoutes = ({ roles }: { roles: string[] }) => {
   const { token, user, isLoading } = useAuth();
 
@@ -44,7 +53,9 @@ export const ProtectedRoutes = ({ roles }: { roles: string[] }) => {
         <Loader />
       ) : token && user ? (
         roles.includes(user.role) ? (
-          <Outlet />
+          <SocketProvider>
+            <Outlet />
+          </SocketProvider>
         ) : (
           <Navigate to='/unauthorized' />
         )
