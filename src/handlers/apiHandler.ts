@@ -15,12 +15,12 @@ export const apiHandler = async (
 ) => {
   return await axios({
     method: methodType,
-    baseURL: config.BASE_URL,
+    baseURL: config.SERVER_BASE_URL,
     url: endPoint,
     data: payload,
     headers: {
       'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': config.BASE_URL,
+      'Access-Control-Allow-Origin': config.SERVER_BASE_URL,
       'Access-Control-Allow-Methods': ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
       Authorization: `Bearer ${token || getToken()}`,
     },
