@@ -1,4 +1,4 @@
-import React, { FormEvent, useEffect, useState } from 'react';
+import React, { FormEvent, useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import moment from 'moment';
 
@@ -15,16 +15,34 @@ import ChatTextBox from '../../../components/system/ChatTextBox';
 
 // context
 import { useUserInfo } from '../../../context/UserInfoContext';
+import { useSocket } from '../../../context/SocketContext';
 
 const Chat = () => {
   const params = useParams();
   const userInfoContext = useUserInfo();
+  const socket = useSocket();
 
   const [messages, setMessages] = useState<messageSchema[]>([]);
   const [text, setText] = useState<string>('');
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     getMessages();
+  }, []);
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
+
+  useEffect(() => {
+    socket?.on('receive-message', (data) => {
+      const { messageInfo } = data;
+      setMessages((prev) => [...prev, { ...messageInfo }]);
+    });
+
+    return () => {
+      socket?.off('receive-message');
+    };
   }, []);
 
   const getMessages = async () => {
@@ -83,14 +101,26 @@ const Chat = () => {
     });
 
     if (res.success) {
+      console.log(res.data);
+      setMessages([
+        ...messages,
+        {
+          ...res.data,
+        },
+      ]);
       setText('');
+      socket?.emit('send-message', {
+        subjectId: params.subjectId,
+        userInfo: userInfoContext?.userInfo,
+        messageInfo: res.data,
+      });
     } else {
       showMessage(res.message, 'failure');
     }
   };
 
   return (
-    <div className='py-4 h-[calc(100vh-222px)] overflow-auto'>
+    <div className='py-4 h-[calc(100vh-200px)]  md:h-[calc(100vh-218px)] overflow-auto'>
       <div className='flex flex-col'>
         {messages.map((message: messageSchema, index) => {
           return (
@@ -115,6 +145,7 @@ const Chat = () => {
           );
         })}
       </div>
+      <div ref={messagesEndRef} />
       <ChatInput text={text} handleSend={handleSend} handleText={handleText} />
     </div>
   );
