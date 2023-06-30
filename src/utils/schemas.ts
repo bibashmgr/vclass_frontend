@@ -47,3 +47,16 @@ export type messageSchema = {
   user: userSchema;
   createdAt: Date;
 };
+
+export type postSchema = {
+  _id: string;
+  portal: string;
+  user: userSchema;
+  category: string;
+  title: string;
+  desc: string;
+  files: string;
+  submittedBy: string[];
+  assignmentRef: string | null;
+  createdAt: Date;
+};

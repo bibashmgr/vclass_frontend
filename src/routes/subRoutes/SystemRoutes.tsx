@@ -3,9 +3,10 @@ import { Route, Routes } from 'react-router-dom';
 // pages: system
 import Home from '../../pages/system/Home';
 import Semester from '../../pages/system/Semester';
-import Chat from '../../pages/system/portal/Chat';
-import Post from '../../pages/system/portal/Post';
-import Attendance from '../../pages/system/portal/Attendance';
+import Chat from '../../pages/system/portal/chat/Chat';
+import Post from '../../pages/system/portal/post/Post';
+import PostCreate from '../../pages/system/portal/post/PostCreate';
+import Attendance from '../../pages/system/portal/attendance/Attendance';
 
 // pages: public
 import PageNotFound from '../../pages/public/PageNotFound';
@@ -27,6 +28,7 @@ const SystemRoutes = () => {
         >
           <Route path='chat' element={<Chat />} />
           <Route path='post' element={<Post />} />
+          <Route path='post/create' element={<PostCreate />} />
           <Route path='attendance' element={<Attendance />} />
         </Route>
       </Route>
