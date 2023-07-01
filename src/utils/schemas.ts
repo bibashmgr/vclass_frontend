@@ -48,6 +48,21 @@ export type messageSchema = {
   createdAt: Date;
 };
 
+export type fileSchema = {
+  bucketName: string;
+  chunkSize: number;
+  contentType: string;
+  encoding: string;
+  fieldname: string;
+  filename: string;
+  id: string;
+  metadata: null;
+  mimetype: string;
+  originalname: string;
+  size: number;
+  uploadDate: Date;
+};
+
 export type postSchema = {
   _id: string;
   portal: string;
@@ -55,7 +70,7 @@ export type postSchema = {
   category: string;
   title: string;
   desc: string;
-  files: string;
+  files: string[];
   submittedBy: string[];
   assignmentRef: string | null;
   createdAt: Date;
