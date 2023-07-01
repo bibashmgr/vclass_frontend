@@ -39,11 +39,7 @@ const Post = () => {
   return (
     <div className='pt-4 flex flex-col gap-4'>
       <div className='self-end'>
-        <Button
-          isSmall
-          colorScheme='info'
-          handleClick={() => navigate('create')}
-        >
+        <Button isSmall handleClick={() => navigate('create')}>
           Add Post
         </Button>
       </div>
