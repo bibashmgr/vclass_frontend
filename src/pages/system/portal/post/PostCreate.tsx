@@ -7,7 +7,6 @@ import FormLayout from '../../../../layouts/crud_layouts/FormLayout';
 // components
 import InputField from '../../../../components/global/form/InputField';
 import SelectField from '../../../../components/global/form/SelectField';
-import Spinner from '../../../../components/global/Spinner';
 
 // context
 import { useUserInfo } from '../../../../context/UserInfoContext';
@@ -225,7 +224,7 @@ const PostCreate = () => {
               }`}
               multiple
               accept='image/png, image/jpg, image/jpeg, .pdf'
-              required
+              required={files.length === 0}
               onChange={handleFiles}
             />
           </div>

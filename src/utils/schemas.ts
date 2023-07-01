@@ -49,27 +49,14 @@ export type messageSchema = {
 };
 
 export type fileSchema = {
-  bucketName: string;
-  chunkSize: number;
-  contentType: string;
-  encoding: string;
-  fieldname: string;
-  filename: string;
   id: string;
-  metadata: null;
-  mimetype: string;
+  filename: string;
   originalname: string;
-  size: number;
-  uploadDate: Date;
 };
 
-export type uploadFileSchema = {
+export type postFileSchema = {
   _id: string;
-  chunkSize: number;
-  contentType: string;
   filename: string;
-  length: number;
-  uploadDate: Date;
 };
 
 export type postSchema = {
@@ -79,7 +66,7 @@ export type postSchema = {
   category: string;
   title: string;
   desc: string;
-  files: uploadFileSchema[];
+  files: postFileSchema[];
   submittedBy: string[];
   assignmentRef: string | null;
   createdAt: Date;
