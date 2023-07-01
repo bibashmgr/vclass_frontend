@@ -63,6 +63,15 @@ export type fileSchema = {
   uploadDate: Date;
 };
 
+export type uploadFileSchema = {
+  _id: string;
+  chunkSize: number;
+  contentType: string;
+  filename: string;
+  length: number;
+  uploadDate: Date;
+};
+
 export type postSchema = {
   _id: string;
   portal: string;
@@ -70,7 +79,7 @@ export type postSchema = {
   category: string;
   title: string;
   desc: string;
-  files: string[];
+  files: uploadFileSchema[];
   submittedBy: string[];
   assignmentRef: string | null;
   createdAt: Date;

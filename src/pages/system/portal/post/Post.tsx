@@ -21,6 +21,7 @@ const Post = () => {
   const userInfoContext = useUserInfo();
 
   const [posts, setPosts] = useState<postSchema[]>([]);
+  const [updateCounter, setUpdateCounter] = useState<boolean>(false);
 
   const getPosts = async () => {
     const res = await apiHandler('get', `posts/subject/${params.subjectId}`);
@@ -34,10 +35,10 @@ const Post = () => {
 
   useEffect(() => {
     getPosts();
-  }, []);
+  }, [updateCounter]);
 
   return (
-    <div className='pt-4 flex flex-col gap-4'>
+    <div className='py-4 flex flex-col gap-4'>
       <div className='self-end'>
         <Button isSmall handleClick={() => navigate('create')}>
           Add Post
@@ -51,6 +52,8 @@ const Post = () => {
                 key={index}
                 post={post}
                 isMine={post.user._id === userInfoContext?.userInfo?._id}
+                updateCounter={updateCounter}
+                setUpdateCounter={setUpdateCounter}
               />
             );
           }

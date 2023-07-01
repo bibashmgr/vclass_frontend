@@ -22,7 +22,7 @@ const PortalLayout = () => {
     let locations = location.pathname.split('/');
 
     portals.map((portal, index) => {
-      if (portal.url === locations[locations.length - 1]) {
+      if (portal.url === locations[5]) {
         setActiveIndex(index);
       }
     });

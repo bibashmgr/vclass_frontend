@@ -8,7 +8,8 @@ type propsType = {
 const Popover = ({ parentElement, children }: propsType) => {
   const [isPopover, setIsPopover] = useState(false);
 
-  const handlePopover = () => {
+  const handlePopover = (e: React.MouseEvent) => {
+    e.stopPropagation();
     setIsPopover(!isPopover);
   };
 
