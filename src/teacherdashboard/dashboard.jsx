@@ -42,17 +42,25 @@ function TeacherDashboard() {
 
       <div>
         <h2 className="text-xl font-bold mb-2">Create a Student</h2>
+
+
         <form onSubmit={handleCreateStudent}>
           <input
+
+
             type="text"
+            
             name="studentName"
+
             placeholder="Enter student name"
             className="border border-gray-300 p-2 rounded-md mr-2"
+
             required
           />
           <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
             Create
           </button>
+
         </form>
       </div>
 
