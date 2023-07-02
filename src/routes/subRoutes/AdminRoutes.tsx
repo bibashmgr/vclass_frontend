@@ -28,7 +28,7 @@ const AdminRoutes = () => {
   return (
     <Routes>
       <Route path='*' element={<PageNotFound />} />
-      <Route element={<AppLayout isAdmin={true} />}>
+      <Route element={<AppLayout />}>
         <Route path='/' element={<Dashboard />} />
         {/* subjectRoutes */}
         <Route path='/subject' element={<Subject />} />
