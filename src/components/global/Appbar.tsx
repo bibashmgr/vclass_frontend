@@ -16,18 +16,20 @@ import { removeToken, setColorMode } from '../../handlers/storageHandler';
 import { useTheme } from '../../context/ThemeContext';
 import { useUserInfo } from '../../context/UserInfoContext';
 
+// schemas
+import { navLinkSchema } from '../../utils/navLinks';
+
 // types
 type propsType = {
   handleSidebar: React.MouseEventHandler;
   pathName: string;
-  isAdmin: boolean;
-  navLinks: any[];
+  navLinks: navLinkSchema[];
 };
 
-const Appbar = ({ handleSidebar, pathName, isAdmin, navLinks }: propsType) => {
+const Appbar = ({ handleSidebar, pathName, navLinks }: propsType) => {
   const navigate = useNavigate();
   const theme = useTheme();
-  const userInfo = useUserInfo();
+  const userInfoContext = useUserInfo();
 
   const getAppbarTitle = (): string | undefined => {
     let navLink = navLinks.find((link) => link.url === pathName);
@@ -60,7 +62,7 @@ const Appbar = ({ handleSidebar, pathName, isAdmin, navLinks }: propsType) => {
         </p>
       </div>
       <div className='flex gap-2 items-center'>
-        {!isAdmin && (
+        {userInfoContext?.userInfo?.role !== 'admin' && (
           <IconButton
             Icon={MdNotifications}
             title='Notification'
@@ -77,7 +79,7 @@ const Appbar = ({ handleSidebar, pathName, isAdmin, navLinks }: propsType) => {
         <Popover
           parentElement={
             <img
-              src={userInfo?.userInfo?.avatar}
+              src={userInfoContext?.userInfo?.avatar}
               className='w-8 h-8 rounded-md cursor-pointer object-cover'
             />
           }

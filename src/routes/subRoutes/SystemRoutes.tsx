@@ -21,7 +21,7 @@ const SystemRoutes = () => {
   return (
     <Routes>
       <Route path='*' element={<PageNotFound />} />
-      <Route element={<AppLayout isAdmin={false} />}>
+      <Route element={<AppLayout />}>
         <Route index element={<Home />} />
         <Route path='/semester/:semesterId' element={<Semester />} />
         <Route

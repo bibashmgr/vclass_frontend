@@ -6,7 +6,7 @@ import Sidebar from '../components/global/Sidebar';
 import Appbar from '../components/global/Appbar';
 
 // utils
-import { navLinks } from '../utils/navLinks';
+import { navLinks, navLinkSchema } from '../utils/navLinks';
 
 // handlers
 import { apiHandler } from '../handlers/apiHandler';
@@ -17,12 +17,16 @@ import { BsFillBookmarksFill } from 'react-icons/bs';
 // schemas
 import { facultySchema } from '../utils/schemas';
 
-const AppLayout = ({ isAdmin }: { isAdmin: boolean }) => {
+// context
+import { useUserInfo } from '../context/UserInfoContext';
+
+const AppLayout = () => {
   const location = useLocation();
+  const userInfoContext = useUserInfo();
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [faculty, setFaculty] = useState<facultySchema>();
-  const [semesters, setSemesters] = useState<any[]>([]);
+  const [semesters, setSemesters] = useState<navLinkSchema[]>([]);
 
   const handleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -42,12 +46,6 @@ const AppLayout = ({ isAdmin }: { isAdmin: boolean }) => {
       return `/${locations[1]}`;
     }
   };
-
-  useEffect(() => {
-    if (!isAdmin) {
-      fetchSemesters();
-    }
-  }, []);
 
   const fetchSemesters = async () => {
     const res = await apiHandler('get', 'batches/userId');
@@ -70,14 +68,30 @@ const AppLayout = ({ isAdmin }: { isAdmin: boolean }) => {
     }
   };
 
+  const getNavLinks = (): navLinkSchema[] => {
+    let role = userInfoContext?.userInfo?.role;
+    if (role === 'admin') {
+      return navLinks;
+    } else if (role === 'student') {
+      return semesters;
+    } else {
+      return [];
+    }
+  };
+
+  useEffect(() => {
+    if (userInfoContext?.userInfo?.role === 'student') {
+      fetchSemesters();
+    }
+  }, []);
+
   return (
     <div>
       <Sidebar
-        isAdmin={isAdmin}
         isSidebarOpen={isSidebarOpen}
         handleSidebar={handleSidebar}
         closeSidebar={closeSidebar}
-        navLinks={isAdmin ? navLinks : semesters}
+        navLinks={getNavLinks()}
         pathName={getPathName()}
       />
       <div className='w-screen'>
@@ -90,8 +104,7 @@ const AppLayout = ({ isAdmin }: { isAdmin: boolean }) => {
         <Appbar
           pathName={getPathName()}
           handleSidebar={handleSidebar}
-          navLinks={isAdmin ? navLinks : semesters}
-          isAdmin={isAdmin}
+          navLinks={getNavLinks()}
         />
         <div className='w-full md:w-[calc(100vw-240px)] lg:w-[calc(100vw-288px)] fixed top-16 md:top-20 left-0 md:left-60 lg:left-72 overflow-scroll h-[calc(100vh-64px)] md:h-[calc(100vh-80px)] px-4 md:px-6 py-4 md:py-4 bg-gray-100 dark:bg-gray-700 z-10'>
           <Outlet context={{ faculty }} />

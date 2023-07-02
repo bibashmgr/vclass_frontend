@@ -5,17 +5,18 @@ import { IconType } from 'react-icons';
 // icons
 import { MdClose } from 'react-icons/md';
 
+// schema
+import { navLinkSchema } from '../../utils/navLinks';
+
 type propsType = {
-  isAdmin: boolean;
   isSidebarOpen: boolean;
   closeSidebar: Function;
   handleSidebar: React.MouseEventHandler;
   pathName: string;
-  navLinks: any[];
+  navLinks: navLinkSchema[];
 };
 
 const Sidebar = ({
-  isAdmin,
   isSidebarOpen,
   closeSidebar,
   handleSidebar,
