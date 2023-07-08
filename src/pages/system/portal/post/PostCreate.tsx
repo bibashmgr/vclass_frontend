@@ -92,10 +92,15 @@ const PostCreate = () => {
   const handleCreatePost = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const res = await apiHandler('post', 'posts/create', {
-      ...post,
-      subject: params.subjectId,
-    });
+    const res = await apiHandler(
+      'post',
+      `posts/${
+        userInfoContext?.userInfo?.role === 'student'
+          ? userInfoContext.userInfo.batch
+          : params.batchId
+      }/${params.subjectId}/create`,
+      post
+    );
 
     if (res.success) {
       showMessage(res.message, 'success');

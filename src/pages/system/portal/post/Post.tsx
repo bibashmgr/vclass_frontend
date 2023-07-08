@@ -24,7 +24,14 @@ const Post = () => {
   const [updateCounter, setUpdateCounter] = useState<boolean>(false);
 
   const getPosts = async () => {
-    const res = await apiHandler('get', `posts/subject/${params.subjectId}`);
+    const res = await apiHandler(
+      'get',
+      `posts/${
+        userInfoContext?.userInfo?.role === 'student'
+          ? userInfoContext.userInfo.batch
+          : params.batchId
+      }/${params.subjectId}`
+    );
 
     if (res.success) {
       setPosts(res.data);

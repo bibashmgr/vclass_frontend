@@ -26,6 +26,7 @@ const AppLayout = () => {
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [faculty, setFaculty] = useState<facultySchema>();
+  const [batches, setBatches] = useState<navLinkSchema[]>([]);
   const [semesters, setSemesters] = useState<navLinkSchema[]>([]);
 
   const handleSidebar = () => {
@@ -58,7 +59,7 @@ const AppLayout = () => {
           sems.push({
             title: `Semester ${index + 1}`,
             url: `/semester/${index + 1}`,
-            roles: ['student', 'teacher'],
+            roles: ['student'],
             Icon: BsFillBookmarksFill,
           });
         }
@@ -68,12 +69,32 @@ const AppLayout = () => {
     }
   };
 
+  const fetchBatches = async () => {
+    const res = await apiHandler('get', 'batches/portal');
+
+    if (res.success) {
+      let mappingBatches: any[] = [];
+      res.data.map((batch: any, index: number) => {
+        mappingBatches.push({
+          title: `${batch.faculty.name} ${batch.year}`,
+          url: `/batch/${batch._id}`,
+          roles: ['teacher'],
+          Icon: BsFillBookmarksFill,
+        });
+      });
+
+      setBatches(mappingBatches);
+    }
+  };
+
   const getNavLinks = (): navLinkSchema[] => {
     let role = userInfoContext?.userInfo?.role;
     if (role === 'admin') {
       return navLinks;
     } else if (role === 'student') {
       return semesters;
+    } else if (role === 'teacher') {
+      return batches;
     } else {
       return [];
     }
@@ -82,6 +103,9 @@ const AppLayout = () => {
   useEffect(() => {
     if (userInfoContext?.userInfo?.role === 'student') {
       fetchSemesters();
+    }
+    if (userInfoContext?.userInfo?.role === 'teacher') {
+      fetchBatches();
     }
   }, []);
 

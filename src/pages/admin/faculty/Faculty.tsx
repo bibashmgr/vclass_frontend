@@ -19,7 +19,7 @@ import { showMessage } from '../../../handlers/messageHandler';
 const Faculty = () => {
   const navigate = useNavigate();
 
-  const [faculties, setFaculties] = useState([]);
+  const [faculties, setFaculties] = useState<facultySchema[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [updateCounter, setUpdateCounter] = useState<boolean>(false);

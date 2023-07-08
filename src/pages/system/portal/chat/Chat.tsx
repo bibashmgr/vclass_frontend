@@ -46,7 +46,14 @@ const Chat = () => {
   }, []);
 
   const getMessages = async () => {
-    const res = await apiHandler('get', `messages/subject/${params.subjectId}`);
+    const res = await apiHandler(
+      'get',
+      `messages/${
+        userInfoContext?.userInfo?.role === 'student'
+          ? userInfoContext.userInfo.batch
+          : params.batchId
+      }/${params.subjectId}`
+    );
 
     if (res.success) {
       setMessages(res.data);
@@ -95,10 +102,17 @@ const Chat = () => {
 
   const handleSend = async (e: FormEvent) => {
     e.preventDefault();
-    const res = await apiHandler('post', '/messages/create', {
-      desc: text,
-      subject: params.subjectId,
-    });
+    const res = await apiHandler(
+      'post',
+      `messages/${
+        userInfoContext?.userInfo?.role === 'student'
+          ? userInfoContext.userInfo.batch
+          : params.batchId
+      }/${params.subjectId}/create`,
+      {
+        desc: text,
+      }
+    );
 
     if (res.success) {
       console.log(res.data);
@@ -111,7 +125,10 @@ const Chat = () => {
       setText('');
       socket?.emit('send-message', {
         subjectId: params.subjectId,
-        userInfo: userInfoContext?.userInfo,
+        batchId:
+          userInfoContext?.userInfo?.role === 'student'
+            ? userInfoContext.userInfo.batch
+            : params.batchId,
         messageInfo: res.data,
       });
     } else {

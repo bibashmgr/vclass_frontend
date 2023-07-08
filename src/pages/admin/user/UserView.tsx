@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-// helpers
+// handlers
 import { apiHandler } from '../../../handlers/apiHandler';
 import { showMessage } from '../../../handlers/messageHandler';
 
@@ -18,7 +18,7 @@ import { AiFillIdcard } from 'react-icons/ai';
 import { BsStack, BsPersonFill } from 'react-icons/bs';
 
 // type
-import { userSchema } from '../../../utils/schemas';
+import { userSchema, batchSchema } from '../../../utils/schemas';
 
 const UserView = () => {
   const params = useParams();
@@ -51,11 +51,7 @@ const UserView = () => {
       <Card title='Email' subtitle={user?.email} Icon={MdEmail} />
       <Card title='Role' subtitle={user?.role} Icon={BsPersonFill} />
       <Card title='College' subtitle={user?.college} Icon={FaUniversity} />
-      <Card
-        title='Batch'
-        subtitle={user?.batch?.year.toString()}
-        Icon={BsStack}
-      />
+      <Card title='Batch' subtitle={user?.batch?.year} Icon={BsStack} />
     </ViewLayout>
   );
 };

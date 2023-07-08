@@ -13,7 +13,7 @@ import { apiHandler } from '../../../handlers/apiHandler';
 import { showMessage } from '../../../handlers/messageHandler';
 
 // types
-import { batchSchema, facultySchema, userSchema } from '../../../utils/schemas';
+import { batchSchema } from '../../../utils/schemas';
 
 const UserEdit = () => {
   const params = useParams();

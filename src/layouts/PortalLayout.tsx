@@ -14,9 +14,11 @@ import { useSocket } from '../context/SocketContext';
 const PortalLayout = () => {
   const location = useLocation();
   const params = useParams();
-  const [activeIndex, setActiveIndex] = useState(0);
-  const userInfo = useUserInfo();
+
+  const userInfoContext = useUserInfo();
   const socket = useSocket();
+
+  const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
     let locations = location.pathname.split('/');
@@ -31,13 +33,19 @@ const PortalLayout = () => {
   useEffect(() => {
     socket?.emit('join-portal', {
       subjectId: params.subjectId,
-      userInfo: userInfo?.userInfo,
+      batchId:
+        userInfoContext?.userInfo?.role === 'student'
+          ? userInfoContext.userInfo.batch
+          : params.batchId,
     });
 
     return () => {
       socket?.emit('leave-portal', {
         subjectId: params.subjectId,
-        userInfo: userInfo?.userInfo,
+        batchId:
+          userInfoContext?.userInfo?.role === 'student'
+            ? userInfoContext.userInfo.batch
+            : params.batchId,
       });
     };
   }, []);
