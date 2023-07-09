@@ -172,7 +172,7 @@ const PostCreate = () => {
           value={post?.desc}
           handleChange={handleInputField}
           extraStyling='lg:col-span-2'
-          isRequired={true}
+          isRequired={false}
         />
         <div className='flex flex-col gap-2 lg:col-span-2'>
           <label
@@ -187,7 +187,7 @@ const PostCreate = () => {
             </p>
           )}
           <div
-            className={`relative flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 dark:border-gray-600 border-dashed rounded-lg bg-gray-50 dark:bg-gray-700 ${
+            className={`relative flex flex-col items-center justify-center w-full h-48 border-2 border-gray-300 dark:border-gray-600 border-dashed rounded-lg bg-gray-50 dark:bg-gray-700 ${
               files.length === 0 &&
               'hover:bg-gray-100  dark:hover:bg-gray-600 dark:hover:border-gray-500'
             } py-6 px-6`}
@@ -229,7 +229,6 @@ const PostCreate = () => {
               }`}
               multiple
               accept='image/png, image/jpg, image/jpeg, .pdf'
-              required={files.length === 0}
               onChange={handleFiles}
             />
           </div>

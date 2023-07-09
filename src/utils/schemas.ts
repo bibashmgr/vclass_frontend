@@ -70,7 +70,7 @@ export type postSchema = {
   title: string;
   desc: string;
   files: postFileSchema[];
-  submittedBy: string[];
+  submittedBy: postSchema[];
   assignmentRef: string | null;
   createdAt: Date;
 };
