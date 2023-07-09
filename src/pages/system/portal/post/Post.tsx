@@ -4,6 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 // components
 import PostCard from "../../../../components/system/post/PostCard";
 import Button from "../../../../components/global/button/Button";
+import Spinner from "../../../../components/global/Spinner";
 
 // schemas
 import { postSchema } from "../../../../utils/schemas";
@@ -14,7 +15,6 @@ import { showMessage } from "../../../../handlers/messageHandler";
 
 // context
 import { useUserInfo } from "../../../../context/UserInfoContext";
-import Spinner from "../../../../components/global/Spinner";
 
 const Post = () => {
   const params = useParams();
@@ -50,11 +50,11 @@ const Post = () => {
   return (
     <div className="py-4 flex flex-col gap-4">
       {isLoading ? (
-        <div className="flex justify-center pt-2">
+        <div className="flex justify-center pt-4">
           <Spinner boxSize={5} />
         </div>
       ) : posts.length === 0 ? (
-        <div className="flex flex-col items-center gap-2 pt-2">
+        <div className="flex flex-col items-center gap-2 pt-4">
           <p className="text-gray-400 dark:text-gray-400 text-sm font-medium">
             No Posts
           </p>

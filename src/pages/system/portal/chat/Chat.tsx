@@ -12,11 +12,11 @@ import { messageSchema } from "../../../../utils/schemas";
 // components
 import ChatInput from "../../../../components/system/chat/ChatInput";
 import ChatTextBox from "../../../../components/system/chat/ChatTextBox";
+import Spinner from "../../../../components/global/Spinner";
 
 // context
 import { useUserInfo } from "../../../../context/UserInfoContext";
 import { useSocket } from "../../../../context/SocketContext";
-import Spinner from "../../../../components/global/Spinner";
 
 const Chat = () => {
   const params = useParams();
@@ -142,11 +142,11 @@ const Chat = () => {
   return (
     <div className="py-4 h-[calc(100vh-200px)]  md:h-[calc(100vh-218px)] overflow-auto">
       {isLoading ? (
-        <div className="flex justify-center pt-2">
+        <div className="flex justify-center pt-4">
           <Spinner boxSize={5} />
         </div>
       ) : messages.length === 0 ? (
-        <div className="flex justify-center pt-2">
+        <div className="flex justify-center pt-4">
           <p className="text-gray-400 dark:text-gray-400 text-sm font-medium">
             No Messages
           </p>
