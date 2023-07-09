@@ -9,7 +9,7 @@ export type subjectSchema = {
 export type facultySchema = {
   _id: string;
   name: string;
-  semesters: any[][];
+  semesters: subjectSchema[][] | string[][];
   desc: string;
   isHidden: boolean;
 };
@@ -17,12 +17,7 @@ export type facultySchema = {
 export type batchSchema = {
   _id: string;
   year: string;
-  faculty: {
-    _id: string;
-    name: string;
-    semesters: string[][];
-    isHidden: boolean;
-  };
+  faculty: facultySchema;
   currentSemester: number;
   desc: string;
   isHidden: boolean;
@@ -36,6 +31,46 @@ export type userSchema = {
   email: string;
   role: string;
   college: string | null;
-  batch: string | number | null;
+  batch: batchSchema;
   isHidden: boolean;
+};
+
+export type portalSchema = {
+  _id: string;
+  batch: batchSchema;
+  subject: subjectSchema;
+  teacher: userSchema;
+  createdAt: Date;
+};
+
+export type messageSchema = {
+  _id: string;
+  desc: string;
+  portal: string;
+  user: userSchema;
+  createdAt: Date;
+};
+
+export type fileSchema = {
+  id: string;
+  filename: string;
+  originalname: string;
+};
+
+export type postFileSchema = {
+  _id: string;
+  filename: string;
+};
+
+export type postSchema = {
+  _id: string;
+  portal: string;
+  user: userSchema;
+  category: string;
+  title: string;
+  desc: string;
+  files: postFileSchema[];
+  submittedBy: postSchema[];
+  assignmentRef: string | null;
+  createdAt: Date;
 };

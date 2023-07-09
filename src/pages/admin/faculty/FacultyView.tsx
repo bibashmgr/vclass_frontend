@@ -16,14 +16,13 @@ import { MdDescription } from 'react-icons/md';
 import { AiFillIdcard } from 'react-icons/ai';
 import { IoPeople } from 'react-icons/io5';
 
+// schemas
+import { facultySchema } from '../../../utils/schemas';
+
 const FacultyView = () => {
   const params = useParams();
 
-  const [faculty, setFaculty] = useState({
-    name: '',
-    semesters: [],
-    desc: '',
-  });
+  const [faculty, setFaculty] = useState<facultySchema>();
   const [isLoading, setIsLoading] = useState(true);
 
   const getFaculty = async () => {
@@ -49,20 +48,20 @@ const FacultyView = () => {
       layoutSubtitle='Faculty details'
       isLoading={isLoading}
     >
-      <Card title='Name' subtitle={faculty.name} Icon={AiFillIdcard} />
+      <Card title='Name' subtitle={faculty?.name} Icon={AiFillIdcard} />
       <Card
         title='Toatal Semesters'
         subtitle={
-          faculty.semesters.length < 10
-            ? `0${faculty.semesters.length}`
-            : faculty.semesters.length
+          faculty && faculty.semesters.length < 10
+            ? `0${faculty?.semesters.length}`
+            : faculty?.semesters.length
         }
         Icon={IoPeople}
       />
       <div className='lg:col-span-2'>
         <Card
           title='Description'
-          subtitle={faculty.desc}
+          subtitle={faculty?.desc}
           Icon={MdDescription}
         />
       </div>

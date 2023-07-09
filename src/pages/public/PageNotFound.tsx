@@ -3,30 +3,25 @@ import { useNavigate } from 'react-router-dom';
 // components
 import Button from '../../components/global/button/Button';
 
-// handlers
-import { getColorMode, getToken } from '../../handlers/storageHandler';
-import { apiHandler } from '../../handlers/apiHandler';
+// context
+import { useTheme } from '../../context/ThemeContext';
+import { useUserInfo } from '../../context/UserInfoContext';
 
 const PageNotFound = () => {
   const navigate = useNavigate();
+  const themeContext = useTheme();
+  const userInfoContext = useUserInfo();
 
   const redirectUser = () => {
-    if (getToken()) {
-      fetchUserInfo();
-    } else {
-      navigate('/auth/login');
-    }
-  };
+    if (userInfoContext?.userInfo) {
 
-  const fetchUserInfo = async () => {
-    const res = await apiHandler('get', '/auth/login/success');
-
-    if (res.success) {
-      if (res.data.role === 'admin') {
+      let role = userInfoContext.userInfo.role;
+      
+      if (role === 'admin') {
         navigate('/admin');
-      } else if (res.data.role === 'student') {
+      } else if (role === 'student') {
         navigate('/');
-      } else if (res.data.role === 'teacher') {
+      } else if (role === 'teacher') {
         navigate('/');
       } else {
         navigate('/unauthorized');
@@ -49,7 +44,7 @@ const PageNotFound = () => {
         </div>
         <img
           src={
-            getColorMode() === 'dark'
+            themeContext === 'dark'
               ? '/images/404-dark.svg'
               : '/images/404-light.svg'
           }

@@ -6,26 +6,30 @@ import { MdNotifications, MdWbSunny, MdDarkMode } from 'react-icons/md';
 import { HiMenu } from 'react-icons/hi';
 
 // components
-import IconButton from '../global/button/IconButton';
+import IconButton from './button/IconButton';
+import Popover from './Popover';
 
 // helpers
-import {
-  getColorMode,
-  removeToken,
-  setColorMode,
-} from '../../handlers/storageHandler';
-import Popover from '../global/Popover';
+import { removeToken, setColorMode } from '../../handlers/storageHandler';
+
+// context
+import { useTheme } from '../../context/ThemeContext';
+import { useUserInfo } from '../../context/UserInfoContext';
+
+// schemas
+import { navLinkSchema } from '../../utils/navLinks';
 
 // types
 type propsType = {
   handleSidebar: React.MouseEventHandler;
   pathName: string;
-  isAdmin: boolean;
-  navLinks: any[];
+  navLinks: navLinkSchema[];
 };
 
-const Appbar = ({ handleSidebar, pathName, isAdmin, navLinks }: propsType) => {
+const Appbar = ({ handleSidebar, pathName, navLinks }: propsType) => {
   const navigate = useNavigate();
+  const theme = useTheme();
+  const userInfoContext = useUserInfo();
 
   const getAppbarTitle = (): string | undefined => {
     let navLink = navLinks.find((link) => link.url === pathName);
@@ -58,7 +62,7 @@ const Appbar = ({ handleSidebar, pathName, isAdmin, navLinks }: propsType) => {
         </p>
       </div>
       <div className='flex gap-2 items-center'>
-        {!isAdmin && (
+        {userInfoContext?.userInfo?.role !== 'admin' && (
           <IconButton
             Icon={MdNotifications}
             title='Notification'
@@ -68,14 +72,14 @@ const Appbar = ({ handleSidebar, pathName, isAdmin, navLinks }: propsType) => {
           />
         )}
         <IconButton
-          Icon={getColorMode() === 'dark' ? MdDarkMode : MdWbSunny}
+          Icon={theme === 'dark' ? MdDarkMode : MdWbSunny}
           title='Notification'
           handleClick={handleModeClick}
         />
         <Popover
           parentElement={
             <img
-              src='https://via.placeholder.com/150'
+              src={userInfoContext?.userInfo?.avatar}
               className='w-8 h-8 rounded-md cursor-pointer object-cover'
             />
           }

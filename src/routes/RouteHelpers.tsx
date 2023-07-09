@@ -1,5 +1,4 @@
 import { Outlet, Navigate } from 'react-router-dom';
-
 import { ToastContainer, Theme, Bounce } from 'react-toastify';
 
 // styles
@@ -11,11 +10,12 @@ import Loader from '../pages/public/Loader';
 // hooks
 import { useAuth } from '../hooks/useAuth';
 
-export const PortalRoutes = ({
-  colorMode,
-}: {
-  colorMode: string | undefined;
-}) => {
+// context
+import { useTheme } from '../context/ThemeContext';
+import { SocketProvider } from '../context/SocketContext';
+
+export const PortalRoutes = () => {
+  const theme = useTheme();
   return (
     <>
       <ToastContainer
@@ -29,10 +29,18 @@ export const PortalRoutes = ({
         draggable
         pauseOnHover
         transition={Bounce}
-        theme={colorMode as Theme}
+        theme={theme as Theme}
       />
       <Outlet />
     </>
+  );
+};
+
+export const SocketRoutes = () => {
+  return (
+    <SocketProvider>
+      <Outlet />
+    </SocketProvider>
   );
 };
 
@@ -45,7 +53,9 @@ export const ProtectedRoutes = ({ roles }: { roles: string[] }) => {
         <Loader />
       ) : token && user ? (
         roles.includes(user.role) ? (
-          <Outlet />
+          <SocketProvider>
+            <Outlet />
+          </SocketProvider>
         ) : (
           <Navigate to='/unauthorized' />
         )

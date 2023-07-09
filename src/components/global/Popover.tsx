@@ -8,7 +8,8 @@ type propsType = {
 const Popover = ({ parentElement, children }: propsType) => {
   const [isPopover, setIsPopover] = useState(false);
 
-  const handlePopover = () => {
+  const handlePopover = (e: React.MouseEvent) => {
+    e.stopPropagation();
     setIsPopover(!isPopover);
   };
 
@@ -17,7 +18,9 @@ const Popover = ({ parentElement, children }: propsType) => {
       <div onClick={handlePopover}>{parentElement}</div>
       <div
         className={`absolute z-10 right-0 top-12 inline-block w-44 divide-y divide-gray-100 dark:divide-gray-600 text-sm text-gray-500 dark:text-gray-400 transition-opacity duration-300 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-md shadow-light dark:shadow-none ${
-          isPopover ? 'opacity-100' : 'opacity-0'
+          isPopover
+            ? 'opacity-100 cursor-pointer pointer-events-auto'
+            : 'opacity-0 cursor-none pointer-events-none'
         }`}
       >
         {children}

@@ -1,10 +1,19 @@
+import { IconType } from 'react-icons';
+
 // icons
 import { IoGrid } from 'react-icons/io5';
 import { RiBook2Fill } from 'react-icons/ri';
 import { FaGraduationCap } from 'react-icons/fa';
 import { BsStack, BsPersonFill } from 'react-icons/bs';
 
-export const navLinks = [
+export type navLinkSchema = {
+  title: string;
+  url: string;
+  roles: string[];
+  Icon: IconType;
+};
+
+export const navLinks: navLinkSchema[] = [
   {
     title: 'dashboard',
     url: '/admin',

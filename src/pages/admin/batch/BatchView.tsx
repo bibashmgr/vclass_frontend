@@ -15,26 +15,19 @@ import Card from '../../../components/global/Card';
 import { MdDescription } from 'react-icons/md';
 import { AiFillIdcard } from 'react-icons/ai';
 
+// schemas
+import { batchSchema } from '../../../utils/schemas';
+
 const FacultyView = () => {
   const params = useParams();
 
-  const [batch, setBatch] = useState({
-    year: '',
-    faculty: '',
-    currentSemester: '',
-    desc: '',
-  });
+  const [batch, setBatch] = useState<batchSchema>();
   const [isLoading, setIsLoading] = useState(true);
 
   const getBatch = async () => {
     await apiHandler('get', `batches/${params.batchId}`, null).then((res) => {
       if (res.success) {
-        setBatch({
-          year: res.data.year,
-          faculty: res.data.faculty.name,
-          currentSemester: res.data.currentSemester,
-          desc: res.data.desc,
-        });
+        setBatch(res.data);
         setIsLoading(false);
       } else {
         showMessage(res.message, 'failure');
@@ -54,20 +47,20 @@ const FacultyView = () => {
     >
       <Card
         title='Name'
-        subtitle={`${batch.faculty} ${batch.year}`}
+        subtitle={`${batch?.faculty} ${batch?.year}`}
         Icon={AiFillIdcard}
       />
       <Card
         title='CurrentSemester'
         subtitle={
-          Number(batch.currentSemester) < 10
-            ? `0${batch.currentSemester}`
-            : batch.currentSemester
+          batch && Number(batch?.currentSemester) < 10
+            ? `0${batch?.currentSemester}`
+            : batch?.currentSemester
         }
         Icon={AiFillIdcard}
       />
       <div className='lg:col-span-2'>
-        <Card title='Description' subtitle={batch.desc} Icon={MdDescription} />
+        <Card title='Description' subtitle={batch?.desc} Icon={MdDescription} />
       </div>
     </ViewLayout>
   );

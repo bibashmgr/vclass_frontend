@@ -24,7 +24,13 @@ const LoginSuccess = () => {
   }, []);
 
   const fetchUserInfo = async (jwtToken: string) => {
-    const res = await apiHandler('get', '/auth/login/success', null, jwtToken);
+    const res = await apiHandler(
+      'get',
+      '/auth/login/success',
+      null,
+      false,
+      jwtToken
+    );
 
     if (res.success) {
       setToken(jwtToken);

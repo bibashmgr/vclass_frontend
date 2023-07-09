@@ -19,7 +19,7 @@ import { showMessage } from '../../../handlers/messageHandler';
 const Batch = () => {
   const navigate = useNavigate();
 
-  const [batches, setBatches] = useState([]);
+  const [batches, setBatches] = useState<batchSchema[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [updateCounter, setUpdateCounter] = useState<boolean>(false);

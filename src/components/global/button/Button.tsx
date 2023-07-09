@@ -39,7 +39,7 @@ const Button = ({
     <button
       type={type}
       className={`${
-        isSmall ? 'px-3 py-2 text-xs' : 'px-4 py-2.5 text-sm'
+        isSmall ? 'px-3 py-2 text-xs' : 'px-4 py-2 text-sm'
       } rounded-md  font-medium disabled:opacity-75 disabled:cursor-not-allowed ${getColorScheme(
         colorScheme
       )}`}
