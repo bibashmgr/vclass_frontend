@@ -9,26 +9,6 @@ module.exports = {
         lg: '1024px',
         xl: '1280px',
       },
-      colors: {
-        lightColor: '#FFFFFF',
-        darkColor: '#0F172A',
-        failureColor: {
-          light: '#F87171',
-          dark: '#EF4444',
-        },
-        successColor: {
-          light: '#6EE7B7',
-          dark: '#10B981',
-        },
-        infoColor: {
-          light: '#93C5FD',
-          dark: '#3B82F6',
-        },
-        warnColor: {
-          light: '#FEF08A',
-          dark: '#FDE047',
-        },
-      },
       boxShadow: {
         light: '0px 0px 35px rgba(181, 181, 195, 0.15)',
       },
@@ -40,3 +20,29 @@ module.exports = {
   plugins: [],
   darkMode: 'class',
 };
+
+/* 
+  colors: {
+    info: {
+      blue-500
+    },
+    failure: {
+      red-500
+    },
+    success: {
+      emerald-500
+    },
+    warn: {
+      yellow-300
+    },
+    neutral: {
+      
+    }
+    light:{
+      white
+    }
+    dark: {
+      gray-900
+    }
+  }
+*/

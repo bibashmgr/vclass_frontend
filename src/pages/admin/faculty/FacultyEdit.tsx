@@ -172,7 +172,7 @@ const FacultyEdit = () => {
                     type='button'
                     className={`inline-block px-4 py-2.5 rounded-t-md active ${
                       tabIndex === index
-                        ? 'bg-gray-100 dark:bg-gray-700 text-infoColor-dark dark:text-infoColor-dark'
+                        ? 'bg-gray-100 dark:bg-gray-700 text-blue-500 dark:text-blue-500'
                         : 'bg-transparent text-gray-500 dark:text-gray-400 hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 dark:hover:text-gray-300'
                     }`}
                     onClick={() => setTabIndex(index)}

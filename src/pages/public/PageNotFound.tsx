@@ -14,9 +14,8 @@ const PageNotFound = () => {
 
   const redirectUser = () => {
     if (userInfoContext?.userInfo) {
-
       let role = userInfoContext.userInfo.role;
-      
+
       if (role === 'admin') {
         navigate('/admin');
       } else if (role === 'student') {
@@ -35,7 +34,7 @@ const PageNotFound = () => {
     <div className='flex justify-center items-center w-screen h-screen bg-gray-100 dark:bg-gray-700 px-6'>
       <div className='max-w-sm md:bg-white dark:md:bg-gray-800 rounded-lg flex flex-col md:gap-2 justify-center items-center md:py-12 md:px-12'>
         <div className='text-center'>
-          <p className='text-darkColor dark:text-lightColor font-bold text-2xl'>
+          <p className='text-gray-900 dark:text-white font-bold text-2xl'>
             Oops!
           </p>
           <p className='text-gray-400 dark:text-gray-300 font-normal text-xs'>

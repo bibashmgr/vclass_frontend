@@ -79,7 +79,7 @@ const User = () => {
       >
         {users.map((user: userSchema, userIndex) => {
           return (
-            <tr key={user._id} className='bg-lightColor dark:bg-gray-800'>
+            <tr key={user._id} className='bg-white dark:bg-gray-800'>
               <td className='px-6 py-4'>
                 {userIndex + 1 < 10 ? `0${userIndex + 1}` : userIndex + 1}
               </td>

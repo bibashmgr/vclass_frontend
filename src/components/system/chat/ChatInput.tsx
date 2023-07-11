@@ -39,7 +39,7 @@ const ChatInput = ({ text, handleText, handleSend }: propsType) => {
       />
       <button
         type='submit'
-        className='inline-flex justify-center p-2 text-infoColor-dark rounded-full cursor-pointer hover:bg-blue-100 dark:text-blue-600 dark:hover:bg-gray-600'
+        className='inline-flex justify-center p-2 text-blue-500 rounded-full cursor-pointer hover:bg-blue-100 dark:text-blue-600 dark:hover:bg-gray-600'
         title='Send'
       >
         <svg

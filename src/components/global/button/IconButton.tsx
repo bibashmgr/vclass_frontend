@@ -27,7 +27,7 @@ const IconButton = ({
     >
       {
         <Icon
-          className={`w-${iconSize} h-${iconSize} text-darkColor dark:text-gray-200`}
+          className={`w-${iconSize} h-${iconSize} text-gray-900 dark:text-gray-200`}
         />
       }
       {hasIncidator && (

@@ -37,7 +37,7 @@ const ChatTextBox = ({ message, isMine, isInfoHide }: propsType) => {
                 isMine ? 'flex-row-reverse' : 'flex-row'
               }`}
             >
-              <p className='text-darkColor dark:text-lightColor text-sm font-medium'>
+              <p className='text-gray-900 dark:text-white text-sm font-medium'>
                 {isMine ? 'You' : message.user.name.split(' ')[0]}
               </p>
               <p className='text-gray-400 dark:text-gray-400 text-[10px] font-normal'>
@@ -46,7 +46,7 @@ const ChatTextBox = ({ message, isMine, isInfoHide }: propsType) => {
             </div>
           )}
           <p
-            className={`text-darkColor dark:text-lightColor text-sm font-normal px-3 py-2.5 bg-white dark:bg-gray-800 rounded-2xl ${
+            className={`text-gray-900 dark:text-white text-sm font-normal px-3 py-2.5 bg-white dark:bg-gray-800 rounded-2xl ${
               isMine ? 'rounded-tr-none' : 'rounded-tl-none'
             }`}
           >

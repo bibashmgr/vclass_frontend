@@ -6,7 +6,7 @@ const Spinner = ({ boxSize = 4 }: propsType) => {
   return (
     <svg
       aria-hidden='true'
-      className={`w-${boxSize} h-${boxSize} text-gray-100 animate-spin dark:text-gray-400 fill-lightColor dark:fill-gray-100`}
+      className={`w-${boxSize} h-${boxSize} text-gray-100 animate-spin dark:text-gray-400 fill-white dark:fill-gray-100`}
       viewBox='0 0 100 101'
       fill='none'
       xmlns='http://www.w3.org/2000/svg'
