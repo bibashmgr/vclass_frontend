@@ -32,10 +32,10 @@ const ListLayout = ({
   };
 
   return (
-    <div className='shadow-light dark:shadow-none rounded-lg bg-lightColor dark:bg-gray-800 px-6 py-6 flex flex-col gap-6'>
+    <div className='shadow-light dark:shadow-none rounded-lg bg-white dark:bg-gray-800 px-6 py-6 flex flex-col gap-6'>
       <div className='flex justify-between items-center'>
         <div>
-          <p className='text-darkColor dark:text-lightColor text-lg font-semibold'>
+          <p className='text-gray-900 dark:text-white text-lg font-semibold'>
             {layoutTitle}
           </p>
           <p className='text-gray-400 dark:text-gray-400 text-xs font-normal'>

@@ -80,7 +80,7 @@ const Faculty = () => {
       >
         {faculties.map((faculty: facultySchema, facultyIndex) => {
           return (
-            <tr key={faculty._id} className='bg-lightColor dark:bg-gray-800'>
+            <tr key={faculty._id} className='bg-white dark:bg-gray-800'>
               <td className='px-6 py-4'>
                 {facultyIndex + 1 < 10
                   ? `0${facultyIndex + 1}`

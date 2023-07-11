@@ -80,7 +80,7 @@ const PostCard = ({
             className={`w-10 h-10 rounded-md`}
           />
           <div className='flex flex-col gap-1 justify-center'>
-            <p className='text-darkColor dark:text-lightColor text-md'>
+            <p className='text-gray-900 dark:text-white text-md'>
               {`${isMine ? 'You' : post.user.name} posted a new ${
                 post.category
               }: ${post.title}`}

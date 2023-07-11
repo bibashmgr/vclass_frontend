@@ -28,12 +28,12 @@ const Semester = () => {
         return !subject.isHidden ? (
           <div
             key={index}
-            className='flex flex-col gap-4 px-4 py-4 shadow-light dark:shadow-none rounded-lg bg-lightColor dark:bg-gray-800'
+            className='flex flex-col gap-4 px-4 py-4 shadow-light dark:shadow-none rounded-lg bg-white dark:bg-gray-800'
           >
             <p className='text-gray-400 dark:text-gray-400 text-xs font-bold'>
               {subject?.codeName}
             </p>
-            <p className='text-darkColor dark:text-lightColor text-lg font-semibold'>
+            <p className='text-gray-900 dark:text-white text-lg font-semibold'>
               {subject?.name}
             </p>
             <p className='text-gray-400 dark:text-gray-400 text-xs font-normal'>

@@ -182,9 +182,7 @@ const PostCreate = () => {
             Files:
           </label>
           {errors.files && (
-            <p className='text-xs text-failureColor-dark font-normal'>
-              {errors.files}
-            </p>
+            <p className='text-xs text-red-500 font-normal'>{errors.files}</p>
           )}
           <div
             className={`relative flex flex-col items-center justify-center w-full h-48 border-2 border-gray-300 dark:border-gray-600 border-dashed rounded-lg bg-gray-50 dark:bg-gray-700 ${
@@ -209,7 +207,7 @@ const PostCreate = () => {
                   return (
                     <div
                       key={index}
-                      className={`flex flex-col gap-1 justify-center items-center relative px-2 py-2  text-gray-400 dark:text-gray-300 hover:text-gray-200 dark:hover:text-white rounded-lg cursor-pointer hover:bg-failureColor-light`}
+                      className={`flex flex-col gap-1 justify-center items-center relative px-2 py-2  text-gray-400 dark:text-gray-300 hover:text-gray-200 dark:hover:text-white rounded-lg cursor-pointer hover:bg-red-300`}
                       onClick={() => handleRemoveFile(index)}
                     >
                       <BsFileEarmarkFill className='w-14 h-14' />

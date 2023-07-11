@@ -83,7 +83,7 @@ const Subject = () => {
       >
         {subjects.map((subject: subjectSchema, subjectIndex) => {
           return (
-            <tr key={subject._id} className='bg-lightColor dark:bg-gray-800'>
+            <tr key={subject._id} className='bg-white dark:bg-gray-800'>
               <td className='px-6 py-4'>
                 {subjectIndex + 1 < 10
                   ? `0${subjectIndex + 1}`

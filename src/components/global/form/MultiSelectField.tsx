@@ -146,7 +146,7 @@ const MultiSelectField = ({
                 <p
                   key={optionIndex}
                   data-value={option.value}
-                  className='px-2 py-1 hover:bg-infoColor-dark hover:text-lightColor'
+                  className='px-2 py-1 hover:bg-blue-500 hover:text-white'
                   onClick={handleSelect}
                 >
                   {option.title}

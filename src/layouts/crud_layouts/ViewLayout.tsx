@@ -23,7 +23,7 @@ const ViewLayout = ({
   const navigate = useNavigate();
 
   return (
-    <div className='shadow-light dark:shadow-none rounded-lg bg-lightColor dark:bg-gray-800 px-6 py-6 flex flex-col gap-6'>
+    <div className='shadow-light dark:shadow-none rounded-lg bg-white dark:bg-gray-800 px-6 py-6 flex flex-col gap-6'>
       <div className='flex items-center gap-4'>
         <IconButton
           title='Go Back'
@@ -31,7 +31,7 @@ const ViewLayout = ({
           Icon={IoChevronBack}
         />
         <div>
-          <p className='text-darkColor dark:text-lightColor text-lg font-semibold'>
+          <p className='text-gray-900 dark:text-white text-lg font-semibold'>
             {layoutTitle}
           </p>
           <p className='text-gray-400 dark:text-gray-400 text-xs font-normal'>

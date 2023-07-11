@@ -77,7 +77,7 @@ const Batch = () => {
       >
         {batches.map((batch: batchSchema, batchIndex) => {
           return (
-            <tr key={batch._id} className='bg-lightColor dark:bg-gray-800'>
+            <tr key={batch._id} className='bg-white dark:bg-gray-800'>
               <td className='px-6 py-4'>
                 {batchIndex + 1 < 10 ? `0${batchIndex + 1}` : batchIndex + 1}
               </td>

@@ -54,10 +54,10 @@ const Appbar = ({ handleSidebar, pathName, navLinks }: propsType) => {
     >
       <div className='flex gap-3 h-full items-center'>
         <HiMenu
-          className='w-6 h-6 block md:hidden text-darkColor dark:text-lightColor cursor-pointer'
+          className='w-6 h-6 block md:hidden text-gray-900 dark:text-white cursor-pointer'
           onClick={handleSidebar}
         />
-        <p className='text-lg font-bold text-darkColor dark:text-lightColor capitalize'>
+        <p className='text-lg font-bold text-gray-900 dark:text-white capitalize'>
           {getAppbarTitle() || 'Home'}
         </p>
       </div>

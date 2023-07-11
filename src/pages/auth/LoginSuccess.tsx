@@ -53,7 +53,7 @@ const LoginSuccess = () => {
     <div className='w-screen h-screen bg-gray-100 dark:bg-gray-700 flex justify-center items-center'>
       <div className='flex flex-col gap-4 items-center'>
         <Spinner boxSize={6} />
-        <p className='text-darkColor dark:text-gray-300 text-sm font-bold'>
+        <p className='text-gray-900 dark:text-gray-300 text-sm font-bold'>
           Redirecting
         </p>
       </div>

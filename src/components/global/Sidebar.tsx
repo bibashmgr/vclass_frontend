@@ -25,19 +25,19 @@ const Sidebar = ({
 }: propsType) => {
   return (
     <aside
-      className={`bg-lightColor dark:bg-gray-800 w-60 lg:w-72 h-screen px-4 md:px-6 fixed top-0 ${
+      className={`bg-white dark:bg-gray-800 w-60 lg:w-72 h-screen px-4 md:px-6 fixed top-0 ${
         isSidebarOpen ? 'left-0 md:left-0' : '-left-60 md:left-0'
       } z-40 ease-linear duration-150`}
     >
       <div className='w-full h-16 md:h-20 flex justify-between items-center'>
         <div className='flex gap-2 items-center'>
           <img src='/vite.svg' className='w-8 h-8' />
-          <p className='text-xl font-bold text-darkColor dark:text-lightColor'>
+          <p className='text-xl font-bold text-gray-900 dark:text-white'>
             VCLASS
           </p>
         </div>
         <MdClose
-          className='block md:hidden w-5 h-5 cursor-pointer text-darkColor dark:text-lightColor'
+          className='block md:hidden w-5 h-5 cursor-pointer text-gray-900 dark:text-white'
           onClick={handleSidebar}
         />
       </div>
@@ -92,8 +92,8 @@ const NavLink = ({
     <div
       className={`capitalize px-4 py-4 rounded-md flex items-center gap-3 cursor-pointer ${
         isActive
-          ? 'bg-gray-100 text-darkColor dark:bg-gray-700 dark:text-lightColor'
-          : 'bg-lightColor text-gray-400 dark:bg-gray-800'
+          ? 'bg-gray-100 text-gray-900 dark:bg-gray-700 dark:text-white'
+          : 'bg-white text-gray-400 dark:bg-gray-800'
       } `}
       onClick={() => handleNavLink(url)}
     >
