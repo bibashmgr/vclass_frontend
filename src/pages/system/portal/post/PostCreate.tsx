@@ -7,6 +7,7 @@ import FormLayout from '../../../../layouts/crud_layouts/FormLayout';
 // components
 import InputField from '../../../../components/global/form/InputField';
 import SelectField from '../../../../components/global/form/SelectField';
+import DatePicker from '../../../../components/global/form/DatePicker';
 
 // context
 import { useUserInfo } from '../../../../context/UserInfoContext';
@@ -139,50 +140,51 @@ const PostCreate = () => {
   };
 
   return (
-    <div className='pt-4'>
+    <div className="pt-4">
       <FormLayout
-        layoutTitle='Create Post'
-        layoutSubtitle='Fill out the forms'
+        layoutTitle="Create Post"
+        layoutSubtitle="Fill out the forms"
         handleSubmit={handleCreatePost}
         isEdit={false}
       >
         <InputField
           hasLabel
-          type='text'
-          label='Title'
-          name='title'
+          type="text"
+          label="Title"
+          name="title"
           value={post?.title}
           handleChange={handleInputField}
           isRequired={true}
         />
         <SelectField
           hasLabel
-          label='Category'
-          name='category'
+          label="Category"
+          name="category"
           value={post?.category}
           handleSelect={handleInputField}
           options={getCategoryOptions()}
           isRequired={true}
         />
+        <DatePicker />
         <InputField
           hasLabel
-          label='Description'
-          type='textarea'
-          name='desc'
+          label="Description"
+          type="textarea"
+          name="desc"
           value={post?.desc}
           handleChange={handleInputField}
-          extraStyling='lg:col-span-2'
+          extraStyling="lg:col-span-2"
           isRequired={false}
         />
-        <div className='flex flex-col gap-2 lg:col-span-2'>
+        <div className="flex flex-col gap-2 lg:col-span-2">
           <label
-            htmlFor='files'
-            className='text-gray-400 dark:text-gray-400 text-sm font-semibold'
+            htmlFor="files"
+            className="text-gray-400 dark:text-gray-400 text-sm font-semibold"
           >
             Files:
           </label>
           {errors.files && (
-            <p className='text-xs text-red-500 font-normal'>{errors.files}</p>
+            <p className="text-xs text-red-500 font-normal">{errors.files}</p>
           )}
           <div
             className={`relative flex flex-col items-center justify-center w-full h-48 border-2 border-gray-300 dark:border-gray-600 border-dashed rounded-lg bg-gray-50 dark:bg-gray-700 ${
@@ -191,18 +193,18 @@ const PostCreate = () => {
             } py-6 px-6`}
           >
             {files?.length === 0 ? (
-              <div className='flex flex-col items-center justify-center'>
-                <BsFillCloudArrowUpFill className='w-10 h-10 mb-3 text-gray-400' />
-                <p className='mb-2 text-sm text-gray-500 dark:text-gray-400'>
-                  <span className='font-semibold'>Click to upload</span> or drag
+              <div className="flex flex-col items-center justify-center">
+                <BsFillCloudArrowUpFill className="w-10 h-10 mb-3 text-gray-400" />
+                <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                  <span className="font-semibold">Click to upload</span> or drag
                   and drop
                 </p>
-                <p className='text-xs text-gray-500 dark:text-gray-400'>
+                <p className="text-xs text-gray-500 dark:text-gray-400">
                   (PNG, JPG or PDF)
                 </p>
               </div>
             ) : (
-              <div className='flex gap-4 flex-wrap'>
+              <div className="flex gap-4 flex-wrap">
                 {files.map((file, index) => {
                   return (
                     <div
@@ -210,23 +212,23 @@ const PostCreate = () => {
                       className={`flex flex-col gap-1 justify-center items-center relative px-2 py-2  text-gray-400 dark:text-gray-300 hover:text-gray-200 dark:hover:text-white rounded-lg cursor-pointer hover:bg-red-300`}
                       onClick={() => handleRemoveFile(index)}
                     >
-                      <BsFileEarmarkFill className='w-14 h-14' />
-                      <p className='text-xs font-normal'>{file.originalname}</p>
+                      <BsFileEarmarkFill className="w-14 h-14" />
+                      <p className="text-xs font-normal">{file.originalname}</p>
                     </div>
                   );
                 })}
               </div>
             )}
             <input
-              id='files'
-              type='file'
+              id="files"
+              type="file"
               className={`${
                 files.length === 0
                   ? 'absolute top-0 left-0 right-0 bottom-0 opacity-0 cursor-pointer'
                   : 'hidden'
               }`}
               multiple
-              accept='image/png, image/jpg, image/jpeg, .pdf'
+              accept="image/png, image/jpg, image/jpeg, .pdf"
               onChange={handleFiles}
             />
           </div>

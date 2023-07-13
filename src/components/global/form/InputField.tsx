@@ -30,12 +30,57 @@ const InputField = ({
       {hasLabel && (
         <label
           htmlFor={name}
-          className='text-gray-400 dark:text-gray-400 text-sm font-semibold'
+          className="text-gray-400 dark:text-gray-400 text-sm font-semibold"
         >
           {label}:
         </label>
       )}
-      {type === 'text' && (
+      {type === 'textarea' ? (
+        <textarea
+          id={name}
+          name={name}
+          value={value}
+          placeholder={placeHolder}
+          onChange={handleChange}
+          required={isRequired}
+          rows={4}
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 resize-none"
+        />
+      ) : type === 'number' ? (
+        <input
+          id={name}
+          name={name}
+          value={value}
+          type={type}
+          placeholder={placeHolder}
+          onChange={handleChange}
+          min="1"
+          required={isRequired}
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md  focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        />
+      ) : type === 'date' ? (
+        <input
+          type={type}
+          id={name}
+          value={value}
+          placeholder={placeHolder}
+          onChange={handleChange}
+          required={isRequired}
+          disabled={isDisabled}
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md  focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 disabled:opacity-75 disabled:cursor-not-allowed"
+        />
+      ) : type === 'time' ? (
+        <input
+          type={type}
+          id={name}
+          value={value}
+          placeholder={placeHolder}
+          onChange={handleChange}
+          required={isRequired}
+          disabled={isDisabled}
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md  focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 disabled:opacity-75 disabled:cursor-not-allowed"
+        />
+      ) : (
         <input
           id={name}
           name={name}
@@ -45,32 +90,7 @@ const InputField = ({
           onChange={handleChange}
           required={isRequired}
           disabled={isDisabled}
-          className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md  focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 disabled:opacity-75 disabled:cursor-not-allowed'
-        />
-      )}
-      {type === 'number' && (
-        <input
-          id={name}
-          name={name}
-          value={value}
-          type={type}
-          placeholder={placeHolder}
-          onChange={handleChange}
-          min='1'
-          required={isRequired}
-          className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md  focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
-        />
-      )}
-      {type === 'textarea' && (
-        <textarea
-          id={name}
-          name={name}
-          value={value}
-          placeholder={placeHolder}
-          onChange={handleChange}
-          required={isRequired}
-          rows={4}
-          className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 resize-none'
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md  focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 disabled:opacity-75 disabled:cursor-not-allowed"
         />
       )}
     </div>
