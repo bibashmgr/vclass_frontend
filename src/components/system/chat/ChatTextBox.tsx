@@ -1,4 +1,4 @@
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 // schemas
 import { messageSchema } from '../../../utils/schemas';
@@ -41,7 +41,7 @@ const ChatTextBox = ({ message, isMine, isInfoHide }: propsType) => {
                 {isMine ? 'You' : message.user.name.split(' ')[0]}
               </p>
               <p className='text-gray-400 dark:text-gray-400 text-[10px] font-normal'>
-                {moment(message.createdAt.toString()).format('h:mm A')}
+                {dayjs(message.createdAt.toString()).format('hh:mm A')}
               </p>
             </div>
           )}

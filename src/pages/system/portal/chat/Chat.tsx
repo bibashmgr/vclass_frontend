@@ -1,6 +1,6 @@
-import React, { FormEvent, useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 // handlers
 import { apiHandler } from '../../../../handlers/apiHandler';
@@ -93,8 +93,8 @@ const Chat = () => {
   };
 
   const isOneDayApart = (date1: Date, date2: Date) => {
-    let day1 = moment(date1).format('Do');
-    let day2 = moment(date2).format('Do');
+    let day1 = dayjs(date1).format('D');
+    let day2 = dayjs(date2).format('D');
 
     return day1 !== day2;
   };
@@ -103,7 +103,7 @@ const Chat = () => {
     setText(e.target.value);
   };
 
-  const handleSend = async (e: FormEvent) => {
+  const handleSend = async (e: React.FormEvent) => {
     e.preventDefault();
     const res = await apiHandler(
       'post',
@@ -118,7 +118,6 @@ const Chat = () => {
     );
 
     if (res.success) {
-      console.log(res.data);
       setMessages([
         ...messages,
         {
@@ -164,7 +163,9 @@ const Chat = () => {
                     )) && (
                     <div className='flex justify-center items-center mt-4 mb-2'>
                       <p className='text-gray-900 dark:text-white text-[10px] font-normal border border-gray-300 dark:border-gray-500 rounded-full px-4 py-1.5'>
-                        {moment(message.createdAt).format('ll')}
+                        {dayjs(message?.createdAt?.toString()).format(
+                          'MMM DD, YYYY'
+                        )}
                       </p>
                     </div>
                   )}

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 // schemas
 import { postSchema } from '../../../utils/schemas';
@@ -86,7 +86,7 @@ const PostCard = ({
               }: ${post.title}`}
             </p>
             <p className='text-gray-400 dark:text-gray-400 text-xs font-normal'>
-              {moment(post.createdAt.toString()).format('ll')}
+              {dayjs(post?.createdAt.toString()).format('MMM DD, YYYY')}
             </p>
           </div>
         </div>

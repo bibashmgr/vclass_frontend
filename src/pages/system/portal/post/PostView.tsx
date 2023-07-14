@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 // schemas
 import {
@@ -198,47 +198,57 @@ const PostView = () => {
         </div>
       ) : (
         <div className='py-4'>
-          <div className='flex justify-between items-center pb-4 border-b border-gray-300 dark:border-gray-600'>
-            <div className='flex flex-col gap-1'>
-              <p className='text-gray-900 dark:text-white text-2xl font-semibold'>
-                {post?.title}
-              </p>
-              <div className='flex gap-2 justify-start text-gray-400 dark:text-gray-400 text-xs font-normal'>
-                <p>
-                  {userInfoContext?.userInfo?._id === post?.user._id
-                    ? 'You'
-                    : post?.user.name}
+          <div className='pb-4 border-b border-gray-300 dark:border-gray-600'>
+            <div className='flex justify-between items-center '>
+              <div className='flex flex-col gap-1'>
+                <p className='text-gray-900 dark:text-white text-2xl font-semibold'>
+                  {post?.title}
                 </p>
-                <p>·</p>
-                <p>{moment(post?.createdAt.toString()).format('ll')}</p>
+                <div className='flex gap-2 justify-start text-gray-400 dark:text-gray-400 text-xs font-normal'>
+                  <p>
+                    {userInfoContext?.userInfo?._id === post?.user._id
+                      ? 'You'
+                      : post?.user.name}
+                  </p>
+                  <p>·</p>
+                  <p>
+                    {dayjs(post?.createdAt.toString()).format('MMM DD, YYYY')}
+                  </p>
+                </div>
               </div>
-            </div>
-            {userInfoContext?.userInfo?._id === post?.user._id && (
-              <Popover
-                parentElement={
-                  <button
-                    type='button'
-                    className='inline-flex justify-center p-2 text-gray-500 rounded-full cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600'
-                    title='More'
+              {userInfoContext?.userInfo?._id === post?.user._id && (
+                <Popover
+                  parentElement={
+                    <button
+                      type='button'
+                      className='inline-flex justify-center p-2 text-gray-500 rounded-full cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600'
+                      title='More'
+                    >
+                      <FiMoreVertical className='w-5 h-5' />
+                    </button>
+                  }
+                >
+                  <div
+                    className='px-4 py-2.5 hover:opacity-75 cursor-pointer'
+                    onClick={handleEdit}
                   >
-                    <FiMoreVertical className='w-5 h-5' />
-                  </button>
-                }
-              >
-                <div
-                  className='px-4 py-2.5 hover:opacity-75 cursor-pointer'
-                  onClick={handleEdit}
-                >
-                  Edit
-                </div>
-                <div
-                  className='px-4 py-2.5 hover:opacity-75 cursor-pointer'
-                  onClick={handleDelete}
-                >
-                  Delete
-                </div>
-              </Popover>
-            )}
+                    Edit
+                  </div>
+                  <div
+                    className='px-4 py-2.5 hover:opacity-75 cursor-pointer'
+                    onClick={handleDelete}
+                  >
+                    Delete
+                  </div>
+                </Popover>
+              )}
+            </div>
+            <div className='mt-1.5 text-gray-400 dark:text-gray-400 text-xs font-normal flex gap-2'>
+              <p>Due Date:</p>
+              <p>
+                {dayjs(post?.dueDate.toString()).format('MMM DD, YYYY hh:mm A')}
+              </p>
+            </div>
           </div>
           <div className='py-4 flex flex-col gap-6'>
             {post?.desc && (

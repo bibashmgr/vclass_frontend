@@ -4,12 +4,14 @@ type propsType = {
   parentElement: React.ReactNode;
   children: React.ReactNode;
   popDirection?: 'left' | 'right';
+  isDisabled?: boolean;
 };
 
 const Popover = ({
   parentElement,
   children,
   popDirection = 'right',
+  isDisabled = false,
 }: propsType) => {
   const popoverRef = useRef<HTMLDivElement>(null);
   const [isPopover, setIsPopover] = useState(false);
@@ -37,7 +39,12 @@ const Popover = ({
   }, []);
 
   return (
-    <div className='relative' ref={popoverRef}>
+    <div
+      className={`relative ${
+        isDisabled ? 'pointer-events-none' : 'pointer-events-auto'
+      }`}
+      ref={popoverRef}
+    >
       <div onClick={handlePopover}>{parentElement}</div>
       <div
         className={`absolute z-10 ${
