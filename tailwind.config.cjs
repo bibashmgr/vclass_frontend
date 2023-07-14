@@ -1,6 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  content: [
+    './index.html',
+    './src/**/*.{js,ts,jsx,tsx}',
+    './node_modules/react-tailwindcss-datepicker/dist/index.esm.js',
+  ],
   theme: {
     extend: {
       screens: {
@@ -20,29 +24,3 @@ module.exports = {
   plugins: [],
   darkMode: 'class',
 };
-
-/* 
-  colors: {
-    info: {
-      blue-500
-    },
-    failure: {
-      red-500
-    },
-    success: {
-      emerald-500
-    },
-    warn: {
-      yellow-300
-    },
-    neutral: {
-      
-    }
-    light:{
-      white
-    }
-    dark: {
-      gray-900
-    }
-  }
-*/
