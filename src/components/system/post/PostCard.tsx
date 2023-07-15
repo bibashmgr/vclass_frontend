@@ -37,6 +37,11 @@ const PostCard = ({
     navigate(`${post._id}`);
   };
 
+  const handleViewStats = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    navigate(`${post._id}/stats`);
+  };
+
   const handleEdit = (e: React.MouseEvent) => {
     e.stopPropagation();
     navigate(`${post._id}/edit`);
@@ -114,6 +119,14 @@ const PostCard = ({
             >
               Delete
             </div>
+            {post?.category === 'assignment' && (
+              <div
+                className='px-4 py-2.5 hover:opacity-75 cursor-pointer'
+                onClick={handleViewStats}
+              >
+                View Stats
+              </div>
+            )}
           </Popover>
         )}
       </div>

@@ -79,6 +79,10 @@ const PostView = () => {
     window.open(`${config.SERVER_BASE_URL}/files/${fileName}`, '_blank');
   };
 
+  const handleViewStats = (e: React.MouseEvent) => {
+    navigate('stats');
+  };
+
   const handleEdit = (e: React.MouseEvent) => {
     navigate('edit');
   };
@@ -240,15 +244,27 @@ const PostView = () => {
                   >
                     Delete
                   </div>
+                  {post?.category === 'assignment' && (
+                    <div
+                      className='px-4 py-2.5 hover:opacity-75 cursor-pointer'
+                      onClick={handleViewStats}
+                    >
+                      View Stats
+                    </div>
+                  )}
                 </Popover>
               )}
             </div>
-            <div className='mt-1.5 text-gray-400 dark:text-gray-400 text-xs font-normal flex gap-2'>
-              <p>Due Date:</p>
-              <p>
-                {dayjs(post?.dueDate.toString()).format('MMM DD, YYYY hh:mm A')}
-              </p>
-            </div>
+            {post?.category === 'assignment' && (
+              <div className='mt-1.5 text-gray-400 dark:text-gray-400 text-xs font-normal flex gap-2'>
+                <p>Due Date:</p>
+                <p>
+                  {dayjs(post?.dueDate.toString()).format(
+                    'MMM DD, YYYY hh:mm A'
+                  )}
+                </p>
+              </div>
+            )}
           </div>
           <div className='py-4 flex flex-col gap-6'>
             {post?.desc && (
