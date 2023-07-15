@@ -35,7 +35,7 @@ const PostCreate = () => {
     desc: '',
     title: '',
     category: '',
-    credit: NaN,
+    credit: '',
     files: [],
   });
   const [date, setDate] = useState<DateValueType>();
@@ -144,7 +144,7 @@ const PostCreate = () => {
           desc: '',
           title: '',
           category: '',
-          credit: NaN,
+          credit: '',
           files: [],
         });
         setDate({
