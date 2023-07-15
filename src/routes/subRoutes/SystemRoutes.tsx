@@ -8,8 +8,10 @@ import Batch from '../../pages/system/Batch';
 import Chat from '../../pages/system/portal/chat/Chat';
 import Post from '../../pages/system/portal/post/Post';
 import PostCreate from '../../pages/system/portal/post/PostCreate';
-import PostEdit from '../../pages/system/portal/post/PostEdit';
+import PostStats from '../../pages/system/portal/post/PostStats';
 import PostView from '../../pages/system/portal/post/PostView';
+import PostSingleStats from '../../pages/system/portal/post/PostSingleStats';
+import PostEdit from '../../pages/system/portal/post/PostEdit';
 import Attendance from '../../pages/system/portal/attendance/Attendance';
 
 // pages: public
@@ -45,7 +47,9 @@ const SystemRoutes = () => {
           <Route path='chat' element={<Chat />} />
           <Route path='post' element={<Post />} />
           <Route path='post/create' element={<PostCreate />} />
+          <Route path='post/stats' element={<PostStats />} />
           <Route path='post/:postId' element={<PostView />} />
+          <Route path='post/:postId/stats' element={<PostSingleStats />} />
           <Route path='post/:postId/edit' element={<PostEdit />} />
           <Route path='attendance' element={<Attendance />} />
         </Route>
