@@ -15,6 +15,7 @@ import { useUserInfo } from '../../../../context/UserInfoContext';
 
 // icons
 import { BsFileEarmarkFill, BsFillCloudArrowUpFill } from 'react-icons/bs';
+import { IoCalendar } from 'react-icons/io5';
 
 // handlers
 import { apiHandler } from '../../../../handlers/apiHandler';
@@ -23,8 +24,8 @@ import { showMessage } from '../../../../handlers/messageHandler';
 // schemas
 import { fileSchema } from '../../../../utils/schemas';
 
-// icons
-import { IoCalendar } from 'react-icons/io5';
+// utils
+import { trimmer } from '../../../../utils/trimmer';
 
 const PostCreate = () => {
   const params = useParams();
@@ -314,7 +315,9 @@ const PostCreate = () => {
                       onClick={() => handleRemoveFile(index)}
                     >
                       <BsFileEarmarkFill className='w-14 h-14' />
-                      <p className='text-xs font-normal'>{file.originalname}</p>
+                      <p className='text-xs font-normal'>
+                        {trimmer(file.originalname, 6, '..')}
+                      </p>
                     </div>
                   );
                 })}

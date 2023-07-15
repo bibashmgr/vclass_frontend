@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import Datepicker from 'react-tailwindcss-datepicker';
+import { DateValueType } from 'react-tailwindcss-datepicker/dist/types';
+import dayjs from 'dayjs';
 
 // layouts
 import FormLayout from '../../../../layouts/crud_layouts/FormLayout';
@@ -13,6 +16,7 @@ import { useUserInfo } from '../../../../context/UserInfoContext';
 
 // icons
 import { BsFileEarmarkFill, BsFillCloudArrowUpFill } from 'react-icons/bs';
+import { IoCalendar } from 'react-icons/io5';
 
 // handlers
 import { apiHandler } from '../../../../handlers/apiHandler';
@@ -20,6 +24,9 @@ import { showMessage } from '../../../../handlers/messageHandler';
 
 // schemas
 import { fileSchema, postFileSchema } from '../../../../utils/schemas';
+
+// icons
+import { trimmer } from '../../../../utils/trimmer';
 
 const PostEdit = () => {
   const params = useParams();
@@ -29,16 +36,23 @@ const PostEdit = () => {
     desc: '',
     title: '',
     category: '',
+    credit: NaN,
     files: [],
   });
   const [files, setFiles] = useState<postFileSchema[]>([]);
+  const [date, setDate] = useState<DateValueType>();
   const [isLoading, setIsLoading] = useState(true);
   const [errors, setErrors] = useState({
     files: '',
+    date: '',
   });
 
   const handleInputField = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPost((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleDate = (newValue: any) => {
+    setDate(newValue);
   };
 
   const handleFiles = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -98,21 +112,49 @@ const PostEdit = () => {
   const handleUpdatePost = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const res = await apiHandler('patch', `posts/${params.postId}`, post);
+    let err = [];
 
-    if (res.success) {
-      showMessage(res.message, 'success');
-      setPost({
-        desc: res.data.desc,
-        title: res.data.title,
-        category: res.data.category,
-        files: res.data.files.map((file: postFileSchema) => {
-          return file._id;
-        }),
+    if (post.category === 'assignment') {
+      if (!date?.startDate) {
+        setErrors((prev) => ({
+          ...prev,
+          date: 'Required',
+        }));
+        err.push('Date is Required');
+      }
+    }
+
+    if (err.length === 0) {
+      let dueDate = date?.startDate?.toString() + ' ' + '11:59 AM';
+
+      const res = await apiHandler('patch', `posts/${params.postId}`, {
+        ...post,
+        dueDate: dueDate,
       });
-      setFiles(res.data.files);
-    } else {
-      showMessage(res.message, 'failure');
+
+      if (res.success) {
+        showMessage(res.message, 'success');
+        setPost({
+          desc: res.data.desc,
+          title: res.data.title,
+          category: res.data.category,
+          credit: res.data.credit,
+          files: res.data.files.map((file: postFileSchema) => {
+            return file._id;
+          }),
+        });
+        setDate({
+          startDate: res.data.dueDate,
+          endDate: res.data.dueDate,
+        });
+        setFiles(res.data.files);
+        setErrors({
+          files: '',
+          date: '',
+        });
+      } else {
+        showMessage(res.message, 'failure');
+      }
     }
   };
 
@@ -146,9 +188,14 @@ const PostEdit = () => {
         desc: res.data.desc,
         title: res.data.title,
         category: res.data.category,
+        credit: res.data.credit,
         files: res.data.files.map((file: postFileSchema) => {
           return file._id;
         }),
+      });
+      setDate({
+        startDate: dayjs(res.data.dueDate).format('YYYY-MM-DD'),
+        endDate: dayjs(res.data.dueDate).format('YYYY-MM-DD'),
       });
       setFiles(res.data.files);
       setIsLoading(false);
@@ -187,6 +234,63 @@ const PostEdit = () => {
           handleSelect={handleInputField}
           options={getCategoryOptions()}
           isRequired={true}
+          isDisabled={true}
+        />
+        <div className='flex flex-col gap-2'>
+          <div className='flex gap-1 items-center'>
+            <label
+              htmlFor='date'
+              className={` ${
+                post.category !== 'assignment'
+                  ? 'text-gray-400/40 '
+                  : 'text-gray-400'
+              } text-sm font-semibold`}
+            >
+              Date:
+            </label>
+            {errors.date && (
+              <p className='text-xs text-red-500 font-normal'>{errors.date}</p>
+            )}
+          </div>
+          <Datepicker
+            value={date!}
+            onChange={handleDate}
+            asSingle={true}
+            useRange={false}
+            primaryColor='blue'
+            popoverDirection='down'
+            placeholder='Select date'
+            toggleIcon={(open) => (
+              <IoCalendar
+                className={`w-5 h-5 ${
+                  post.category !== 'assignment'
+                    ? 'text-gray-500/50 dark:text-gray-400/50'
+                    : 'text-gray-500 dark:text-gray-400'
+                }`}
+              />
+            )}
+            minDate={new Date(Date.now() + 24 * 60 * 60 * 1000)}
+            readOnly={true}
+            disabled={post.category !== 'assignment'}
+            classNames={{
+              input(p) {
+                return 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md  focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 disabled:cursor-not-allowed disabled:opacity-50 relative';
+              },
+              toggleButton(p) {
+                return 'absolute top-1/2 right-3 -translate-y-1/2 text-gray-400';
+              },
+            }}
+          />
+        </div>
+        <InputField
+          hasLabel
+          label='Credit'
+          type='number'
+          name='credit'
+          value={post?.credit}
+          handleChange={handleInputField}
+          isRequired={post.category === 'assignment'}
+          isDisabled={post.category !== 'assignment'}
         />
         <InputField
           hasLabel
@@ -236,7 +340,7 @@ const PostEdit = () => {
                     >
                       <BsFileEarmarkFill className='w-14 h-14' />
                       <p className='text-xs font-normal'>
-                        {file.filename.split('_')[1]}
+                        {trimmer(file.filename.split('_')[1], 6, '..')}
                       </p>
                     </div>
                   );

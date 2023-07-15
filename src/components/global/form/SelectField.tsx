@@ -17,6 +17,7 @@ type propsType = {
   options: optionType[];
   placeHolder?: string;
   isRequired?: boolean;
+  isDisabled?: boolean;
 };
 
 const SelectField = ({
@@ -27,26 +28,30 @@ const SelectField = ({
   handleSelect,
   options,
   placeHolder = 'Select an option',
-  isRequired = false,
+  isRequired = true,
+  isDisabled = false,
 }: propsType) => {
   return (
     <div className='flex flex-col gap-2'>
       {hasLabel && (
         <label
           htmlFor={name}
-          className='text-gray-400 dark:text-gray-400 text-sm font-semibold'
+          className={` ${
+            isDisabled ? 'text-gray-400/40 ' : 'text-gray-400'
+          } text-sm font-semibold`}
         >
           {label}:
         </label>
       )}
       <div className='relative'>
         <select
-          className='bg-gray-50 border border-gray-300 text-gray-400 text-sm rounded-md placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 cursor-pointer appearance-none invalid:text-gray-700 invalid:dark:text-gray-400'
+          className='bg-gray-50 border border-gray-300 text-gray-400 text-sm rounded-md placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 cursor-pointer appearance-none invalid:text-gray-700 invalid:dark:text-gray-400 disabled:opacity-50 disabled:cursor-not-allowed'
           id={name}
           name={name}
           value={value}
           onChange={handleSelect}
           required={isRequired}
+          disabled={isDisabled}
         >
           <option value='' disabled>
             {placeHolder}

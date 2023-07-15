@@ -19,6 +19,7 @@ type propsType = {
   faculty: any;
   setFaculty: React.Dispatch<React.SetStateAction<any>>;
   tabIndex: number;
+  isDisabled?: boolean;
 };
 
 const MultiSelectField = ({
@@ -31,6 +32,7 @@ const MultiSelectField = ({
   faculty,
   setFaculty,
   tabIndex,
+  isDisabled = false,
 }: propsType) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -97,7 +99,9 @@ const MultiSelectField = ({
       {hasLabel && (
         <label
           htmlFor={name}
-          className='text-gray-400 dark:text-gray-400 text-sm font-semibold'
+          className={` ${
+            isDisabled ? 'text-gray-400/40 ' : 'text-gray-400'
+          } text-sm font-semibold`}
         >
           {label}:
         </label>

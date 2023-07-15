@@ -30,7 +30,9 @@ const InputField = ({
       {hasLabel && (
         <label
           htmlFor={name}
-          className='text-gray-400 dark:text-gray-400 text-sm font-semibold'
+          className={` ${
+            isDisabled ? 'text-gray-400/40 ' : 'text-gray-400'
+          } text-sm font-semibold`}
         >
           {label}:
         </label>
