@@ -1,26 +1,26 @@
-import React from 'react';
-import { IconType } from 'react-icons';
-
 type propsType = {
   title: string;
-  hasIcon: boolean;
-  Icon: IconType;
-  bgColor?: string;
-  color?: string;
+  colorScheme?: string;
+  isSmall?: boolean;
 };
 
-const Badge = ({
-  title,
-  hasIcon,
-  Icon,
-  bgColor = 'bg-blue-100 dark:bg-gray-700',
-  color = 'text-blue-800 dark:text-blue-400',
-}: propsType) => {
+const Badge = ({ title, colorScheme = 'info', isSmall = false }: propsType) => {
+  const getColorScheme = (color: string) => {
+    if (color === 'success' || color === 'done')
+      return 'text-emerald-600 bg-emerald-200';
+    if (color === 'failure' || color === 'missing')
+      return 'text-red-600 bg-red-200';
+    if (color === 'warn' || color === 'late')
+      return 'text-yellow-600 bg-yellow-200';
+
+    return 'text-blue-600 bg-blue-200';
+  };
   return (
     <div
-      className={`${color} ${bgColor} text-xs font-medium inline-flex gap-1 items-center px-2.5 py-0.5 rounded-md`}
+      className={`${getColorScheme(colorScheme)} ${
+        isSmall ? 'text-[10px] px-1.5 py-1.5' : 'text-xs px-2 py-2'
+      } font-bold inline-flex gap-1 items-center  rounded-lg capitalize`}
     >
-      {hasIcon && <Icon className='w-3 h-3' />}
       {title}
     </div>
   );
