@@ -76,3 +76,28 @@ export type postSchema = {
   credit: number | null;
   createdAt: Date;
 };
+
+export type postStats = {
+  user: {
+    name: string;
+    email: string;
+  };
+  posts: [
+    {
+      title: string;
+      credit: number;
+      status: string;
+    }
+  ];
+  stats: {
+    done: number;
+    late: number;
+    missing: number;
+  };
+};
+
+export type postSingleStats = {
+  name: string;
+  email: string;
+  status: string;
+};
