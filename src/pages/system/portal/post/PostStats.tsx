@@ -10,8 +10,12 @@ import { postStats } from '../../../../utils/schemas';
 
 // handlers
 import { apiHandler } from '../../../../handlers/apiHandler';
-import IconButton from '../../../../components/global/button/IconButton';
+
+// icons
 import { BiChevronDown, BiChevronUp } from 'react-icons/bi';
+
+// components
+import IconButton from '../../../../components/global/button/IconButton';
 import Badge from '../../../../components/global/Badge';
 
 const PostStats = () => {
@@ -23,8 +27,12 @@ const PostStats = () => {
   const [statsIndex, setStatsIndex] = useState<number>(0);
 
   const handleOpenStats = (index: number) => {
-    setStatsIndex(index);
-    setIsStatsOpen(!isStatsOpen);
+    if (index === statsIndex) {
+      setIsStatsOpen(!isStatsOpen);
+    } else {
+      setStatsIndex(index);
+      setIsStatsOpen(true);
+    }
   };
 
   const getPostStats = async () => {
