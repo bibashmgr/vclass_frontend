@@ -4,6 +4,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 // components
 import Button from '../../components/global/button/Button';
 import { getColorMode } from '../../handlers/storageHandler';
+import IconButton from '../../components/global/button/IconButton';
+import { IoChevronBack } from 'react-icons/io5';
 
 type propsType = {
   children: React.ReactNode;
@@ -11,8 +13,12 @@ type propsType = {
   layoutTitle: string;
   layoutSubtitle: string;
   hasCreateBtn?: boolean;
+  hasBackBtn?: boolean;
   isEmpty: boolean;
   isLoading: boolean;
+  hasAction?: boolean;
+  hasMultipleBtns?: boolean;
+  multipleBtns?: React.ReactNode;
 };
 
 const ListLayout = ({
@@ -23,6 +29,10 @@ const ListLayout = ({
   isEmpty,
   isLoading,
   hasCreateBtn = true,
+  hasBackBtn = false,
+  hasAction = true,
+  hasMultipleBtns = false,
+  multipleBtns = <></>,
 }: propsType) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -34,15 +44,29 @@ const ListLayout = ({
   return (
     <div className='shadow-light dark:shadow-none rounded-lg bg-white dark:bg-gray-800 px-6 py-6 flex flex-col gap-6'>
       <div className='flex justify-between items-center'>
-        <div>
-          <p className='text-gray-900 dark:text-white text-lg font-semibold'>
-            {layoutTitle}
-          </p>
-          <p className='text-gray-400 dark:text-gray-400 text-xs font-normal'>
-            {layoutSubtitle}
-          </p>
+        <div className='flex gap-4 items-center'>
+          {hasBackBtn && (
+            <IconButton
+              title='Go Back'
+              handleClick={() => navigate(-1)}
+              Icon={IoChevronBack}
+            />
+          )}
+          <div>
+            <p className='text-gray-900 dark:text-white text-lg font-semibold'>
+              {layoutTitle}
+            </p>
+            <p className='text-gray-400 dark:text-gray-400 text-xs font-normal'>
+              {layoutSubtitle}
+            </p>
+          </div>
         </div>
-        {hasCreateBtn && <Button handleClick={handleAddSubject}>Create</Button>}
+        <div className='flex gap-4'>
+          {hasCreateBtn && (
+            <Button handleClick={handleAddSubject}>Create</Button>
+          )}
+          {hasMultipleBtns && multipleBtns}
+        </div>
       </div>
       <div className='relative block overflow-x-auto whitespace-nowrap'>
         <table className='w-full text-sm text-left text-gray-500 dark:text-gray-400'>
@@ -53,14 +77,24 @@ const ListLayout = ({
               </th>
               {tableHeader.map((header, headerIndex) => {
                 return (
-                  <th key={headerIndex + 1} scope='col' className='px-6 py-3'>
+                  <th
+                    key={headerIndex + 1}
+                    scope='col'
+                    className={`px-6 py-3 ${
+                      !hasAction &&
+                      tableHeader.length === headerIndex + 1 &&
+                      'rounded-r-lg'
+                    }`}
+                  >
                     {header}
                   </th>
                 );
               })}
-              <th scope='col' className='px-6 py-3 rounded-r-lg'>
-                Action
-              </th>
+              {hasAction && (
+                <th scope='col' className='px-6 py-3 rounded-r-lg'>
+                  Action
+                </th>
+              )}
             </tr>
           </thead>
           <tbody>
