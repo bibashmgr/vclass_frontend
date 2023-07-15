@@ -9,7 +9,6 @@ import FormLayout from '../../../../layouts/crud_layouts/FormLayout';
 // components
 import InputField from '../../../../components/global/form/InputField';
 import SelectField from '../../../../components/global/form/SelectField';
-import TimePicker from '../../../../components/global/form/TimePicker';
 
 // context
 import { useUserInfo } from '../../../../context/UserInfoContext';
@@ -35,15 +34,14 @@ const PostCreate = () => {
     desc: '',
     title: '',
     category: '',
+    credit: NaN,
     files: [],
   });
   const [date, setDate] = useState<DateValueType>();
-  const [time, setTime] = useState<string>('');
   const [files, setFiles] = useState<fileSchema[]>([]);
 
   const [errors, setErrors] = useState({
     date: '',
-    time: '',
     files: '',
   });
 
@@ -111,7 +109,6 @@ const PostCreate = () => {
   const handleCreatePost = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const isValid = false;
     let err = [];
 
     if (post.category === 'assignment') {
@@ -122,18 +119,10 @@ const PostCreate = () => {
         }));
         err.push('Date is Required');
       }
-
-      if (time === '') {
-        setErrors((prev) => ({
-          ...prev,
-          time: 'Required',
-        }));
-        err.push('Time is Required');
-      }
     }
 
     if (err.length === 0) {
-      let dueDate = date?.startDate?.toString() + ' ' + time;
+      let dueDate = date?.startDate?.toString() + ' ' + '11:59 AM';
 
       const res = await apiHandler(
         'post',
@@ -154,16 +143,23 @@ const PostCreate = () => {
           desc: '',
           title: '',
           category: '',
+          credit: NaN,
           files: [],
         });
+        setDate({
+          startDate: null,
+          endDate: null,
+        });
         setFiles([]);
+        setErrors({
+          files: '',
+          date: '',
+        });
       } else {
         showMessage(res.message, 'failure');
       }
     }
   };
-
-  const createPost = async () => {};
 
   const getCategoryOptions = () => {
     if (userInfoContext?.userInfo?.role === 'student') {
@@ -213,7 +209,6 @@ const PostCreate = () => {
           options={getCategoryOptions()}
           isRequired={true}
         />
-
         <div className='flex flex-col gap-2'>
           <div className='flex gap-1 items-center'>
             <label
@@ -252,7 +247,7 @@ const PostCreate = () => {
             disabled={post.category !== 'assignment'}
             classNames={{
               input(p) {
-                return 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md  focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 disabled:opacity-40 relative';
+                return 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md  focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 disabled:cursor-not-allowed disabled:opacity-50 relative';
               },
               toggleButton(p) {
                 return 'absolute top-1/2 right-3 -translate-y-1/2 text-gray-400';
@@ -260,10 +255,14 @@ const PostCreate = () => {
             }}
           />
         </div>
-        <TimePicker
-          value={time}
-          setValue={setTime}
-          error={errors.time}
+        <InputField
+          hasLabel
+          label='Credit'
+          type='number'
+          name='credit'
+          value={post?.credit}
+          handleChange={handleInputField}
+          isRequired={post.category === 'assignment'}
           isDisabled={post.category !== 'assignment'}
         />
         <InputField

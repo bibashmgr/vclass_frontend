@@ -72,6 +72,7 @@ export type postSchema = {
   files: postFileSchema[];
   submittedBy: postSchema[];
   assignmentRef: string | null;
-  dueDate: Date;
+  dueDate: Date | null;
+  credit: number | null;
   createdAt: Date;
 };

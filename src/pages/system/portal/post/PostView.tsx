@@ -257,11 +257,12 @@ const PostView = () => {
             </div>
             {post?.category === 'assignment' && (
               <div className='mt-1.5 text-gray-400 dark:text-gray-400 text-xs font-normal flex gap-2'>
-                <p>Due Date:</p>
+                <p>{post?.credit} points</p>
+                <p>·</p>
                 <p>
-                  {dayjs(post?.dueDate.toString()).format(
-                    'MMM DD, YYYY hh:mm A'
-                  )}
+                  {`Due: ${dayjs(post?.dueDate?.toString()).format(
+                    'MMM DD, YYYY'
+                  )}`}
                 </p>
               </div>
             )}
