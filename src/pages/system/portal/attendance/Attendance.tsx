@@ -125,19 +125,19 @@ const Attendance = () => {
             <StatusCard
               Icon={TiGroup}
               colorScheme="success"
-              title={attendance?.totalPresents.toString() as string}
+              title={numberTrimmer(attendance?.totalPresents!)}
               subtitle="Total Present Students"
             />
             <StatusCard
               Icon={TiGroup}
               colorScheme="failure"
-              title={attendance?.totalAbsents.toString() as string}
+              title={numberTrimmer(attendance?.totalAbsents!)}
               subtitle="Total Absent Students"
             />
             <StatusCard
               Icon={TiGroup}
               colorScheme="info"
-              title={attendance?.students.length.toString() as string}
+              title={numberTrimmer(attendance?.students.length!)}
               subtitle="Total Students"
             />
           </div>
