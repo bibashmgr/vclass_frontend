@@ -15,6 +15,7 @@ import { batchHeader } from '../../../utils/tableHeaders';
 // handlers
 import { apiHandler } from '../../../handlers/apiHandler';
 import { showMessage } from '../../../handlers/messageHandler';
+import { numberTrimmer } from '../../../utils/trimmer';
 
 const Batch = () => {
   const navigate = useNavigate();
@@ -70,20 +71,18 @@ const Batch = () => {
       />
       <ListLayout
         tableHeader={batchHeader}
-        layoutTitle='Batches'
+        layoutTitle="Batches"
         layoutSubtitle={`${batches.length} batches added`}
         isEmpty={batches.length === 0}
         isLoading={isLoading}
       >
         {batches.map((batch: batchSchema, batchIndex) => {
           return (
-            <tr key={batch._id} className='bg-white dark:bg-gray-800'>
-              <td className='px-6 py-4'>
-                {batchIndex + 1 < 10 ? `0${batchIndex + 1}` : batchIndex + 1}
-              </td>
-              <td className='px-6 py-4'>{batch.year}</td>
-              <td className='px-6 py-4'>{batch.faculty.name}</td>
-              <td className='px-6 py-4'>
+            <tr key={batch._id} className="bg-white dark:bg-gray-800">
+              <td className="px-6 py-4">{numberTrimmer(batchIndex + 1)}</td>
+              <td className="px-6 py-4">{batch.year}</td>
+              <td className="px-6 py-4">{batch.faculty.name}</td>
+              <td className="px-6 py-4">
                 {batch.currentSemester < 10
                   ? `0${batch.currentSemester}`
                   : batch.currentSemester}

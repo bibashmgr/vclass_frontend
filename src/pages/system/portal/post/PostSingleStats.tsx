@@ -13,6 +13,7 @@ import { apiHandler } from '../../../../handlers/apiHandler';
 
 // components
 import Badge from '../../../../components/global/Badge';
+import { numberTrimmer } from '../../../../utils/trimmer';
 
 const PostSingleStats = () => {
   const params = useParams();
@@ -34,10 +35,10 @@ const PostSingleStats = () => {
   }, []);
 
   return (
-    <div className='py-4'>
+    <div className="py-4">
       <ListLayout
         tableHeader={postStatsHeader}
-        layoutTitle='Students'
+        layoutTitle="Students"
         layoutSubtitle={`${students.length} students joined`}
         isEmpty={students.length === 0}
         isLoading={isLoading}
@@ -47,15 +48,11 @@ const PostSingleStats = () => {
       >
         {students.map((student: postSingleStats, studentIndex) => {
           return (
-            <tr key={studentIndex} className='bg-white dark:bg-gray-800'>
-              <td className='px-6 py-4'>
-                {studentIndex + 1 < 10
-                  ? `0${studentIndex + 1}`
-                  : studentIndex + 1}
-              </td>
-              <td className='px-6 py-4 capitalize'>{student?.name}</td>
-              <td className='px-6 py-4'>{student?.email}</td>
-              <td className='px-6 py-4'>
+            <tr key={studentIndex} className="bg-white dark:bg-gray-800">
+              <td className="px-6 py-4">{numberTrimmer(studentIndex + 1)}</td>
+              <td className="px-6 py-4 capitalize">{student?.name}</td>
+              <td className="px-6 py-4">{student?.email}</td>
+              <td className="px-6 py-4">
                 <Badge title={student?.status} colorScheme={student?.status} />
               </td>
             </tr>

@@ -17,6 +17,7 @@ import { showMessage } from '../../../handlers/messageHandler';
 
 // components
 import Modal from '../../../components/global/Modal';
+import { numberTrimmer } from '../../../utils/trimmer';
 
 const Subject = () => {
   const navigate = useNavigate();
@@ -76,21 +77,17 @@ const Subject = () => {
       />
       <ListLayout
         tableHeader={subjectHeader}
-        layoutTitle='Subjects'
+        layoutTitle="Subjects"
         layoutSubtitle={`${subjects.length} subjects added`}
         isEmpty={subjects.length === 0}
         isLoading={isLoading}
       >
         {subjects.map((subject: subjectSchema, subjectIndex) => {
           return (
-            <tr key={subject._id} className='bg-white dark:bg-gray-800'>
-              <td className='px-6 py-4'>
-                {subjectIndex + 1 < 10
-                  ? `0${subjectIndex + 1}`
-                  : subjectIndex + 1}
-              </td>
-              <td className='px-6 py-4 capitalize'>{subject.name}</td>
-              <td className='px-6 py-4 uppercase'>{subject.codeName}</td>
+            <tr key={subject._id} className="bg-white dark:bg-gray-800">
+              <td className="px-6 py-4">{numberTrimmer(subjectIndex + 1)}</td>
+              <td className="px-6 py-4 capitalize">{subject.name}</td>
+              <td className="px-6 py-4 uppercase">{subject.codeName}</td>
               <ActionTd
                 hasView
                 hasEdit
