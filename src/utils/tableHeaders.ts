@@ -9,3 +9,5 @@ export const userHeader = ['Name', 'Email', 'Role'];
 export const postStatsHeader = ['Name', 'Email', 'Status'];
 
 export const attendanceStatsHeader = ['Name', 'Email', 'Status'];
+
+export const attendanceMarkerHeader = ['Name', 'Email'];
