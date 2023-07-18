@@ -15,6 +15,7 @@ import { facultyHeader } from '../../../utils/tableHeaders';
 // handlers
 import { apiHandler } from '../../../handlers/apiHandler';
 import { showMessage } from '../../../handlers/messageHandler';
+import { numberTrimmer } from '../../../utils/trimmer';
 
 const Faculty = () => {
   const navigate = useNavigate();
@@ -73,21 +74,17 @@ const Faculty = () => {
       />
       <ListLayout
         tableHeader={facultyHeader}
-        layoutTitle='Faculties'
+        layoutTitle="Faculties"
         layoutSubtitle={`${faculties.length} faculties added`}
         isEmpty={faculties.length === 0}
         isLoading={isLoading}
       >
         {faculties.map((faculty: facultySchema, facultyIndex) => {
           return (
-            <tr key={faculty._id} className='bg-white dark:bg-gray-800'>
-              <td className='px-6 py-4'>
-                {facultyIndex + 1 < 10
-                  ? `0${facultyIndex + 1}`
-                  : facultyIndex + 1}
-              </td>
-              <td className='px-6 py-4'>{faculty.name}</td>
-              <td className='px-6 py-4'>
+            <tr key={faculty._id} className="bg-white dark:bg-gray-800">
+              <td className="px-6 py-4">{numberTrimmer(facultyIndex + 1)}</td>
+              <td className="px-6 py-4">{faculty.name}</td>
+              <td className="px-6 py-4">
                 {faculty.semesters.length < 10
                   ? `0${faculty.semesters.length}`
                   : faculty.semesters.length}

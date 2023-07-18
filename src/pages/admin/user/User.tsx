@@ -15,6 +15,7 @@ import { userHeader } from '../../../utils/tableHeaders';
 // handlers
 import { apiHandler } from '../../../handlers/apiHandler';
 import { showMessage } from '../../../handlers/messageHandler';
+import { numberTrimmer } from '../../../utils/trimmer';
 
 const User = () => {
   const navigate = useNavigate();
@@ -71,7 +72,7 @@ const User = () => {
       />
       <ListLayout
         tableHeader={userHeader}
-        layoutTitle='Users'
+        layoutTitle="Users"
         layoutSubtitle={`${users.length} users added`}
         isEmpty={users.length === 0}
         isLoading={isLoading}
@@ -79,13 +80,11 @@ const User = () => {
       >
         {users.map((user: userSchema, userIndex) => {
           return (
-            <tr key={user._id} className='bg-white dark:bg-gray-800'>
-              <td className='px-6 py-4'>
-                {userIndex + 1 < 10 ? `0${userIndex + 1}` : userIndex + 1}
-              </td>
-              <td className='px-6 py-4 capitalize'>{user.name}</td>
-              <td className='px-6 py-4'>{user.email}</td>
-              <td className='px-6 py-4 capitalize'>{user.role}</td>
+            <tr key={user._id} className="bg-white dark:bg-gray-800">
+              <td className="px-6 py-4">{numberTrimmer(userIndex + 1)}</td>
+              <td className="px-6 py-4 capitalize">{user.name}</td>
+              <td className="px-6 py-4">{user.email}</td>
+              <td className="px-6 py-4 capitalize">{user.role}</td>
               <ActionTd
                 hasView
                 hasEdit
