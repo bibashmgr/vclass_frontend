@@ -13,6 +13,8 @@ import PostView from '../../pages/system/portal/post/PostView';
 import PostSingleStats from '../../pages/system/portal/post/PostSingleStats';
 import PostEdit from '../../pages/system/portal/post/PostEdit';
 import Attendance from '../../pages/system/portal/attendance/Attendance';
+import AttendanceMark from '../../pages/system/portal/attendance/AttendanceMark';
+import AttendanceView from '../../pages/system/portal/attendance/AttendanceView';
 
 // pages: public
 import PageNotFound from '../../pages/public/PageNotFound';
@@ -37,7 +39,7 @@ const SystemRoutes = () => {
           <Route path='post/create' element={<PostCreate />} />
           <Route path='post/:postId' element={<PostView />} />
           <Route path='post/:postId/edit' element={<PostEdit />} />
-          <Route path='attendance' element={<Attendance />} />
+          <Route path='attendance' element={<AttendanceView />} />
         </Route>
         <Route path='/batch/:batchId' element={<Batch />} />
         <Route
@@ -52,6 +54,8 @@ const SystemRoutes = () => {
           <Route path='post/:postId/stats' element={<PostSingleStats />} />
           <Route path='post/:postId/edit' element={<PostEdit />} />
           <Route path='attendance' element={<Attendance />} />
+          <Route path='attendance/mark' element={<AttendanceMark />} />
+          <Route path='attendance/:userId' element={<AttendanceView />} />
         </Route>
       </Route>
     </Routes>
