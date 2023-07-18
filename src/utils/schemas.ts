@@ -40,6 +40,7 @@ export type portalSchema = {
   batch: batchSchema;
   subject: subjectSchema;
   teacher: userSchema;
+  activeDates: Date[];
   createdAt: Date;
 };
 
@@ -100,4 +101,26 @@ export type postSingleStats = {
   name: string;
   email: string;
   status: string;
+};
+
+export type attendanceStats = {
+  totalPresents: number;
+  totalAbsents: number;
+  students:
+    | [
+        {
+          _id: string;
+          name: string;
+          email: string;
+          status: string;
+        }
+      ]
+    | [];
+};
+
+export type userAttendanceStats = {
+  _id: string;
+  portal: portalSchema;
+  user: userSchema;
+  activeDates: Date[];
 };
