@@ -6,9 +6,9 @@ type propsType = {
 
 const Badge = ({ title, colorScheme = 'info', isSmall = false }: propsType) => {
   const getColorScheme = (color: string) => {
-    if (color === 'success' || color === 'done')
+    if (color === 'success' || color === 'done' || color === 'present')
       return 'text-emerald-600 bg-emerald-200';
-    if (color === 'failure' || color === 'missing')
+    if (color === 'failure' || color === 'missing' || color === 'absent')
       return 'text-red-600 bg-red-200';
     if (color === 'warn' || color === 'late')
       return 'text-yellow-600 bg-yellow-200';

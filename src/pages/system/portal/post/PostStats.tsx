@@ -53,7 +53,7 @@ const PostStats = () => {
   }, []);
 
   return (
-    <div className='pt-4'>
+    <div className='py-4'>
       <ListLayout
         tableHeader={postStatsHeader}
         layoutTitle='Students'
