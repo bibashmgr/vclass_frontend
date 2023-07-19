@@ -56,7 +56,7 @@ const AttendanceMark = () => {
       'post',
       `attendances/${params.batchId}/${params.subjectId}`,
       {
-        date: dayjs(Date.now()).format('YYYY/MM/DD'),
+        date: dayjs(Date.now()).format('YYYY-MM-DD'),
         students: toSendStudents,
       }
     );
@@ -73,17 +73,18 @@ const AttendanceMark = () => {
   }, []);
 
   return (
-    <div className="py-4">
+    <div className='py-4'>
       <ListLayout
-        layoutTitle="Students"
+        layoutTitle='Students'
         layoutSubtitle={`${students.length} students joined`}
         hasCreateBtn={false}
         isEmpty={students.length === 0}
         isLoading={isLoading}
         tableHeader={attendanceMarkerHeader}
+        hasBackBtn={true}
         hasMultipleBtns={true}
         multipleBtns={
-          <Button colorScheme="success" handleClick={handleMark} isSmall>
+          <Button colorScheme='success' handleClick={handleMark} isSmall>
             Submit
           </Button>
         }
@@ -91,10 +92,10 @@ const AttendanceMark = () => {
         {students.map((student, studentIndex) => {
           return (
             <tr key={studentIndex}>
-              <td className="px-6 py-4">{numberTrimmer(studentIndex + 1)}</td>
-              <td className="px-6 py-4">{student.name}</td>
-              <td className="px-6 py-4">{student.email}</td>
-              <td className="px-6 py-4 flex items-center">
+              <td className='px-6 py-4'>{numberTrimmer(studentIndex + 1)}</td>
+              <td className='px-6 py-4'>{student.name}</td>
+              <td className='px-6 py-4'>{student.email}</td>
+              <td className='px-6 py-4 flex items-center'>
                 <ToggleButton handleToggle={() => handleToggle(studentIndex)} />
               </td>
             </tr>
