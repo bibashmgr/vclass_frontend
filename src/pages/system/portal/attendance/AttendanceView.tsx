@@ -41,7 +41,6 @@ const AttendanceView = () => {
     );
 
     if (res.success) {
-      console.log(res.data);
       setStats(res.data);
       setIsLoading(false);
     }
