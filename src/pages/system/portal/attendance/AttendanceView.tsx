@@ -7,6 +7,7 @@ import { TiGroup } from 'react-icons/ti';
 // components
 import StatusCard from '../../../../components/global/StatusCard';
 import Spinner from '../../../../components/global/Spinner';
+import MonthlyStatsCard from '../../../../components/system/attendance/MonthlyStatsCard';
 
 // handlers
 import { apiHandler } from '../../../../handlers/apiHandler';
@@ -15,15 +16,16 @@ import { apiHandler } from '../../../../handlers/apiHandler';
 import { useUserInfo } from '../../../../context/UserInfoContext';
 
 // utils
-import { userAttendanceStats } from '../../../../utils/schemas';
+import { userAttendanceStatsSchema } from '../../../../utils/schemas';
 import { numberTrimmer } from '../../../../utils/trimmer';
+import DailyStatsCard from '../../../../components/system/attendance/DailyStatsCard';
 
 const AttendanceView = () => {
   const params = useParams();
   const userInfoContext = useUserInfo();
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [stats, setStats] = useState<userAttendanceStats>();
+  const [stats, setStats] = useState<userAttendanceStatsSchema>();
 
   const getUserAttendanceStats = async () => {
     const res = await apiHandler(
@@ -111,6 +113,10 @@ const AttendanceView = () => {
               }
               subtitle='Present Percentage'
             />
+          </div>
+          <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
+            <MonthlyStatsCard stats={stats!} />
+            <DailyStatsCard />
           </div>
         </div>
       )}
