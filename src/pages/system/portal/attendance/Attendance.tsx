@@ -18,7 +18,7 @@ import { TiGroup } from 'react-icons/ti';
 
 // utils
 import { attendanceStatsHeader } from '../../../../utils/tableHeaders';
-import { attendanceStats } from '../../../../utils/schemas';
+import { attendanceStatsSchema } from '../../../../utils/schemas';
 
 // handlers
 import { apiHandler } from '../../../../handlers/apiHandler';
@@ -40,7 +40,7 @@ const Attendance = () => {
   });
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [fetchCounter, setFetchCounter] = useState<boolean>(false);
-  const [attendance, setAttendance] = useState<attendanceStats>();
+  const [attendance, setAttendance] = useState<attendanceStatsSchema>();
 
   const handleDate = (newValue: any) => {
     setDate(newValue);
@@ -83,20 +83,20 @@ const Attendance = () => {
   return (
     <>
       {isLoading ? (
-        <div className="flex justify-center py-8">
+        <div className='flex justify-center py-8'>
           <Spinner boxSize={5} />
         </div>
       ) : (
-        <div className="flex flex-col gap-4 py-4">
-          <div className="flex gap-2 justify-end items-center">
-            <div className="w-36">
+        <div className='flex flex-col gap-4 py-4'>
+          <div className='flex gap-2 justify-end items-center'>
+            <div className='w-36'>
               <Datepicker
                 value={date!}
                 onChange={handleDate}
                 asSingle={true}
                 useRange={false}
-                primaryColor="blue"
-                popoverDirection="down"
+                primaryColor='blue'
+                popoverDirection='down'
                 toggleIcon={(open) => (
                   <IoCalendar
                     className={`w-5 h-5 text-gray-500 dark:text-gray-400`}
@@ -114,36 +114,36 @@ const Attendance = () => {
               />
             </div>
             <Button
-              colorScheme="info"
+              colorScheme='info'
               isSmall
               handleClick={() => navigate('mark')}
             >
               Mark
             </Button>
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          <div className='grid grid-cols-1 lg:grid-cols-3 gap-4'>
             <StatusCard
               Icon={TiGroup}
-              colorScheme="success"
+              colorScheme='success'
               title={numberTrimmer(attendance?.totalPresents!)}
-              subtitle="Total Present Students"
+              subtitle='Total Present Students'
             />
             <StatusCard
               Icon={TiGroup}
-              colorScheme="failure"
+              colorScheme='failure'
               title={numberTrimmer(attendance?.totalAbsents!)}
-              subtitle="Total Absent Students"
+              subtitle='Total Absent Students'
             />
             <StatusCard
               Icon={TiGroup}
-              colorScheme="info"
+              colorScheme='info'
               title={numberTrimmer(attendance?.students.length!)}
-              subtitle="Total Students"
+              subtitle='Total Students'
             />
           </div>
           <ListLayout
             tableHeader={attendanceStatsHeader}
-            layoutTitle="Students"
+            layoutTitle='Students'
             layoutSubtitle={`${attendance?.students?.length} students joined`}
             isEmpty={(attendance?.students.length as Number) === 0}
             isLoading={isLoading}
@@ -151,24 +151,24 @@ const Attendance = () => {
           >
             {attendance?.students.map((student, studentIndex) => {
               return (
-                <tr key={studentIndex} className="bg-white dark:bg-gray-800">
-                  <td className="px-6 py-4">
+                <tr key={studentIndex} className='bg-white dark:bg-gray-800'>
+                  <td className='px-6 py-4'>
                     {numberTrimmer(studentIndex + 1)}
                   </td>
-                  <td className="px-6 py-4 capitalize">{student?.name}</td>
-                  <td className="px-6 py-4">{student?.email}</td>
-                  <td className="px-6 py-4">
+                  <td className='px-6 py-4 capitalize'>{student?.name}</td>
+                  <td className='px-6 py-4'>{student?.email}</td>
+                  <td className='px-6 py-4'>
                     <Badge
                       title={student?.status}
                       colorScheme={student?.status}
                     />
                   </td>
-                  <td className="px-6 py-4">
+                  <td className='px-6 py-4'>
                     <Button
                       handleClick={() => {
                         navigate(student._id);
                       }}
-                      colorScheme="success"
+                      colorScheme='success'
                     >
                       View
                     </Button>
