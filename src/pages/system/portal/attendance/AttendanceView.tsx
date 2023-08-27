@@ -75,27 +75,40 @@ const AttendanceView = () => {
             <StatusCard
               Icon={TiGroup}
               colorScheme='success'
-              title={numberTrimmer(stats?.activeDates.length!)}
+              title={
+                stats?.portal?.activeDates.length === 0
+                  ? '00'
+                  : numberTrimmer(stats?.activeDates.length!)
+              }
               subtitle='Total Present Days'
             />
             <StatusCard
               Icon={TiGroup}
               colorScheme='failure'
-              title={numberTrimmer(
-                stats?.portal?.activeDates.length! - stats?.activeDates.length!
-              )}
+              title={
+                stats?.portal?.activeDates.length === 0
+                  ? '00'
+                  : numberTrimmer(
+                      stats?.portal?.activeDates.length! -
+                        stats?.activeDates.length!
+                    )
+              }
               subtitle='Total Absent Days'
             />
             <StatusCard
               Icon={TiGroup}
               colorScheme='info'
-              title={`${numberTrimmer(
-                Math.floor(
-                  (stats?.activeDates.length! /
-                    stats?.portal?.activeDates.length!) *
-                    100
-                )
-              )}%`}
+              title={
+                stats?.portal?.activeDates.length === 0
+                  ? '00%'
+                  : `${numberTrimmer(
+                      Math.floor(
+                        (stats?.activeDates.length! /
+                          stats?.portal?.activeDates.length!) *
+                          100
+                      )
+                    )}%`
+              }
               subtitle='Present Percentage'
             />
           </div>
