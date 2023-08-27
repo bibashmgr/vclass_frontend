@@ -3,7 +3,7 @@ export type portalSchema = {
   url: string;
 };
 
-export const portals = [
+export const portals: portalSchema[] = [
   {
     title: 'Chat',
     url: 'chat',
