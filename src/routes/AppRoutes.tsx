@@ -11,6 +11,8 @@ import SystemRoutes from './subRoutes/SystemRoutes';
 // helpers
 import { PortalRoutes, ProtectedRoutes } from './RouteHelpers';
 
+import VideoCall from '../pages/system/portal/chat/VideoCall';
+
 const AppRoutes = () => {
   return (
     <Routes>
@@ -23,6 +25,7 @@ const AppRoutes = () => {
         <Route element={<ProtectedRoutes roles={['student', 'teacher']} />}>
           <Route path='/*' element={<SystemRoutes />} />
         </Route>
+        <Route path='/videocall' element={<VideoCall />} />
       </Route>
     </Routes>
   );
