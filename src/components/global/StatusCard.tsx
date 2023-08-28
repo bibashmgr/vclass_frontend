@@ -26,7 +26,7 @@ const StatusCard = ({ Icon, colorScheme, title, subtitle }: propsType) => {
   return (
     <div className='flex gap-4 items-center bg-white dark:bg-gray-800 px-6 py-6 rounded-lg'>
       <div className={`p-2.5 ${getIconColorScheme(colorScheme)} rounded-full`}>
-        <Icon className='w-7 h-7' />
+        <Icon className='w-6 h-6' />
       </div>
       <div className='flex flex-col'>
         <p className='text-gray-900 dark:text-white font-bold text-2xl'>

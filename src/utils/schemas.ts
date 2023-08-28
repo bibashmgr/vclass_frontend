@@ -124,3 +124,10 @@ export type userAttendanceStatsSchema = {
   user: userSchema;
   activeDates: Date[];
 };
+
+export type dashboardInfoSchema = {
+  subjects: number;
+  faculties: number;
+  batches: number;
+  users: number;
+};
