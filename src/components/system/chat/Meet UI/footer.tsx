@@ -7,7 +7,6 @@ import {
   BiPhone,
   BiDesktop,
 } from "react-icons/bi";
-import { FiMoreVertical } from "react-icons/fi";
 
 const BottomNavigation: React.FC = () => {
   const [isMicrophoneOn, setIsMicrophoneOn] = useState(true);
@@ -67,11 +66,6 @@ const BottomNavigation: React.FC = () => {
             onClick={shareScreen}
           >
             <BiDesktop size={20} />
-          </div>
-        </div>
-        <div className="text-gray-600">
-          <div className="bg-gray-200 rounded-full p-3 border border-gray-300 flex items-center justify-center w-10 h-10 cursor-pointer transform hover:scale-110 transition-transform">
-            <FiMoreVertical size={20} />
           </div>
         </div>
       </div>

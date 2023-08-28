@@ -8,6 +8,7 @@ import {
 } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import BottomNavigation from "../../../../components/system/chat/Meet UI/footer";
+// import BodyComponent from "../../../../components/system/chat/Meet UI/body";
 
 const WebcamComponent = () => {
   const history = useNavigate();
@@ -98,6 +99,7 @@ const WebcamComponent = () => {
         <div>
           <Header></Header>
           <BottomNavigation />
+          {/* <BodyComponent></BodyComponent> */}
         </div>
       )}
     </div>
