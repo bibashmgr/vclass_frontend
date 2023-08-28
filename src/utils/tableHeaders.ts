@@ -1,9 +1,13 @@
-export const subjectHeader = ['Name', 'Code Name'];
+export const subjectHeader: string[] = ['Name', 'Code Name'];
 
-export const facultyHeader = ['Name', 'Total Semesters'];
+export const facultyHeader: string[] = ['Name', 'Total Semesters'];
 
-export const batchHeader = ['Year', 'Faculty', 'Current Semester'];
+export const batchHeader: string[] = ['Year', 'Faculty', 'Current Semester'];
 
-export const userHeader = ['Name', 'Email', 'Role'];
+export const userHeader: string[] = ['Name', 'Email', 'Role'];
 
-export const postStatsHeader = ['Name', 'Email', 'Status'];
+export const postStatsHeader: string[] = ['Name', 'Email', 'Status'];
+
+export const attendanceStatsHeader: string[] = ['Name', 'Email', 'Status'];
+
+export const attendanceMarkerHeader: string[] = ['Name', 'Email'];

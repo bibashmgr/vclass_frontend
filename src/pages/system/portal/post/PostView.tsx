@@ -30,7 +30,7 @@ import Button from '../../../../components/global/button/Button';
 import Spinner from '../../../../components/global/Spinner';
 
 // utils
-import { trimmer } from '../../../../utils/trimmer';
+import { filenameTrimmer } from '../../../../utils/trimmer';
 
 const PostView = () => {
   const navigate = useNavigate();
@@ -288,7 +288,7 @@ const PostView = () => {
                     >
                       <BsFileEarmarkFill className='w-14 h-14' />
                       <p className='text-xs font-normal'>
-                        {trimmer(file.filename.split('_')[1], 6, '..')}
+                        {filenameTrimmer(file.filename.split('_')[1], 6, '..')}
                       </p>
                     </div>
                   );
@@ -338,7 +338,11 @@ const PostView = () => {
                           >
                             <BsFileEarmarkFill className='w-14 h-14' />
                             <p className='text-xs font-normal'>
-                              {trimmer(file.filename.split('_')[1], 6, '..')}
+                              {filenameTrimmer(
+                                file.filename.split('_')[1],
+                                6,
+                                '..'
+                              )}
                             </p>
                           </div>
                         );

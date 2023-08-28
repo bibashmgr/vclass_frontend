@@ -25,7 +25,7 @@ import { showMessage } from '../../../../handlers/messageHandler';
 import { fileSchema } from '../../../../utils/schemas';
 
 // utils
-import { trimmer } from '../../../../utils/trimmer';
+import { filenameTrimmer } from '../../../../utils/trimmer';
 
 const PostCreate = () => {
   const params = useParams();
@@ -185,7 +185,7 @@ const PostCreate = () => {
   };
 
   return (
-    <div className='pt-4'>
+    <div className='py-4'>
       <FormLayout
         layoutTitle='Create Post'
         layoutSubtitle='Fill out the forms'
@@ -316,7 +316,7 @@ const PostCreate = () => {
                     >
                       <BsFileEarmarkFill className='w-14 h-14' />
                       <p className='text-xs font-normal'>
-                        {trimmer(file.originalname, 6, '..')}
+                        {filenameTrimmer(file.originalname, 6, '..')}
                       </p>
                     </div>
                   );

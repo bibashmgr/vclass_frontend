@@ -26,7 +26,7 @@ import { showMessage } from '../../../../handlers/messageHandler';
 import { fileSchema, postFileSchema } from '../../../../utils/schemas';
 
 // icons
-import { trimmer } from '../../../../utils/trimmer';
+import { filenameTrimmer } from '../../../../utils/trimmer';
 
 const PostEdit = () => {
   const params = useParams();
@@ -209,7 +209,7 @@ const PostEdit = () => {
   }, []);
 
   return (
-    <div className='pt-4'>
+    <div className='py-4'>
       <FormLayout
         layoutTitle='Edit Post'
         layoutSubtitle='Fill out the forms'
@@ -340,7 +340,7 @@ const PostEdit = () => {
                     >
                       <BsFileEarmarkFill className='w-14 h-14' />
                       <p className='text-xs font-normal'>
-                        {trimmer(file.filename.split('_')[1], 6, '..')}
+                        {filenameTrimmer(file.filename.split('_')[1], 6, '..')}
                       </p>
                     </div>
                   );
