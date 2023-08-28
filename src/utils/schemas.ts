@@ -78,7 +78,7 @@ export type postSchema = {
   createdAt: Date;
 };
 
-export type postStats = {
+export type postStatsSchema = {
   user: {
     name: string;
     email: string;
@@ -97,13 +97,13 @@ export type postStats = {
   };
 };
 
-export type postSingleStats = {
+export type postSingleStatsSchema = {
   name: string;
   email: string;
   status: string;
 };
 
-export type attendanceStats = {
+export type attendanceStatsSchema = {
   totalPresents: number;
   totalAbsents: number;
   students:
@@ -118,7 +118,7 @@ export type attendanceStats = {
     | [];
 };
 
-export type userAttendanceStats = {
+export type userAttendanceStatsSchema = {
   _id: string;
   portal: portalSchema;
   user: userSchema;
