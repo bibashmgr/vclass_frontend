@@ -8,6 +8,7 @@ import { TiGroup } from 'react-icons/ti';
 import StatusCard from '../../../../components/global/StatusCard';
 import Spinner from '../../../../components/global/Spinner';
 import MonthlyStatsCard from '../../../../components/system/attendance/MonthlyStatsCard';
+import DailyStatsCard from '../../../../components/system/attendance/DailyStatsCard';
 
 // handlers
 import { apiHandler } from '../../../../handlers/apiHandler';
@@ -18,7 +19,6 @@ import { useUserInfo } from '../../../../context/UserInfoContext';
 // utils
 import { userAttendanceStatsSchema } from '../../../../utils/schemas';
 import { numberTrimmer } from '../../../../utils/trimmer';
-import DailyStatsCard from '../../../../components/system/attendance/DailyStatsCard';
 
 const AttendanceView = () => {
   const params = useParams();
