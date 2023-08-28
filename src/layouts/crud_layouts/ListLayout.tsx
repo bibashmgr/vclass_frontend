@@ -102,9 +102,9 @@ const ListLayout = ({
               <tr className='bg-white dark:bg-gray-800'>
                 <td colSpan={tableHeader.length + 2} className='py-4'>
                   <div className='animate-pulse flex flex-col gap-4 w-full'>
-                    <div className='h-6 bg-gray-200 rounded-lg dark:bg-gray-700 w-full'></div>
-                    <div className='h-6 bg-gray-200 rounded-lg dark:bg-gray-700 w-full'></div>
-                    <div className='h-6 bg-gray-200 rounded-lg dark:bg-gray-700 w-full'></div>
+                    <div className='h-6 bg-gray-200 rounded-lg dark:bg-gray-700 w-full' />
+                    <div className='h-6 bg-gray-200 rounded-lg dark:bg-gray-700 w-full' />
+                    <div className='h-6 bg-gray-200 rounded-lg dark:bg-gray-700 w-full' />
                   </div>
                 </td>
               </tr>
