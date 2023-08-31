@@ -14,7 +14,6 @@ const BodyComponent = () => {
   const [isMicOn, setIsMicOn] = useState(false);
   const [isVideoOn, setIsVideoOn] = useState(false);
   const [isJoined, setIsJoined] = useState(false);
-  const [WebCam, setwebCam] = useState(WebcamComponent);
 
   useEffect(() => {
     // ... your existing useEffect code ...
