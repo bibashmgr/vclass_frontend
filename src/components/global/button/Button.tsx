@@ -37,7 +37,7 @@ const Button = ({
       type={type}
       className={`${
         isSmall ? 'px-3 py-2 text-xs' : 'px-4 py-2 text-sm'
-      } rounded-md  font-medium disabled:opacity-75 disabled:cursor-not-allowed ${getColorScheme(
+      } rounded-md  font-medium disabled:opacity-50 disabled:cursor-not-allowed ${getColorScheme(
         colorScheme
       )}`}
       onClick={handleClick}

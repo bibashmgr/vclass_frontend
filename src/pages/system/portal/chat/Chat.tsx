@@ -13,10 +13,15 @@ import { messageSchema } from '../../../../utils/schemas';
 import ChatInput from '../../../../components/system/chat/ChatInput';
 import ChatTextBox from '../../../../components/system/chat/ChatTextBox';
 import Spinner from '../../../../components/global/Spinner';
+import IconButton from '../../../../components/global/button/IconButton';
 
 // context
 import { useUserInfo } from '../../../../context/UserInfoContext';
 import { useSocket } from '../../../../context/SocketContext';
+
+// icons
+import { BsFillPeopleFill } from 'react-icons/bs';
+import { IoIosVideocam } from 'react-icons/io';
 
 const Chat = () => {
   const params = useParams();
@@ -139,47 +144,79 @@ const Chat = () => {
   };
 
   return (
-    <div className='py-4 h-[calc(100vh-200px)]  md:h-[calc(100vh-218px)] overflow-auto'>
+    <div className='py-4'>
       {isLoading ? (
         <div className='flex justify-center pt-4'>
           <Spinner boxSize={5} />
         </div>
-      ) : messages.length === 0 ? (
-        <div className='flex justify-center pt-4'>
-          <p className='text-gray-400 dark:text-gray-400 text-sm font-medium'>
-            No Messages
-          </p>
-        </div>
       ) : (
-        <>
-          <div className='flex flex-col'>
-            {messages.map((message: messageSchema, index) => {
-              return (
-                <div key={index}>
-                  {(index === 0 ||
-                    isOneDayApart(
-                      new Date(messages[index - 1]?.createdAt),
-                      new Date(messages[index]?.createdAt)
-                    )) && (
-                    <div className='flex justify-center items-center mt-4 mb-2'>
-                      <p className='text-gray-900 dark:text-white text-[10px] font-normal border border-gray-300 dark:border-gray-500 rounded-full px-4 py-1.5'>
-                        {dayjs(message?.createdAt?.toString()).format(
-                          'MMM DD, YYYY'
-                        )}
-                      </p>
-                    </div>
-                  )}
-                  <ChatTextBox
-                    message={message}
-                    isMine={message.user._id === userInfoContext?.userInfo?._id}
-                    isInfoHide={hideInfo(index)}
-                  />
-                </div>
-              );
-            })}
+        <div className='flex flex-col gap-4'>
+          <div className='flex justify-end gap-2'>
+            {userInfoContext?.userInfo?.role === 'teacher' && (
+              <IconButton
+                Icon={IoIosVideocam}
+                iconSize={5}
+                title='Create Video Call'
+                handleClick={() => {}}
+              />
+            )}
+            {userInfoContext?.userInfo?.role === 'student' && (
+              <IconButton
+                Icon={IoIosVideocam}
+                iconSize={5}
+                title='Join Video Call'
+                isDisabled
+                handleClick={() => {}}
+              />
+            )}
+            <IconButton
+              Icon={BsFillPeopleFill}
+              iconSize={5}
+              title='Add Post'
+              handleClick={() => {}}
+            />
           </div>
-          <div ref={messagesEndRef} />
-        </>
+
+          {messages.length === 0 ? (
+            <div className='flex justify-center pt-4'>
+              <p className='text-gray-400 dark:text-gray-400 text-sm font-medium'>
+                No Messages
+              </p>
+            </div>
+          ) : (
+            <div className='py-2 h-[calc(100vh-272px)]  md:h-[calc(100vh-288px)] overflow-auto'>
+              <div className='flex flex-col'>
+                {messages.map((message: messageSchema, index) => {
+                  return (
+                    <div key={index}>
+                      {(index === 0 ||
+                        isOneDayApart(
+                          new Date(messages[index - 1]?.createdAt),
+                          new Date(messages[index]?.createdAt)
+                        )) && (
+                        <div className='flex justify-center items-center mt-4 mb-2'>
+                          <p className='text-gray-900 dark:text-white text-[10px] font-normal border border-gray-300 dark:border-gray-500 rounded-full px-4 py-1.5'>
+                            {dayjs(message?.createdAt?.toString()).format(
+                              'MMM DD, YYYY'
+                            )}
+                          </p>
+                        </div>
+                      )}
+                      <ChatTextBox
+                        message={message}
+                        isMine={
+                          message.user._id === userInfoContext?.userInfo?._id
+                        }
+                        isInfoHide={hideInfo(index)}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+              <div ref={messagesEndRef} />
+            </div>
+          )}
+        </div>
       )}
       <ChatInput text={text} handleSend={handleSend} handleText={handleText} />
     </div>

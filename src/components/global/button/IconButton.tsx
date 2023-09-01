@@ -8,6 +8,7 @@ type propsType = {
   hasIncidator?: boolean;
   indicatorTitle?: string;
   handleClick?: React.MouseEventHandler;
+  isDisabled?: boolean;
 };
 
 const IconButton = ({
@@ -17,13 +18,15 @@ const IconButton = ({
   handleClick,
   hasIncidator = false,
   indicatorTitle = '0',
+  isDisabled = false,
 }: propsType) => {
   return (
     <button
       type='button'
       title={title}
       onClick={handleClick}
-      className='border border-gray-300 dark:border-gray-500 inline-flex rounded-md p-[6px] cursor-pointer relative hover:opacity-80'
+      disabled={isDisabled}
+      className='border border-gray-300 dark:border-gray-500 inline-flex rounded-md p-[6px] cursor-pointer relative hover:opacity-80 disabled:opacity-50 disabled:cursor-not-allowed'
     >
       {
         <Icon
