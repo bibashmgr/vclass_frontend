@@ -131,3 +131,15 @@ export type dashboardInfoSchema = {
   batches: number;
   users: number;
 };
+
+export type callParticipantSchema = {
+  name: string;
+  email: string;
+  avatar: string;
+  role: string;
+  prefs: {
+    audio: boolean;
+    video: boolean;
+    screen: boolean;
+  };
+};

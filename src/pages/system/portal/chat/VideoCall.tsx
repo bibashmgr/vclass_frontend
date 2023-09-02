@@ -1,124 +1,211 @@
-import React, { useState, useEffect, useRef } from "react";
-import {
-  FaMicrophone,
-  FaMicrophoneSlash,
-  FaVideo,
-  FaVideoSlash,
-} from "react-icons/fa";
-import ReactDOM from "react-dom"; // Don't forget to import ReactDOM for rendering
+import { useState, useEffect, useRef } from 'react';
+import { useLocation, useNavigate } from 'react-router';
 
-const MeetingPage: React.FC = () => {
-  return <div>{/* Content of your meeting page goes here */}</div>;
-};
+// context
+import { useUserInfo } from '../../../../context/UserInfoContext';
+import { useSocket } from '../../../../context/SocketContext';
 
-const WebcamComponent: React.FC = () => {
+// components
+import Button from '../../../../components/global/button/Button';
+import VideoTopNav from '../../../../components/system/chat/VideoTopNav';
+import VideoMainScreen from '../../../../components/system/chat/VideoMainScreen';
+import VideoBottomNav from '../../../../components/system/chat/VideoBottomNav';
+
+// schemas
+import { callParticipantSchema } from '../../../../utils/schemas';
+
+const VideoCall = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const userInfoContext = useUserInfo();
+  const socket = useSocket();
+
   const videoRef = useRef<HTMLVideoElement | null>(null);
-  const [hasPermission, setHasPermission] = useState(false);
-  const [isMicMuted, setIsMicMuted] = useState(false);
-  const [isVideoOn, setIsVideoOn] = useState(true);
-  const [isJoinClicked, setIsJoinClicked] = useState(false); // Track if "Join Meeting" is clicked
+  const [localStream, setLocalStream] = useState<MediaStream | null>();
+
+  const [isJoined, setIsJoined] = useState<boolean>(false);
+  const [participants, setParticipants] = useState<callParticipantSchema[]>([]);
 
   useEffect(() => {
-    // Check if browser supports media devices
-    if (navigator && navigator.mediaDevices) {
-      navigator.mediaDevices
-        .getUserMedia({ video: true, audio: true })
-        .then((stream) => {
-          // User allowed permission
-          setHasPermission(true);
-          stream.getTracks().forEach((track) => track.stop());
-          // Stop the stream after checking
-        })
-        .catch(() => {
-          // User denied permission or error occurred
-          setHasPermission(false);
-        });
+    console.log(location.state);
+
+    if (!location.state) {
+      navigate('/');
+    } else {
+      if (navigator && navigator.mediaDevices) {
+        navigator.mediaDevices
+          .getUserMedia({ video: true, audio: true })
+          .then((stream) => {
+            let videoElement = document.getElementById(
+              `video-${userInfoContext?.userInfo?.email!}`
+            ) as HTMLVideoElement;
+            if (videoElement) {
+              videoElement.srcObject = stream;
+              videoElement.muted = true;
+            }
+            setLocalStream(stream);
+          })
+          .catch((error) => {
+            console.error('Error accessing media devices.', error);
+          });
+      }
     }
   }, []);
 
-  const toggleMic = () => {
-    setIsMicMuted((prev) => !prev);
-  };
-
-  const toggleVideo = () => {
-    setIsVideoOn((prev) => !prev);
-  };
-
-  const handleJoinMeeting = () => {
-    setIsJoinClicked(true);
-  };
-
   useEffect(() => {
-    if (hasPermission && videoRef.current && isJoinClicked) {
-      // Clear the content of the page when "Join Meeting" is clicked
-      document.body.innerHTML = "";
-      ReactDOM.render(<MeetingPage />, document.body);
+    setParticipants((prev) => [
+      ...prev,
+      {
+        name: userInfoContext?.userInfo?.name!,
+        email: userInfoContext?.userInfo?.email!,
+        avatar: userInfoContext?.userInfo?.avatar!,
+        role: userInfoContext?.userInfo?.role!,
+        prefs: {
+          audio: false,
+          video: false,
+          screen: false,
+        },
+      },
+    ]);
+  }, []);
+
+  // helpers
+  const addSingleParticipant = (participantInfo: callParticipantSchema) => {
+    setParticipants((prev) => [...prev, participantInfo]);
+  };
+
+  const addParticipantsToList = (participantList: callParticipantSchema[]) => {
+    setParticipants((prev) => [...prev, ...participantList]);
+  };
+
+  const removeSingleParticipant = (userEmail: string) => {
+    let newParticipants = participants.filter(
+      (participant) => participant.email !== userEmail
+    );
+    setParticipants(newParticipants);
+  };
+
+  const clearParticipantList = () => {
+    setParticipants([]);
+  };
+
+  const updatePrefs = (
+    userEmail: string,
+    prefsType: 'audio' | 'video' | 'screen'
+  ) => {
+    setParticipants((prev) =>
+      prev.filter((participant: callParticipantSchema) => {
+        if (participant.email === userEmail) {
+          participant.prefs[prefsType] = !participant.prefs[prefsType];
+        }
+
+        return participant;
+      })
+    );
+  };
+
+  const getUserInfoFromList = (userEmail: string) => {
+    let user = participants.find(
+      (participant) => participant.email === userEmail
+    );
+
+    return user;
+  };
+
+  // handlers
+  const handleJoinBtn = () => {
+    socket?.emit('join-call', {
+      subjectId: location.state.subjectId,
+      batchId: location.state.batchId,
+      callParticipantInfo: getUserInfoFromList(
+        userInfoContext?.userInfo?.email!
+      ),
+    });
+
+    socket?.on('user-joined', (data) => {
+      addParticipantsToList(data);
+    });
+    socket?.on('new-user-joined', (data) => {
+      addSingleParticipant(data);
+    });
+    socket?.on('user-left', (data) => {
+      removeSingleParticipant(data.userId);
+    });
+    socket?.on('user-disconnected', (data) => {
+      removeSingleParticipant(data.userId);
+    });
+
+    setIsJoined(true);
+  };
+
+  const handleEndBtn = () => {
+    // TODO: stop stream
+    if (isJoined) {
+      socket?.emit('leave-room', {
+        subjectId: location.state.subjectId,
+        batchId: location.state.batchId,
+        email: userInfoContext?.userInfo?.email,
+      });
+      socket?.off('user-joined');
+      socket?.off('new-user-joined');
+      socket?.off('user-left');
+      socket?.off('user-disconnected');
     }
-  }, [hasPermission, isJoinClicked]);
+
+    navigate('/');
+  };
+
+  const handleAudioBtn = () => {
+    updatePrefs(userInfoContext?.userInfo?.email!, 'audio');
+  };
+
+  const handleVideoBtn = () => {
+    updatePrefs(userInfoContext?.userInfo?.email!, 'video');
+  };
+
+  const handleScreenBtn = () => {};
 
   return (
-    <div className="flex h-screen bg-gray-700 items-center w-screen">
-      <div className="flex flex-col justify-center w-screen items-center p-8">
-        {isJoinClicked ? null : (
-          <>
-            <div className="w-[700px] h-[400px] relative">
-              {hasPermission && (
-                <video
-                  ref={videoRef}
-                  autoPlay
-                  muted={isMicMuted}
-                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                />
-              )}
-            </div>
-            <div className="flex gap-4 mt-[25px] ">
-              <button
-                onClick={toggleMic}
-                className={`rounded-full p-4 ${
-                  isMicMuted ? "bg-red-500" : "bg-green-500"
-                }`}
-              >
-                {isMicMuted ? (
-                  <FaMicrophoneSlash className="text-white text-2xl" />
-                ) : (
-                  <FaMicrophone className="text-white text-2xl" />
-                )}
-              </button>
-              <button
-                onClick={toggleVideo}
-                className={`rounded-full p-4 ${
-                  isVideoOn ? "bg-green-500" : "bg-red-500"
-                }`}
-              >
-                {isVideoOn ? (
-                  <FaVideo className="text-white text-2xl" />
-                ) : (
-                  <FaVideoSlash className="text-white text-2xl" />
-                )}
-              </button>
-            </div>
-            <div>
-              <p className="mt-[10px] text-white">Ready To Join?</p>
-            </div>
-            <div className="flex flex-row justify-content-around gap-[10px] mt-[3px]">
-              <button
-                className="bg-blue-500 text-white px-4 py-2 rounded "
-                onClick={handleJoinMeeting}
-              >
-                Join Meeting
-              </button>
-              <button
-                className="bg-blue-500 text-white px-4 py-2  rounded  "
-                onClick={() => alert("Cancel Meeting Clicked")}
-              >
-                Cancel Meeting
-              </button>
-            </div>
-          </>
-        )}
-      </div>
+    <div
+      className={`w-screen h-screen overflow-hidden bg-gray-100 dark:bg-gray-700 ${
+        !isJoined && ' flex flex-col gap-2 items-center justify-center'
+      }`}
+    >
+      {/* {isJoined && <VideoTopNav />} */}
+      <VideoMainScreen
+        isJoined={isJoined}
+        userInfo={userInfoContext?.userInfo!}
+        participants={participants}
+      />
+      <VideoBottomNav
+        isJoined={isJoined}
+        isAudioOn={
+          getUserInfoFromList(userInfoContext?.userInfo?.email!)?.prefs?.audio!
+        }
+        isVideoOn={
+          getUserInfoFromList(userInfoContext?.userInfo?.email!)?.prefs?.video!
+        }
+        isScreenShared={
+          getUserInfoFromList(userInfoContext?.userInfo?.email!)?.prefs?.screen!
+        }
+        handleEndBtn={handleEndBtn}
+        handleAudioBtn={handleAudioBtn}
+        handleVideoBtn={handleVideoBtn}
+        handleScreenBtn={handleScreenBtn}
+      />
+      {!isJoined && (
+        <div>
+          <div className='flex justify-center items-center gap-4 w-[360px] mt-4'>
+            <Button colorScheme='info' handleClick={handleJoinBtn}>
+              {userInfoContext?.userInfo?.role === 'teacher'
+                ? 'Start Video Call'
+                : 'Join Video Call'}
+            </Button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
-export default WebcamComponent;
+export default VideoCall;

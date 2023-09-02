@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate, useOutletContext } from 'react-router-dom';
 import dayjs from 'dayjs';
 
 // handlers
@@ -25,8 +25,10 @@ import { IoIosVideocam } from 'react-icons/io';
 
 const Chat = () => {
   const params = useParams();
+  const navigate = useNavigate();
   const userInfoContext = useUserInfo();
   const socket = useSocket();
+  const outletContext: any = useOutletContext();
 
   const [messages, setMessages] = useState<messageSchema[]>([]);
   const [text, setText] = useState<string>('');
@@ -143,6 +145,24 @@ const Chat = () => {
     }
   };
 
+  const handleCreateVideoCall = () => {
+    navigate('/videocall', {
+      state: {
+        subjectId: params.subjectId,
+        batchId: params.batchId,
+      },
+    });
+  };
+
+  const handleJoinVideoCall = () => {
+    navigate('/videocall', {
+      state: {
+        subjectId: params.subjectId,
+        batchId: userInfoContext?.userInfo?.batch,
+      },
+    });
+  };
+
   return (
     <div className='py-4'>
       {isLoading ? (
@@ -157,7 +177,7 @@ const Chat = () => {
                 Icon={IoIosVideocam}
                 iconSize={5}
                 title='Create Video Call'
-                handleClick={() => {}}
+                handleClick={handleCreateVideoCall}
               />
             )}
             {userInfoContext?.userInfo?.role === 'student' && (
@@ -165,15 +185,17 @@ const Chat = () => {
                 Icon={IoIosVideocam}
                 iconSize={5}
                 title='Join Video Call'
-                isDisabled
-                handleClick={() => {}}
+                isDisabled={!outletContext.isVideoLinkCreated}
+                handleClick={handleJoinVideoCall}
               />
             )}
             <IconButton
               Icon={BsFillPeopleFill}
               iconSize={5}
-              title='Add Post'
-              handleClick={() => {}}
+              title='View Participants'
+              handleClick={() => {
+                console.log('View Participants');
+              }}
             />
           </div>
 

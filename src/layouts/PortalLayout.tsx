@@ -18,7 +18,8 @@ const PortalLayout = () => {
   const userInfoContext = useUserInfo();
   const socket = useSocket();
 
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState<number>(0);
+  const [isVideoLinkCreated, setIsVideoCreated] = useState<boolean>(false);
 
   useEffect(() => {
     let locations = location.pathname.split('/');
@@ -39,6 +40,16 @@ const PortalLayout = () => {
           : params.batchId,
     });
 
+    socket?.on('call-just-created', (data) => {
+      console.log('call-just-created');
+      setIsVideoCreated(true);
+    });
+
+    socket?.on('call-already-created', () => {
+      console.log('call-already-created');
+      setIsVideoCreated(true);
+    });
+
     return () => {
       socket?.emit('leave-portal', {
         subjectId: params.subjectId,
@@ -53,7 +64,7 @@ const PortalLayout = () => {
   return (
     <div>
       <Tabs tabs={portals} activeIndex={activeIndex} />
-      <Outlet />
+      <Outlet context={{ isVideoLinkCreated: isVideoLinkCreated }} />
     </div>
   );
 };

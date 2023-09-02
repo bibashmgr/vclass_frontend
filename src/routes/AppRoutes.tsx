@@ -24,8 +24,8 @@ const AppRoutes = () => {
         </Route>
         <Route element={<ProtectedRoutes roles={['student', 'teacher']} />}>
           <Route path='/*' element={<SystemRoutes />} />
+          <Route path='/videocall' element={<VideoCall />} />
         </Route>
-        <Route path='/videocall' element={<VideoCall />} />
       </Route>
     </Routes>
   );
