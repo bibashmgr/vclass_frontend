@@ -60,7 +60,7 @@ const ParticipantCard = ({
 }) => {
   return (
     <div
-      className={`bg-white dark:bg-gray-900 w-full h-full rounded-lg relative ${
+      className={`bg-black dark:bg-black w-full h-full rounded-lg relative ${
         isJoined && 'min-h-[200px]'
       }
       `}
@@ -81,6 +81,7 @@ const ParticipantCard = ({
         id={`video-${participant.email}`}
         autoPlay={true}
         controls={false}
+        muted={!participant.prefs.audio}
       />
 
       {!participant.prefs.audio && (
