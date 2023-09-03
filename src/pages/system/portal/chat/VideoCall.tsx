@@ -11,7 +11,10 @@ import VideoMainScreen from '../../../../components/system/chat/VideoMainScreen'
 import VideoBottomNav from '../../../../components/system/chat/VideoBottomNav';
 
 // schemas
-import { callParticipantSchema } from '../../../../utils/schemas';
+import {
+  callParticipantPrefsSchema,
+  callParticipantSchema,
+} from '../../../../utils/schemas';
 
 const VideoCall = () => {
   const navigate = useNavigate();
@@ -122,24 +125,25 @@ const VideoCall = () => {
     return user;
   };
 
-  const makeCall = async (currentUser: string, newUser: string) => {
+  const makeCall = async (
+    currentUser: string,
+    newUser: string,
+    newUserPrefs: callParticipantPrefsSchema
+  ) => {
     const peerConnection = new RTCPeerConnection(configuration);
     const dataChannel = peerConnection.createDataChannel('dataChannel');
 
-    await localStream?.getTracks().forEach((track) => {
-      console.log('add track');
-      peerConnection.addTrack(track, localStream);
-    });
-
     peerConnection.addEventListener('track', (event) => {
-      console.log('listening to tracking');
       let videoElement = document.getElementById(
         `video-${newUser}`
       ) as HTMLVideoElement;
       if (videoElement) {
         videoElement.srcObject = event.streams[0];
-        videoElement.muted = false;
       }
+    });
+
+    await localStream?.getTracks().forEach((track) => {
+      peerConnection.addTrack(track, localStream);
     });
 
     const offer = await peerConnection.createOffer();
@@ -195,8 +199,8 @@ const VideoCall = () => {
       addParticipantsToList(data);
     });
     socket?.on('new-user-joined', (data) => {
-      makeCall(userInfoContext?.userInfo?.email!, data.email);
       addSingleParticipant(data);
+      makeCall(userInfoContext?.userInfo?.email!, data.email, data.prefs);
     });
     socket?.on('new-prefs', (data) => {
       const { email, type } = data;
@@ -217,18 +221,17 @@ const VideoCall = () => {
         const remoteDataChannel = event.channel;
       };
 
-      await localStream?.getTracks().forEach((track) => {
-        peerConnection.addTrack(track, localStream);
-      });
-
       peerConnection.addEventListener('track', (event) => {
         let videoElement = document.getElementById(
           `video-${caller}`
         ) as HTMLVideoElement;
         if (videoElement) {
           videoElement.srcObject = event.streams[0];
-          videoElement.muted = false;
         }
+      });
+
+      await localStream?.getTracks().forEach((track) => {
+        peerConnection.addTrack(track, localStream);
       });
 
       const remoteDesc = new RTCSessionDescription(offer);
