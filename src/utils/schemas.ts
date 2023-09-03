@@ -143,3 +143,11 @@ export type callParticipantSchema = {
     screen: boolean;
   };
 };
+
+export type callParticipantPrefsSchema = {
+  prefs: {
+    audio: boolean;
+    video: boolean;
+    screen: boolean;
+  };
+};
